@@ -1,5 +1,4 @@
 import SwiftUI
-import BoseKitEngine
 import AppKit
 
 struct MenuBarControls: View {

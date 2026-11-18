@@ -10,8 +10,9 @@ Implementation details for contributors. For an overview, see the [README](../RE
 | `RFCOMMTransport` | IOBluetooth adapter, paired devices and cached SDP identities |
 | `BMAPPacket` / `BMAPDecoder` | Value types; preserve flags and accumulate partial frames |
 | `BMAPSession` | Actor with explicit FIFO requests, bounded response collection, cancellation and events |
-| `BoseFeature<Value, Input>` | Typed, Sendable payload codecs; read-only features use `Never` as input |
-| `DeviceProfile` / `DeviceRegistry` | Product matching, startup commands, capability access and mode policies |
+| `PayloadReader` / `PayloadWriter` | Sequential named-field payload layouts; every decoder states whether trailing bytes are allowed |
+| `BoseFeature<Value, Input>` | Typed, Sendable payload codecs with a read-back confirmation; read-only features use `Never` as input |
+| `DeviceProfile` / `DeviceRegistry` | Named per-device profiles (startup commands, capability access, mode policies) and product matching through `DeviceRegistry.standard` or a caller-built registry |
 | `ModeCodec` | Injectable STATUS decoder and separate write encoder |
 | `BoseDevice` | Serialized multi-command workflows and verified writes |
 | `DeviceController` (app) | UI state, polling, reconnection and user intents for one device |
@@ -34,8 +35,17 @@ Implementation details for contributors. For an overview, see the [README](../RE
   Reconnect with a new transport; writes are never replayed automatically.
 - Unsolicited packets are available through per-subscriber `AsyncStream` events
   (bounded to 256 packets). Response matching never depends on these streams.
-- Errors distinguish malformed device payloads (`invalidPayload`), rejected caller
-  values (`invalidArgument`) and device states that forbid an operation (`invalidState`).
+- Errors distinguish malformed device payloads (`invalidPayload`), rejected caller values (`invalidArgument`), device states that forbid an operation (`invalidState`), operations a profile cannot perform (`unsupported`) and writes whose read-back does not match (`verificationFailed`).
+  The last three carry typed reasons (`BoseError.InvalidState`, `BoseError.Unsupported`, `BoseError.VerificationFailure`).
+  A device error packet without a payload reports `BoseError.device(_, code: nil)`.
+
+## Payloads
+
+- Caller values with protocol limits are validated by their types (`CNCLevel`, `DeviceName`, `ModeName`, `FavoriteModes`, `VoicePromptLanguage`, `EQAdjustment` from `EQBand.adjustment(to:)`), so encoders cannot fail on them. Values reported by the device (`CNCStatus`, decoded names) stay raw.
+- Payloads are exact-length only where a lonestarr capture shows the length: mode STATUS (all layouts) and the Bluetooth audio source (`00 0f 01` + address). Every other payload tolerates trailing bytes, because the other devices are unverified.
+- The shortcut button payload is a 3-byte assignment followed by either nothing or a full 4-byte supported-action bitmap; a partial bitmap is rejected.
+- Text fields (firmware, serial, model, device and source-device names) drop trailing NUL padding and reject an embedded NUL or invalid encoding. Mode names end at the first NUL of their 32-byte field.
+- Changing the active mode's audio writes the mode back with its current name; a device-reported name that is not a valid `ModeName` fails with `invalidState(.modeNameNotWritable)` instead of being truncated.
 
 ## Transport
 
@@ -71,10 +81,11 @@ Verified behavior for individual models is documented per device, for example
 ## Adding a Device
 
 1. Reuse or implement a `ModeCodec` for the payload layout.
-2. Describe the device with a `DeviceProfile`: feature access, startup packets and
-   mode policy. Register it in a registry copy; duplicate IDs fail.
-3. Add a `BoseFeature<Value, Input>` for each new register. `FeatureID` is an open
-   string-backed type, so no enum needs editing.
+2. Describe the device with a `DeviceProfile`: feature access, startup packets and mode policy.
+   A built-in device becomes a named constant in `Profiles/DeviceProfile+Standard.swift` and joins the list behind `DeviceRegistry.standard`; the registry tests check that the standard set has no duplicate product or profile IDs, and `RFCOMMChannel` only admits channels 1...30.
+   A caller-supplied profile goes through `DeviceRegistry(profiles:)` or `register(_:)` on a copy of `DeviceRegistry.standard`, which throw `duplicateProduct` or `duplicateProfile`.
+3. Add a `BoseFeature<Value, Input>` for each new register, with a `confirm` predicate that checks the read-back value against the written input.
+   `FeatureID` is an open string-backed type, so no enum needs editing.
 4. Use `BMAPCommand<Response>` with a custom `ResponseRule` for new response patterns.
-5. Add captured packet fixtures and tests, and record whether behavior comes from
-   upstream inference or hardware verification.
+5. Add captured packet fixtures and tests.
+   Record whether behavior comes from upstream inference or hardware verification in the README "Supported Devices" table and, for verified devices, in a device note under `docs/`.

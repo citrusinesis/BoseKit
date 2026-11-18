@@ -1,7 +1,7 @@
 # QuietComfort Ultra Headphones (1st Gen)
 
-Profile `lonestarr`, product ID `0x4066`, RFCOMM channel 2. Verified on hardware
-with firmware `1.6.7+g6ebabd2`.
+Profile `lonestarr`, product ID `0x4066`, RFCOMM channel 2.
+Verified on user hardware on 2026-11-17 with firmware `1.6.7+g6ebabd2`.
 
 ## Modes
 

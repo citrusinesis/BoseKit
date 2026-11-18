@@ -31,7 +31,8 @@ Available controls depend on what each model supports. The interface is in Engli
 | QuietComfort Headphones, QuietComfort 45 | Implemented, untested |
 | QuietComfort 35 / 35 II | Implemented, untested |
 | Noise Cancelling Headphones 700 | Implemented, untested |
-| QuietComfort Earbuds, Ultra Open Earbuds | Implemented, untested |
+| QuietComfort Earbuds | Implemented, untested |
+| Ultra Open Earbuds | Implemented, untested; listening-mode layout inferred by bosectl |
 
 Device protocol details are based on [bosectl](https://github.com/aaronsb/bosectl).
 Reports for other models are welcome.
@@ -61,7 +62,7 @@ xcodebuild test -workspace BoseKit.xcworkspace -scheme BoseKit -destination 'pla
 ```swift
 import BoseKitEngine
 
-let registry = try DeviceRegistry.standard()
+let registry = DeviceRegistry.standard
 guard let paired = RFCOMMTransport.pairedDevices().first(where: { $0.profile(in: registry) != nil }),
       let profile = paired.profile(in: registry) else { return }
 
@@ -73,8 +74,12 @@ try await device.setCNC(5)
 await device.close()
 ```
 
-Writes are verified by reading the value back from the device. Check
-`profile.supports(_:access:)` before offering a control.
+Every write is verified by reading the value back from the device; a mismatch throws `BoseError.verificationFailed`.
+Check `profile.supports(_:access:)` before offering a control.
+Values with protocol limits are validated when constructed, so an invalid value never reaches an encoder: `CNCLevel` (0...10), `DeviceName` and `ModeName` (at most 31 UTF-8 bytes without NUL; device names must not be empty), `RFCOMMChannel` (1...30) and `FavoriteModes`.
+Integer and string literals of these types are checked at runtime; use `init?(rawValue:)` for user input.
+An EQ adjustment is only valid for a device-reported band: build one with `EQBand.adjustment(to:)`, or use `BoseDevice.setEqualizer(band:value:)`, which reads the bands first.
+Built-in profiles are also available by name, for example `DeviceProfile.lonestarr`; to support another product, build a registry with `DeviceRegistry(profiles:)` or `register(_:)` on a copy of `DeviceRegistry.standard`.
 
 ## Project Structure
 
@@ -93,5 +98,5 @@ BoseKit is available under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-Protocol layouts and device profiles reference
-[bosectl](https://github.com/aaronsb/bosectl) (MIT). See `THIRD_PARTY_NOTICES.txt`.
+Protocol layouts and device profiles reference [bosectl](https://github.com/aaronsb/bosectl) (MIT) at commit `5de5b7ee9b6d096a817a5f5eeb4178f39ed70774`; models marked untested follow that reference and have not been retested on hardware with BoseKit.
+See `THIRD_PARTY_NOTICES.txt`.

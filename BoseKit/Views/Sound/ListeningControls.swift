@@ -19,9 +19,10 @@ struct ListeningControls: View {
             if let audio = device.audio, !compact || device.canEditAudio {
                 AudioControls(device: device, audio: audio)
             } else if let cnc = device.cnc, !compact || device.canEditAudio {
-                ValueSlider(title: .soundAmbient, value: Double(cnc.current), range: 0...Double(cnc.maximum),
+                ValueSlider(title: .soundAmbient, value: Double(cnc.current),
+                            range: 0...min(Double(cnc.maximum), CNCLevel.sliderRange.upperBound),
                             revision: device.refreshRevision, editingChanged: device.setEditing) {
-                    device.setCNC(UInt8($0))
+                    device.setCNC(CNCLevel(sliderValue: $0))
                 }
                 .disabled(!device.supports(.cnc, write: true))
             }

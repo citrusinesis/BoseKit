@@ -16,10 +16,46 @@ extension BoseError {
         case .disconnected: .errorsDisconnected
         case .timeout: .errorsTimeout
         case .transport: .errorsTransport
-        case .unsupported: .errorsUnsupported
+        case .unsupported(let reason): reason.title
         case .device: .errorsRejected
-        case .verificationFailed: .errorsVerification
-        case .invalidPayload, .invalidArgument, .invalidState, .duplicateProduct: .errorsInvalidValue
+        case .invalidState(let state): state.title
+        case .verificationFailed(let failure): failure.title
+        case .invalidPayload, .invalidArgument, .duplicateProduct, .duplicateProfile: .errorsInvalidValue
+        }
+    }
+}
+
+nonisolated extension BoseError.Unsupported {
+    var title: LocalizedStringResource {
+        switch self {
+        case .nonEditableModeSlot, .modeWritesInStatus44Layout: .errorsModeNotEditable
+        case .automaticCNCInCustomModes: .errorsAutomaticAmbientInCustomModes
+        case .feature, .modePolicy, .continuousNoiseControl, .audioSettings, .ancToggleInStatus47Layout:
+            .errorsUnsupported
+        }
+    }
+}
+
+nonisolated extension BoseError.InvalidState {
+    var title: LocalizedStringResource {
+        switch self {
+        case .windBlockLocksCNC: .errorsWindBlockLocksCNC
+        case .modeNotConfigured: .errorsModeNotConfigured
+        case .noFallbackPreset: .errorsNoFallbackPreset
+        case .currentModeUnavailable: .errorsCurrentModeUnavailable
+        case .currentModeHasNoAudioSettings: .errorsCurrentModeHasNoAudioSettings
+        case .modeNameNotWritable: .errorsModeNotEditable
+        }
+    }
+}
+
+nonisolated extension BoseError.VerificationFailure {
+    var title: LocalizedStringResource {
+        switch self {
+        case .feature, .modeFieldsDiffer: .errorsVerification
+        case .modeMissingAfterWrite, .modeNotConfigured: .errorsModeSaveUnconfirmed
+        case .deletedModeStillConfigured: .errorsModeDeleteUnconfirmed
+        case .currentModeNotApplied: .errorsModeNotApplied
         }
     }
 }
@@ -163,11 +199,11 @@ extension VoicePromptLanguage {
 
 extension ModeConfiguration {
     var displayName: String {
-        if editable, voicePrompt != .none, let promptName = voicePrompt.protocolName {
+        if editable, prompt != .none, let promptName = prompt.protocolName {
             return promptName
         }
-        if !name.isEmpty && name != "None" { return name }
-        return voicePrompt.protocolName ?? String(localized: .modesFallbackName(UInt32(id) + 1))
+        if !name.isEmpty && name != ModeConfiguration.emptyName.rawValue { return name }
+        return prompt.protocolName ?? String(localized: .modesFallbackName(UInt32(id) + 1))
     }
 }
 

@@ -1,5 +1,4 @@
 import SwiftUI
-import BoseKitEngine
 
 struct ConnectionPlaceholder: View {
     var device: DeviceController?

@@ -1,5 +1,4 @@
 import SwiftUI
-import BoseKitEngine
 
 enum ControlPage: String, CaseIterable, Identifiable {
     case sound, device, app
@@ -54,21 +53,29 @@ private struct ControlPageContent: View {
 
     var body: some View {
         switch page {
-        case .app:
-            AppPreferencesView(model: model)
-        case .sound, .device:
-            if let device = model.selected {
-                DeviceContent(device: device, page: page).id(device.id)
-            } else {
-                ConnectionPlaceholder()
-            }
+        case .app: AppPreferencesView(model: model)
+        case .sound: deviceContent(.sound)
+        case .device: deviceContent(.device)
+        }
+    }
+
+    @ViewBuilder
+    private func deviceContent(_ page: DevicePage) -> some View {
+        if let device = model.selected {
+            DeviceContent(device: device, page: page).id(device.id)
+        } else {
+            ConnectionPlaceholder()
         }
     }
 }
 
+private enum DevicePage {
+    case sound, device
+}
+
 private struct DeviceContent: View {
     let device: DeviceController
-    let page: ControlPage
+    let page: DevicePage
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -79,7 +86,7 @@ private struct DeviceContent: View {
                     .textSelection(.enabled)
             }
             if device.connected {
-                DevicePage(device: device, page: page)
+                DevicePageContent(device: device, page: page)
                     .disabled(device.busy)
             } else {
                 ConnectionPlaceholder(device: device)
@@ -89,15 +96,14 @@ private struct DeviceContent: View {
     }
 }
 
-private struct DevicePage: View {
+private struct DevicePageContent: View {
     let device: DeviceController
-    let page: ControlPage
+    let page: DevicePage
 
     var body: some View {
         switch page {
         case .sound: SoundSettings(device: device)
         case .device: DeviceSettings(device: device)
-        case .app: EmptyView()
         }
     }
 }

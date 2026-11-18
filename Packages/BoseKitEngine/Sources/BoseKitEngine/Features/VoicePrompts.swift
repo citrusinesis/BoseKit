@@ -1,41 +1,88 @@
 public struct VoicePromptLanguage: RawRepresentable, Hashable, Sendable {
+    static let mask: UInt8 = 0x1f
+
     public let rawValue: UInt8
-    public init(rawValue: UInt8) { self.rawValue = rawValue }
 
-    public static let englishUK = Self(rawValue: 0)
-    public static let englishUS = Self(rawValue: 1)
-    public static let french = Self(rawValue: 2)
-    public static let italian = Self(rawValue: 3)
-    public static let german = Self(rawValue: 4)
-    public static let spanish = Self(rawValue: 5)
-    public static let spanishMexico = Self(rawValue: 6)
-    public static let portuguese = Self(rawValue: 7)
-    public static let mandarin = Self(rawValue: 8)
-    public static let korean = Self(rawValue: 9)
-    public static let russian = Self(rawValue: 10)
-    public static let polish = Self(rawValue: 11)
-    public static let hebrew = Self(rawValue: 12)
-    public static let turkish = Self(rawValue: 13)
-    public static let dutch = Self(rawValue: 14)
-    public static let japanese = Self(rawValue: 15)
-    public static let cantonese = Self(rawValue: 16)
-    public static let arabic = Self(rawValue: 17)
-    public static let swedish = Self(rawValue: 18)
-    public static let danish = Self(rawValue: 19)
-    public static let norwegian = Self(rawValue: 20)
-    public static let finnish = Self(rawValue: 21)
-    public static let hindi = Self(rawValue: 22)
+    public init?(rawValue: UInt8) {
+        guard rawValue & ~Self.mask == 0 else { return nil }
+        self.rawValue = rawValue
+    }
 
-    public static let known: [Self] = (0...22).map(Self.init(rawValue:))
+    init(bits: UInt8) {
+        rawValue = bits & Self.mask
+    }
+
+    public static let englishUK = Self(bits: 0)
+    public static let englishUS = Self(bits: 1)
+    public static let french = Self(bits: 2)
+    public static let italian = Self(bits: 3)
+    public static let german = Self(bits: 4)
+    public static let spanish = Self(bits: 5)
+    public static let spanishMexico = Self(bits: 6)
+    public static let portuguese = Self(bits: 7)
+    public static let mandarin = Self(bits: 8)
+    public static let korean = Self(bits: 9)
+    public static let russian = Self(bits: 10)
+    public static let polish = Self(bits: 11)
+    public static let hebrew = Self(bits: 12)
+    public static let turkish = Self(bits: 13)
+    public static let dutch = Self(bits: 14)
+    public static let japanese = Self(bits: 15)
+    public static let cantonese = Self(bits: 16)
+    public static let arabic = Self(bits: 17)
+    public static let swedish = Self(bits: 18)
+    public static let danish = Self(bits: 19)
+    public static let norwegian = Self(bits: 20)
+    public static let finnish = Self(bits: 21)
+    public static let hindi = Self(bits: 22)
+
+    public static let known: [Self] = [
+        .englishUK,
+        .englishUS,
+        .french,
+        .italian,
+        .german,
+        .spanish,
+        .spanishMexico,
+        .portuguese,
+        .mandarin,
+        .korean,
+        .russian,
+        .polish,
+        .hebrew,
+        .turkish,
+        .dutch,
+        .japanese,
+        .cantonese,
+        .arabic,
+        .swedish,
+        .danish,
+        .norwegian,
+        .finnish,
+        .hindi,
+    ]
 }
 
 public struct VoicePrompts: Equatable, Sendable {
+    private static let enabledBit: UInt8 = 0x20
+    private static let preservedMask: UInt8 = 0xc0
+
     public var enabled: Bool
     public var language: VoicePromptLanguage
-    public let rawPayload: [UInt8]
-    public init(enabled: Bool, language: VoicePromptLanguage, rawPayload: [UInt8]) {
+    let preservedBits: UInt8
+
+    init(enabled: Bool, language: VoicePromptLanguage, preservedBits: UInt8) {
         self.enabled = enabled
         self.language = language
-        self.rawPayload = rawPayload
+        self.preservedBits = preservedBits & Self.preservedMask
+    }
+
+    init(flags: UInt8) {
+        self.init(enabled: flags & Self.enabledBit != 0, language: VoicePromptLanguage(bits: flags),
+                  preservedBits: flags)
+    }
+
+    var flags: UInt8 {
+        preservedBits | (enabled ? Self.enabledBit : 0) | language.rawValue
     }
 }

@@ -11,6 +11,16 @@ struct SpatialAudioPicker: View {
     }
 }
 
+extension CNCLevel {
+    static let sliderRange = Double(minimum.rawValue)...Double(maximum.rawValue)
+
+    init(sliderValue: Double) {
+        let clamped = min(max(sliderValue.rounded(), Self.sliderRange.lowerBound), Self.sliderRange.upperBound)
+        guard let level = Self(rawValue: UInt8(clamped)) else { preconditionFailure("Slider range exceeds CNC levels") }
+        self = level
+    }
+}
+
 struct NoiseControlRangeLabels: View {
     var body: some View {
         HStack {

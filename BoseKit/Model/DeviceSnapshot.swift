@@ -1,6 +1,6 @@
 import BoseKitEngine
 
-enum RefreshScope {
+enum RefreshScope: Comparable {
     case probe
     case live
     case full

@@ -20,7 +20,6 @@ extension BMAPAddress {
     public static let deviceList = BMAPAddress(4, 4)
     public static let deviceInfo = BMAPAddress(4, 5)
     public static let pairing = BMAPAddress(4, 8)
-    public static let requestingHost = BMAPAddress(4, 9)
     public static let routing = BMAPAddress(4, 12)
 
     public static let source = BMAPAddress(5, 1)

@@ -8,6 +8,13 @@ final class DeviceController: Identifiable {
         case disconnected, connecting, connected
     }
 
+    private struct ModeSelection {
+        var confirmed: UInt8?
+        var outstanding = 0
+    }
+
+    private struct RefreshPreempted: Error {}
+
     let id: String
     let profile: DeviceProfile
     private(set) var name: String
@@ -50,10 +57,11 @@ final class DeviceController: Identifiable {
     @ObservationIgnored private var lastFullRefresh = Date.distantPast
     @ObservationIgnored private var visibleViews = 0
     @ObservationIgnored private var editingSessions = 0
-    @ObservationIgnored private var pendingMode: UInt8?
-    @ObservationIgnored private var waitingActions = 0
+    @ObservationIgnored private var modeSelection: ModeSelection?
+    @ObservationIgnored private let actions = ActionQueue()
+    @ObservationIgnored private var deferredRefresh: RefreshScope?
     @ObservationIgnored private var maintenanceTask: Task<Void, Never>?
-    @ObservationIgnored private var refreshTask: Task<Void, Never>?
+    @ObservationIgnored private var refreshTask: (scope: RefreshScope, task: Task<Void, Never>)?
     @ObservationIgnored private let connectDevice: @MainActor (String, DeviceProfile) async throws -> BoseDevice
 
     init(id: String, name: String, profile: DeviceProfile, policy: MaintenancePolicy = .standard,
@@ -124,94 +132,117 @@ final class DeviceController: Identifiable {
     func disconnect(suspend: Bool = true) async {
         isSuspended = suspend
         connection = .disconnected
+        modeSelection = nil
         let old = device
         device = nil
         await old?.close()
     }
 
+    func powerOff() async {
+        await perform { device in
+            self.isSuspended = true
+            do {
+                try await device.powerOff()
+            } catch {
+                if !Self.dropsConnection(error) { self.isSuspended = false }
+                throw error
+            }
+            await self.disconnect()
+        }
+    }
+
     func refresh(_ scope: RefreshScope = .full) async {
-        if let refreshTask { await refreshTask.value; return }
-        guard connected, !busy, let device else { return }
+        while let inFlight = refreshTask {
+            await inFlight.task.value
+            if inFlight.scope >= scope { return }
+        }
+        guard connected, let device else { return }
+        guard !busy else {
+            deferRefresh(scope)
+            return
+        }
         let task = Task {
             await self.read(scope, from: device)
             self.refreshTask = nil
         }
-        refreshTask = task
+        refreshTask = (scope, task)
         await task.value
+    }
+
+    private func deferRefresh(_ scope: RefreshScope) {
+        deferredRefresh = max(deferredRefresh ?? scope, scope)
     }
 
     private func read(_ scope: RefreshScope, from device: BoseDevice) async {
         defer { refreshRevision += 1; lastProbe = Date() }
         do {
             var snapshot = DeviceSnapshot()
-            snapshot.battery = try await read(BoseFeatures.battery, from: device)
-            if scope != .probe {
-                if supports(.currentMode) {
+            snapshot.battery = try await read(BoseFeatures.battery, in: scope, from: device)
+            if scope >= .live {
+                if profile.supports(.currentMode) {
                     try yieldToWaitingAction()
                     snapshot.currentMode = try await device.currentMode()
                 }
-                snapshot.cnc = try await read(BoseFeatures.cnc, from: device)
-                snapshot.anr = try await read(BoseFeatures.anr, from: device)
-                snapshot.equalizer = try await read(BoseFeatures.equalizer, from: device) ?? []
-                snapshot.audio = try await read(BoseFeatures.audioSettings, from: device)
+                snapshot.cnc = try await read(BoseFeatures.cnc, in: scope, from: device)
+                snapshot.anr = try await read(BoseFeatures.anr, in: scope, from: device)
+                snapshot.equalizer = try await read(BoseFeatures.equalizer, in: scope, from: device) ?? []
+                snapshot.audio = try await read(BoseFeatures.audioSettings, in: scope, from: device)
             }
             if scope == .full {
-                snapshot.name = try await read(BoseFeatures.name, from: device)
+                snapshot.name = try await read(BoseFeatures.name, in: scope, from: device)
                 snapshot.firmware = firmware
                 snapshot.serial = serial
                 snapshot.modelName = modelName
-                if firmware == nil { snapshot.firmware = try await read(BoseFeatures.firmware, from: device) }
-                if serial == nil { snapshot.serial = try await read(BoseFeatures.serial, from: device) }
-                if modelName == nil { snapshot.modelName = try await read(BoseFeatures.model, from: device) }
-                snapshot.multipoint = try await read(BoseFeatures.multipoint, from: device)
-                snapshot.autoPause = try await read(BoseFeatures.autoPause, from: device)
-                snapshot.autoAnswer = try await read(BoseFeatures.autoAnswer, from: device)
-                snapshot.pairing = try await read(BoseFeatures.pairing, from: device)
-                snapshot.sidetone = try await read(BoseFeatures.sidetone, from: device)
-                snapshot.voicePrompts = try await read(BoseFeatures.voicePrompts, from: device)
-                snapshot.buttons = try await read(BoseFeatures.buttons, from: device)
-                snapshot.source = try await read(BoseFeatures.source, from: device)
-                snapshot.favorites = try await read(BoseFeatures.favorites, from: device)
-                snapshot.defaultMode = try await read(BoseFeatures.defaultMode, from: device)
-                if supports(.modes) {
+                if firmware == nil { snapshot.firmware = try await read(BoseFeatures.firmware, in: scope, from: device) }
+                if serial == nil { snapshot.serial = try await read(BoseFeatures.serial, in: scope, from: device) }
+                if modelName == nil { snapshot.modelName = try await read(BoseFeatures.model, in: scope, from: device) }
+                snapshot.multipoint = try await read(BoseFeatures.multipoint, in: scope, from: device)
+                snapshot.autoPause = try await read(BoseFeatures.autoPause, in: scope, from: device)
+                snapshot.autoAnswer = try await read(BoseFeatures.autoAnswer, in: scope, from: device)
+                snapshot.pairing = try await read(BoseFeatures.pairing, in: scope, from: device)
+                snapshot.sidetone = try await read(BoseFeatures.sidetone, in: scope, from: device)
+                snapshot.voicePrompts = try await read(BoseFeatures.voicePrompts, in: scope, from: device)
+                snapshot.buttons = try await read(BoseFeatures.buttons, in: scope, from: device)
+                snapshot.source = try await read(BoseFeatures.source, in: scope, from: device)
+                snapshot.favorites = try await read(BoseFeatures.favorites, in: scope, from: device)
+                snapshot.defaultMode = try await read(BoseFeatures.defaultMode, in: scope, from: device)
+                if profile.supports(.modes) {
                     try yieldToWaitingAction()
                     snapshot.modes = try await device.modes()
                 }
-                snapshot.sourceDevices = try await readSourceDevices(from: device)
+                snapshot.sourceDevices = try await readIfAvailable(.sourceDevices, in: scope) {
+                    try await device.sourceDevices()
+                } ?? []
             }
             apply(snapshot, scope: scope)
+            if let deferredRefresh, scope >= deferredRefresh { self.deferredRefresh = nil }
         } catch is RefreshPreempted {
-            return
+            deferRefresh(scope)
         } catch {
             await handle(error)
         }
     }
 
-    private struct RefreshPreempted: Error {}
-
     private func yieldToWaitingAction() throws {
-        if waitingActions > 0 { throw RefreshPreempted() }
+        if !actions.isEmpty { throw RefreshPreempted() }
     }
 
-    private func read<V, I>(_ feature: BoseFeature<V, I>, from device: BoseDevice) async throws -> V? {
-        guard supports(feature.id) else { return nil }
+    private func read<V, I>(_ feature: BoseFeature<V, I>, in scope: RefreshScope,
+                            from device: BoseDevice) async throws -> V? {
+        try await readIfAvailable(feature.id, in: scope) { try await device.read(feature) }
+    }
+
+    private func readIfAvailable<T>(_ feature: FeatureID, in scope: RefreshScope,
+                                    _ request: () async throws -> T) async throws -> T? {
+        guard profile.supports(feature), scope == .full || !unavailable.contains(feature) else { return nil }
         try yieldToWaitingAction()
         do {
-            return try await device.read(feature)
+            let value = try await request()
+            if unavailable.contains(feature) { unavailable.remove(feature) }
+            return value
         } catch BoseError.device {
-            unavailable.insert(feature.id)
+            if !unavailable.contains(feature) { unavailable.insert(feature) }
             return nil
-        }
-    }
-
-    private func readSourceDevices(from device: BoseDevice) async throws -> [SourceDevice] {
-        guard supports(.sourceDevices) else { return [] }
-        try yieldToWaitingAction()
-        do {
-            return try await device.sourceDevices()
-        } catch BoseError.device {
-            unavailable.insert(.sourceDevices)
-            return []
         }
     }
 
@@ -237,7 +268,7 @@ final class DeviceController: Identifiable {
             sourceDevices = snapshot.sourceDevices
             lastFullRefresh = Date()
         }
-        guard pendingMode == nil else { return }
+        guard modeSelection == nil else { return }
         currentMode = snapshot.currentMode
         cnc = snapshot.cnc
         anr = snapshot.anr
@@ -245,7 +276,6 @@ final class DeviceController: Identifiable {
         audio = snapshot.audio ?? modes.first { $0.id == snapshot.currentMode }?.audio
     }
 
-    @discardableResult
     private func setModes(_ newModes: [ModeConfiguration]) {
         modes = newModes
         selectableModes = newModes.filter { profile.modePolicy?.isSelectable($0) == true }
@@ -263,61 +293,76 @@ final class DeviceController: Identifiable {
         setModes(updated)
     }
 
+    @discardableResult
     func perform(refreshing scope: RefreshScope = .full,
                  _ action: @MainActor (BoseDevice) async throws -> Void) async -> Bool {
-        waitingActions += 1
-        await refreshTask?.value
-        waitingActions -= 1
-        guard connected, !busy, let device else { return false }
+        if actions.isEmpty { error = nil }
         busy = true
-        error = nil
-        do {
-            try await action(device)
-            busy = false
-            await refresh(scope)
-            return connected
-        } catch {
-            busy = false
-            await handle(error)
-            if connected { await refresh() }
-            return false
+        await actions.enter()
+        await refreshTask?.task.value
+        var succeeded = false
+        if connected, let device {
+            do {
+                try await action(device)
+                succeeded = true
+                deferRefresh(scope)
+            } catch {
+                await handle(error)
+                deferRefresh(.full)
+            }
         }
+        actions.leave()
+        if actions.isEmpty {
+            busy = false
+            if connected, let deferredRefresh { await refresh(deferredRefresh) }
+        }
+        return succeeded
     }
 
-    func selectMode(_ slot: UInt8) {
-        guard connected, !busy, currentMode != slot else { return }
-        let confirmed = currentMode
-        pendingMode = slot
+    @discardableResult
+    func selectMode(_ slot: UInt8) -> Task<Bool, Never>? {
+        guard connected, currentMode != slot else { return nil }
+        var selection = modeSelection ?? ModeSelection(confirmed: currentMode)
+        selection.outstanding += 1
+        modeSelection = selection
         currentMode = slot
         if let modeAudio = modes.first(where: { $0.id == slot })?.audio { audio = modeAudio }
-        Task {
-            await perform(refreshing: .live) { device in
-                defer { self.pendingMode = nil }
-                try await device.selectMode(slot)
-            }
-            if pendingMode == slot {
-                pendingMode = nil
-                currentMode = confirmed
-            }
+        return send(refreshing: .live) { device in
+            defer { self.settleModeSelection() }
+            try await device.selectMode(slot)
+            self.modeSelection?.confirmed = slot
         }
     }
 
+    private func settleModeSelection() {
+        guard var selection = modeSelection else { return }
+        selection.outstanding -= 1
+        guard selection.outstanding == 0 else {
+            modeSelection = selection
+            return
+        }
+        modeSelection = nil
+        if currentMode != selection.confirmed { currentMode = selection.confirmed }
+    }
+
+    @discardableResult
     func send(refreshing scope: RefreshScope = .full,
-              _ action: @escaping @MainActor (BoseDevice) async throws -> Void) {
+              _ action: @escaping @MainActor (BoseDevice) async throws -> Void) -> Task<Bool, Never> {
         Task { await perform(refreshing: scope, action) }
     }
 
-    func suspendBeforePowerOff() { isSuspended = true }
-
     private func handle(_ error: any Error) async {
         self.error = AppError(error)
+        guard Self.dropsConnection(error) else { return }
+        failures += 1
+        retryAfter = Date().addingTimeInterval(policy.retryDelay(afterFailures: failures))
+        await disconnect(suspend: isSuspended)
+    }
+
+    private static func dropsConnection(_ error: any Error) -> Bool {
         switch error as? BoseError {
-        case .disconnected?, .timeout?, .transport?:
-            failures += 1
-            retryAfter = Date().addingTimeInterval(policy.retryDelay(afterFailures: failures))
-            await disconnect(suspend: isSuspended)
-        default:
-            break
+        case .disconnected?, .timeout?, .transport?: true
+        default: false
         }
     }
 }

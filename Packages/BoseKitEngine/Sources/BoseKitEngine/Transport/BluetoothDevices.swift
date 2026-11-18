@@ -9,9 +9,18 @@ public struct BluetoothProductIdentity: Equatable, Sendable {
         self.productID = productID
     }
 
+    private enum VendorIDSource: UInt16 {
+        case bluetoothSIG = 1
+        case usbImplementersForum = 2
+    }
+
+    private static let boseVendorIDs: [VendorIDSource: UInt16] = [
+        .bluetoothSIG: 0x009e,
+        .usbImplementersForum: 0x05a7,
+    ]
+
     public var isBose: Bool {
-        (vendorIDSource == 1 && vendorID == 0x009e) ||
-        (vendorIDSource == 2 && vendorID == 0x05a7)
+        VendorIDSource(rawValue: vendorIDSource).flatMap { Self.boseVendorIDs[$0] } == vendorID
     }
 }
 
@@ -28,26 +37,42 @@ public struct PairedBluetoothDevice: Identifiable, Sendable {
 }
 
 public struct BluetoothAddress: Hashable, Sendable, CustomStringConvertible {
+    static let byteCount = 6
+    private static let separators: Set<Character> = [":", "-"]
+
     public let bytes: [UInt8]
 
     public init?(bytes: [UInt8]) {
-        guard bytes.count == 6 else { return nil }
+        guard bytes.count == Self.byteCount else { return nil }
         self.bytes = bytes
     }
 
     public init?(string: String) {
-        let parts = string.split(omittingEmptySubsequences: false) { $0 == ":" || $0 == "-" }
-        guard parts.count == 6, parts.allSatisfy({ $0.count == 2 }) else { return nil }
-        let values = parts.compactMap { UInt8($0, radix: 16) }
+        guard let separator = string.first(where: Self.separators.contains) else { return nil }
+        let parts = string.split(separator: separator, omittingEmptySubsequences: false)
+        guard parts.count == Self.byteCount else { return nil }
+        var values: [UInt8] = []
+        for part in parts {
+            guard part.count == 2, part.allSatisfy({ $0.isASCII && $0.isHexDigit }),
+                  let value = UInt8(part, radix: 16) else { return nil }
+            values.append(value)
+        }
         self.init(bytes: values)
     }
 
     public var description: String {
-        bytes.map { hex($0) }.joined(separator: ":")
+        bytes.map { byte in
+            let digits = String(byte, radix: 16, uppercase: true)
+            return digits.count == 1 ? "0" + digits : digits
+        }.joined(separator: ":")
     }
+}
 
-    private func hex(_ byte: UInt8) -> String {
-        let digits = Array("0123456789ABCDEF")
-        return String([digits[Int(byte >> 4)], digits[Int(byte & 0x0f)]])
+extension PayloadReader {
+    mutating func bluetoothAddress() throws -> BluetoothAddress {
+        guard let address = BluetoothAddress(bytes: try bytes(BluetoothAddress.byteCount)) else {
+            throw BoseError.invalidPayload("Bluetooth address")
+        }
+        return address
     }
 }

@@ -45,7 +45,7 @@ public actor BMAPSession {
             do {
                 for try await chunk in bytes {
                     guard let self else { return }
-                    try await self.receive(chunk)
+                    await self.receive(chunk)
                 }
                 await self?.fail(BoseError.disconnected)
             } catch {
@@ -138,17 +138,16 @@ public actor BMAPSession {
         }
     }
 
-    private func receive(_ bytes: [UInt8]) throws {
+    private func receive(_ bytes: [UInt8]) {
         guard !closed else { return }
-        for packet in try decoder.append(bytes) {
+        for packet in decoder.append(bytes) {
             for observer in observers.values { observer.yield(packet) }
             guard var pending = active else { continue }
             if packet.operation == .error, packet.address == pending.packet.address {
-                finish(.failure(BoseError.device(packet.address, code: packet.payload.first ?? 0)))
+                finish(.failure(BoseError.device(packet.address, code: packet.payload.first)))
                 continue
             }
-            guard pending.rule.addresses.contains(packet.address),
-                  pending.rule.accepts(packet) else { continue }
+            guard pending.rule.addresses.contains(packet.address) else { continue }
             guard packet.operation == .status || packet.operation == .result else { continue }
             pending.replies.append(packet)
             active = pending

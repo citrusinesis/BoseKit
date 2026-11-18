@@ -4,7 +4,7 @@ import BoseKitEngine
 struct ModeRow: View {
     let device: DeviceController
     let mode: ModeConfiguration
-    let edit: () -> Void
+    let edit: (() -> Void)?
     let delete: () -> Void
 
     var body: some View {
@@ -33,7 +33,9 @@ struct ModeRow: View {
             }
             if mode.editable, device.supports(.modes, write: true) {
                 Menu {
-                    Button(.commonEdit, systemImage: "pencil", action: edit)
+                    if let edit {
+                        Button(.commonEdit, systemImage: "pencil", action: edit)
+                    }
                     Button(.commonDelete, systemImage: "trash", role: .destructive, action: delete)
                 } label: {
                     Image(systemName: "ellipsis")
@@ -73,19 +75,17 @@ private struct FavoriteButton: View {
 }
 
 #Preview("Mode rows") {
-    if let profile = try? DeviceRegistry.standard().profile(productID: 0x4066) {
-        let device = DeviceController(id: "preview", name: "QC Ultra", profile: profile)
-        VStack(spacing: 10) {
-            ModeRow(device: device, mode: ModeConfiguration(
-                id: 0, prompt: 1, name: "Quiet", editable: false, configured: true,
-                favorite: true, audio: AudioSettings(cnc: 0), rawPayload: []
-            ), edit: {}, delete: {})
-            ModeRow(device: device, mode: ModeConfiguration(
-                id: 3, prompt: 11, name: "Work", editable: true, configured: true,
-                favorite: true, audio: AudioSettings(cnc: 5), rawPayload: []
-            ), edit: {}, delete: {})
-        }
-        .padding(20)
-        .frame(width: 420)
+    let device = DeviceController(id: "preview", name: "QC Ultra", profile: .lonestarr)
+    VStack(spacing: 10) {
+        ModeRow(device: device, mode: ModeConfiguration(
+            id: 0, prompt: .quiet, name: "Quiet", editable: false, configured: true,
+            favorite: true, audio: AudioSettings(cnc: 0), rawPayload: []
+        ), edit: {}, delete: {})
+        ModeRow(device: device, mode: ModeConfiguration(
+            id: 3, prompt: .work, name: "Work", editable: true, configured: true,
+            favorite: true, audio: AudioSettings(cnc: 5), rawPayload: []
+        ), edit: {}, delete: {})
     }
+    .padding(20)
+    .frame(width: 420)
 }

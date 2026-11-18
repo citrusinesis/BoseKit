@@ -41,21 +41,47 @@ public struct ModePrompt: RawRepresentable, Hashable, Sendable {
     public static let stereo = Self(rawValue: 35)
     public static let cinema = Self(rawValue: 36)
 
-    public static let named: [Self] = (1...36).map(Self.init(rawValue:))
+    private static let protocolNames: [Self: String] = [
+        .none: "NONE",
+        .quiet: "QUIET",
+        .aware: "AWARE",
+        .transparent: "TRANSPARENT",
+        .transparency: "TRANSPARENCY",
+        .masking: "MASKING",
+        .comfort: "COMFORT",
+        .commute: "COMMUTE",
+        .outdoor: "OUTDOOR",
+        .workout: "WORKOUT",
+        .home: "HOME",
+        .work: "WORK",
+        .music: "MUSIC",
+        .focus: "FOCUS",
+        .relax: "RELAX",
+        .flight: "FLIGHT",
+        .airport: "AIRPORT",
+        .driving: "DRIVING",
+        .training: "TRAINING",
+        .gym: "GYM",
+        .run: "RUN",
+        .walk: "WALK",
+        .hike: "HIKE",
+        .talk: "TALK",
+        .call: "CALL",
+        .whisper: "WHISPER",
+        .hearing: "HEARING",
+        .learn: "LEARN",
+        .podcast: "PODCAST",
+        .audiobook: "AUDIOBOOK",
+        .calm: "CALM",
+        .sleep: "SLEEP",
+        .meditate: "MEDITATE",
+        .yoga: "YOGA",
+        .immersion: "IMMERSION",
+        .stereo: "STEREO",
+        .cinema: "CINEMA",
+    ]
 
-    public var protocolName: String? {
-        let names = ["NONE", "QUIET", "AWARE", "TRANSPARENT", "TRANSPARENCY", "MASKING", "COMFORT", "COMMUTE", "OUTDOOR", "WORKOUT", "HOME", "WORK", "MUSIC", "FOCUS", "RELAX", "FLIGHT", "AIRPORT", "DRIVING", "TRAINING", "GYM", "RUN", "WALK", "HIKE", "TALK", "CALL", "WHISPER", "HEARING", "LEARN", "PODCAST", "AUDIOBOOK", "CALM", "SLEEP", "MEDITATE", "YOGA", "IMMERSION", "STEREO", "CINEMA"]
-        guard Int(rawValue) < names.count else { return nil }
-        return names[Int(rawValue)]
-    }
-}
+    public static let named: [Self] = protocolNames.keys.filter { $0 != .none }.sorted { $0.rawValue < $1.rawValue }
 
-extension ModeConfiguration {
-    public var voicePrompt: ModePrompt { ModePrompt(rawValue: prompt) }
-}
-
-extension ModeDraft {
-    public init(slot: UInt8, voicePrompt: ModePrompt, name: String, audio: AudioSettings) {
-        self.init(slot: slot, prompt: voicePrompt.rawValue, name: name, audio: audio)
-    }
+    public var protocolName: String? { Self.protocolNames[self] }
 }

@@ -1,7 +1,7 @@
 import BoseKitEngine
 
 extension DeviceController {
-    func setCNC(_ level: UInt8) { changeAudio { try await $0.setCNC(level) } }
+    func setCNC(_ level: CNCLevel) { changeAudio { try await $0.setCNC(level) } }
     func setSpatialAudio(_ value: SpatialAudio) { changeAudio { try await $0.setSpatialAudio(value) } }
     func setWindBlock(_ enabled: Bool) { changeAudio { try await $0.setWindBlock(enabled) } }
     func setANCEnabled(_ enabled: Bool) { changeAudio { try await $0.setANCEnabled(enabled) } }
@@ -12,9 +12,7 @@ extension DeviceController {
     }
 
     func setEqualizer(band: UInt8, to value: Int8) {
-        send(refreshing: .live) {
-            _ = try await $0.write(BoseFeatures.equalizer, value: EQAdjustment(band: band, value: value))
-        }
+        send(refreshing: .live) { _ = try await $0.setEqualizer(band: band, value: value) }
     }
 
     func resetEqualizer() { send(refreshing: .live) { _ = try await $0.resetEqualizer() } }
@@ -33,7 +31,7 @@ extension DeviceController {
     func setFavorite(_ slot: UInt8, _ isFavorite: Bool) { send { _ = try await $0.setFavorite(slot, isFavorite) } }
     func setDefaultMode(_ slot: UInt8) { send { _ = try await $0.write(BoseFeatures.defaultMode, value: slot) } }
 
-    func rename(to name: String) { send { _ = try await $0.write(BoseFeatures.name, value: name) } }
+    func rename(to name: DeviceName) { send { _ = try await $0.write(BoseFeatures.name, value: name) } }
     func setMultipoint(_ enabled: Bool) { send { _ = try await $0.write(BoseFeatures.multipoint, value: enabled) } }
     func setAutoPause(_ enabled: Bool) { send { _ = try await $0.write(BoseFeatures.autoPause, value: enabled) } }
     func setAutoAnswer(_ enabled: Bool) { send { _ = try await $0.write(BoseFeatures.autoAnswer, value: enabled) } }
@@ -51,10 +49,4 @@ extension DeviceController {
     }
 
     func routeAudio(to address: BluetoothAddress) { send { try await $0.routeAudio(to: address) } }
-
-    func powerOff() async {
-        suspendBeforePowerOff()
-        await perform { try await $0.powerOff() }
-        await disconnect()
-    }
 }

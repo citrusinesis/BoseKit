@@ -1,5 +1,4 @@
 import SwiftUI
-import BoseKitEngine
 
 struct AppPreferencesView: View {
     @Bindable var model: BoseAppModel
@@ -21,9 +20,6 @@ struct AppPreferencesView: View {
                 if let device = model.selected {
                     Divider()
                     ConnectionToggleButton(device: device)
-                }
-                if let error = model.discoveryError {
-                    Text(error.message).foregroundStyle(.orange)
                 }
                 SettingsFootnote(.connectionRefreshHelp)
             }

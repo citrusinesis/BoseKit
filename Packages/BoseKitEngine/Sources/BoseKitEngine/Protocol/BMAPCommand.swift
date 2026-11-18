@@ -6,18 +6,15 @@ public struct ResponseRule: Sendable {
 
     public let addresses: Set<BMAPAddress>
     public let completion: Completion
-    public let accepts: @Sendable (BMAPPacket) -> Bool
     public let isComplete: (@Sendable ([BMAPPacket]) -> Bool)?
 
     public init(
         addresses: Set<BMAPAddress>,
         completion: Completion,
-        accepts: @escaping @Sendable (BMAPPacket) -> Bool = { _ in true },
         isComplete: (@Sendable ([BMAPPacket]) -> Bool)? = nil
     ) {
         self.addresses = addresses
         self.completion = completion
-        self.accepts = accepts
         self.isComplete = isComplete
     }
 }
@@ -41,11 +38,5 @@ public struct BMAPCommand<Response: Sendable>: Sendable {
         )
         self.timeout = timeout
         self.decode = decode
-    }
-}
-
-func require(_ payload: [UInt8], count: Int) throws {
-    guard payload.count >= count else {
-        throw BoseError.invalidPayload("Expected at least \(count) bytes, received \(payload.count)")
     }
 }

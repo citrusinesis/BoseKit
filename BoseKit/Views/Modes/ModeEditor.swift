@@ -5,6 +5,7 @@ struct ModeEditor: View {
     let device: DeviceController
     @State private var draft: ModeDraft
     @State private var saving = false
+    @State private var saveFailed = false
     @Environment(\.dismiss) private var dismiss
 
     init(device: DeviceController, initial: ModeDraft) {
@@ -22,7 +23,7 @@ struct ModeEditor: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     SettingsSection(title: .commonName) {
-                        SettingsPicker(title: .modesVoicePromptName, selection: $draft.voicePrompt) {
+                        SettingsPicker(title: .modesVoicePromptName, selection: $draft.prompt) {
                             ForEach(promptChoices, id: \.self) { Text($0.title).tag($0) }
                         }
                     }
@@ -31,7 +32,7 @@ struct ModeEditor: View {
                                         allowsSpatialAudio: device.supports(.spatialAudio, write: true),
                                         allowsWindBlock: device.supports(.windBlock, write: true))
                     }
-                    if let error = device.error {
+                    if saveFailed, let error = device.error {
                         Text(error.message).font(.caption).foregroundStyle(.orange)
                     }
                 }
@@ -58,16 +59,18 @@ struct ModeEditor: View {
     }
 
     private var promptChoices: [ModePrompt] {
-        ModePrompt.named.contains(draft.voicePrompt) ? ModePrompt.named : ModePrompt.named + [draft.voicePrompt]
+        ModePrompt.named.contains(draft.prompt) ? ModePrompt.named : ModePrompt.named + [draft.prompt]
     }
 
     private func save() {
         var toSave = draft
-        if let name = draft.voicePrompt.protocolName { toSave.name = name }
+        if let name = draft.prompt.protocolName.flatMap(ModeName.init(rawValue:)) { toSave.name = name }
         saving = true
+        saveFailed = false
         Task {
             let success = await device.saveMode(toSave)
             saving = false
+            saveFailed = !success
             if success { dismiss() }
         }
     }
@@ -82,9 +85,9 @@ private struct ModeAudioEditor: View {
     var body: some View {
         let cncLocked = audio.windBlock && profile.modePolicy?.windForcesMaximumANC == true
         VStack(alignment: .leading, spacing: 8) {
-            Text(.soundAmbientLevel(UInt32(audio.cnc)))
+            Text(.soundAmbientLevel(UInt32(audio.cnc.rawValue)))
                 .monospacedDigit()
-            Slider(value: $audio.cncLevel, in: 0...10, step: 1)
+            Slider(value: $audio.cncLevel, in: CNCLevel.sliderRange, step: 1)
                 .accessibilityLabel(.soundAmbient)
                 .disabled(cncLocked)
             NoiseControlRangeLabels()
@@ -108,8 +111,8 @@ private struct ModeAudioEditor: View {
 
 private extension AudioSettings {
     var cncLevel: Double {
-        get { Double(cnc) }
-        set { cnc = UInt8(newValue.rounded()) }
+        get { Double(cnc.rawValue) }
+        set { cnc = CNCLevel(sliderValue: newValue) }
     }
 
     var ancToggle: Bool {
@@ -118,18 +121,9 @@ private extension AudioSettings {
     }
 }
 
-private extension ModeDraft {
-    var voicePrompt: ModePrompt {
-        get { ModePrompt(rawValue: prompt) }
-        set { prompt = newValue.rawValue }
-    }
-}
-
 #Preview("Mode Editor") {
-    if let profile = try? DeviceRegistry.standard().profile(productID: 0x4066) {
-        ModeEditor(
-            device: DeviceController(id: "preview", name: "QC Ultra", profile: profile),
-            initial: ModeDraft(slot: 3, voicePrompt: .work, name: "WORK", audio: AudioSettings(cnc: 0))
-        )
-    }
+    ModeEditor(
+        device: DeviceController(id: "preview", name: "QC Ultra", profile: .lonestarr),
+        initial: ModeDraft(slot: 3, prompt: .work, name: "WORK", audio: AudioSettings(cnc: 0))
+    )
 }

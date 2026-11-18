@@ -13,17 +13,32 @@ public enum BMAPOperator: UInt8, Sendable {
 }
 
 public struct BMAPPacket: Equatable, Sendable {
+    static let headerLength = 4
+    static let maximumPayloadLength = Int(UInt8.max)
+    static let maximumLength = headerLength + maximumPayloadLength
+    static let operatorMask: UInt8 = 0x0f
+
     public let address: BMAPAddress
     public let flags: UInt8
     public let payload: [UInt8]
-    public var operation: BMAPOperator? { BMAPOperator(rawValue: flags & 0x0f) }
+    public var operation: BMAPOperator? { BMAPOperator(rawValue: flags & Self.operatorMask) }
 
     public init(address: BMAPAddress, operation: BMAPOperator, payload: [UInt8] = []) throws {
         try self.init(address: address, flags: operation.rawValue, payload: payload)
     }
 
     public init(address: BMAPAddress, flags: UInt8, payload: [UInt8]) throws {
-        guard payload.count <= 255 else { throw BoseError.invalidArgument("Payload exceeds 255 bytes") }
+        guard payload.count <= Self.maximumPayloadLength else {
+            throw BoseError.invalidArgument("Payload exceeds \(Self.maximumPayloadLength) bytes")
+        }
+        self.init(address: address, flags: flags, uncheckedPayload: payload)
+    }
+
+    init(address: BMAPAddress, operation: BMAPOperator, uncheckedPayload payload: [UInt8]) {
+        self.init(address: address, flags: operation.rawValue, uncheckedPayload: payload)
+    }
+
+    fileprivate init(address: BMAPAddress, flags: UInt8, uncheckedPayload payload: [UInt8]) {
         self.address = address
         self.flags = flags
         self.payload = payload
@@ -39,17 +54,17 @@ public struct BMAPDecoder: Sendable {
 
     public init() {}
 
-    public mutating func append(_ bytes: [UInt8]) throws -> [BMAPPacket] {
+    public mutating func append(_ bytes: [UInt8]) -> [BMAPPacket] {
         buffer.append(contentsOf: bytes)
         var offset = 0
         var packets: [BMAPPacket] = []
-        while buffer.count - offset >= 4 {
-            let end = offset + 4 + Int(buffer[offset + 3])
+        while buffer.count - offset >= BMAPPacket.headerLength {
+            let end = offset + BMAPPacket.headerLength + Int(buffer[offset + 3])
             guard end <= buffer.count else { break }
-            packets.append(try BMAPPacket(
+            packets.append(BMAPPacket(
                 address: BMAPAddress(buffer[offset], buffer[offset + 1]),
                 flags: buffer[offset + 2],
-                payload: Array(buffer[(offset + 4)..<end])
+                uncheckedPayload: Array(buffer[(offset + BMAPPacket.headerLength)..<end])
             ))
             offset = end
         }

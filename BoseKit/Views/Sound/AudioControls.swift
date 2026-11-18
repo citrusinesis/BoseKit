@@ -8,9 +8,9 @@ struct AudioControls: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             VStack(alignment: .leading, spacing: 8) {
-                ValueSlider(title: .soundAmbient, value: Double(audio.cnc), range: 0...10,
+                ValueSlider(title: .soundAmbient, value: Double(audio.cnc.rawValue), range: CNCLevel.sliderRange,
                             revision: device.refreshRevision, editingChanged: device.setEditing) {
-                    device.setCNC(UInt8($0))
+                    device.setCNC(CNCLevel(sliderValue: $0))
                 }
                 .disabled(!device.canEditAudio || audio.windBlock || !device.canAdjustCNC)
                 NoiseControlRangeLabels()

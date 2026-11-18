@@ -46,15 +46,19 @@ private struct DeviceNameSettings: View {
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 TextField(.deviceName, text: $newName)
                     .textFieldStyle(.roundedBorder)
-                Button(.commonSave) { device.rename(to: newName) }
-                    .disabled(!isValid)
+                Button(.commonSave) { if let validName { device.rename(to: validName) } }
+                    .disabled(validName == nil)
             }
         }
         .onAppear { newName = device.name }
+        .onChange(of: device.name) { oldName, updatedName in
+            if newName == oldName { newName = updatedName }
+        }
     }
 
-    private var isValid: Bool {
-        !newName.isEmpty && newName.utf8.count <= BoseFeatures.maximumNameLength && newName != device.name
+    private var validName: DeviceName? {
+        guard newName != device.name else { return nil }
+        return DeviceName(rawValue: newName)
     }
 }
 

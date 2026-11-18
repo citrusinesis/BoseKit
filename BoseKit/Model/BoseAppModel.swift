@@ -11,27 +11,29 @@ final class BoseAppModel {
 
     var devices: [DeviceController] = []
     var selectedID: String?
-    private(set) var discoveryError: AppError?
 
-    var hideWhenUnavailable = UserDefaults.standard.bool(forKey: DefaultsKey.hideWhenUnavailable) {
+    var hideWhenUnavailable: Bool {
         didSet {
-            UserDefaults.standard.set(hideWhenUnavailable, forKey: DefaultsKey.hideWhenUnavailable)
+            defaults.set(hideWhenUnavailable, forKey: DefaultsKey.hideWhenUnavailable)
             menuRemovedByUser = false
         }
     }
 
-    var showBattery = UserDefaults.standard.bool(forKey: DefaultsKey.showBattery) {
-        didSet { UserDefaults.standard.set(showBattery, forKey: DefaultsKey.showBattery) }
+    var showBattery: Bool {
+        didSet { defaults.set(showBattery, forKey: DefaultsKey.showBattery) }
     }
 
     @ObservationIgnored private let policy: MaintenancePolicy
-    @ObservationIgnored private var registry: DeviceRegistry?
+    @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private var monitor: Task<Void, Never>?
     @ObservationIgnored private var discovering = false
     private var menuRemovedByUser = false
 
-    init(policy: MaintenancePolicy = .standard) {
+    init(policy: MaintenancePolicy = .standard, defaults: UserDefaults = .standard) {
         self.policy = policy
+        self.defaults = defaults
+        hideWhenUnavailable = defaults.bool(forKey: DefaultsKey.hideWhenUnavailable)
+        showBattery = defaults.bool(forKey: DefaultsKey.showBattery)
     }
 
     var selected: DeviceController? { devices.first { $0.id == selectedID } ?? devices.first }
@@ -83,27 +85,20 @@ final class BoseAppModel {
         guard !discovering else { return }
         discovering = true
         defer { discovering = false }
-        do {
-            if registry == nil { registry = try DeviceRegistry.standard() }
-            guard let registry else { return }
-            let paired = await Task.detached(priority: .utility) {
-                RFCOMMTransport.pairedDevices()
-            }.value
-            var connectedIDs: Set<String> = []
-            for item in paired {
-                guard let profile = item.profile(in: registry) else { continue }
-                if !devices.contains(where: { $0.id == item.id }) {
-                    devices.append(DeviceController(id: item.id, name: item.name, profile: profile, policy: policy))
-                }
-                if item.isConnected { connectedIDs.insert(item.id) }
+        let paired = await Task.detached(priority: .utility) {
+            RFCOMMTransport.pairedDevices()
+        }.value
+        var connectedIDs: Set<String> = []
+        for item in paired {
+            guard let profile = item.profile(in: .standard) else { continue }
+            if !devices.contains(where: { $0.id == item.id }) {
+                devices.append(DeviceController(id: item.id, name: item.name, profile: profile, policy: policy))
             }
-            for device in devices { device.nativeConnected = connectedIDs.contains(device.id) }
-            if selectedID == nil || (selected?.nativeConnected == false && selected?.connected == false) {
-                selectedID = devices.first(where: \.nativeConnected)?.id ?? selectedID ?? devices.first?.id
-            }
-            discoveryError = nil
-        } catch {
-            discoveryError = AppError(error)
+            if item.isConnected { connectedIDs.insert(item.id) }
+        }
+        for device in devices { device.nativeConnected = connectedIDs.contains(device.id) }
+        if selectedID == nil || (selected?.nativeConnected == false && selected?.connected == false) {
+            selectedID = devices.first(where: \.nativeConnected)?.id ?? selectedID ?? devices.first?.id
         }
     }
 }

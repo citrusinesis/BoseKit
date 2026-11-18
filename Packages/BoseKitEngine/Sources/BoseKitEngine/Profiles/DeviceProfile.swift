@@ -9,13 +9,13 @@ public struct ModePolicy: Sendable {
     public let expectedSlots: Set<UInt8>?
     public let allowsCustomAutoCNC: Bool
     public let windForcesMaximumANC: Bool
-    public let deletionCNC: UInt8
+    public let deletionCNC: CNCLevel
     public let deletionClearsConfigured: Bool
 
     public init(
         codec: any ModeCodec, editableSlots: Set<UInt8>, presetSlots: Set<UInt8> = [], expectedSlots: Set<UInt8>? = nil,
         allowsCustomAutoCNC: Bool = true, windForcesMaximumANC: Bool = false,
-        deletionCNC: UInt8 = 0, deletionClearsConfigured: Bool = false
+        deletionCNC: CNCLevel = .minimum, deletionClearsConfigured: Bool = false
     ) {
         self.codec = codec
         self.editableSlots = editableSlots
@@ -38,27 +38,21 @@ public struct DeviceProfile: Sendable {
     public let id: String
     public let name: String
     public let productIDs: Set<UInt16>
-    public let rfcommChannel: UInt8
+    public let rfcommChannel: RFCOMMChannel
     public let initialization: [BMAPPacket]
     public let features: [FeatureID: FeatureAccess]
     public let noiseControl: NoiseControlStrategy
     public let modePolicy: ModePolicy?
     public let batteryLayout: BatteryLayout
-    public let buttonBitmapBigEndian: Bool
     public let voicePromptToggleHasSideEffect: Bool
-    public let provenance: String
 
     public init(
-        id: String, name: String, productIDs: Set<UInt16>, rfcommChannel: UInt8,
+        id: String, name: String, productIDs: Set<UInt16>, rfcommChannel: RFCOMMChannel,
         initialization: [BMAPPacket] = [], features: [FeatureID: FeatureAccess],
         noiseControl: NoiseControlStrategy = .unavailable, modePolicy: ModePolicy? = nil,
-        batteryLayout: BatteryLayout = .percentage, buttonBitmapBigEndian: Bool = true,
-        voicePromptToggleHasSideEffect: Bool = false,
-        provenance: String
-    ) throws {
-        guard (1...30).contains(rfcommChannel) else {
-            throw BoseError.invalidArgument("RFCOMM channel must be 1...30")
-        }
+        batteryLayout: BatteryLayout = .percentage,
+        voicePromptToggleHasSideEffect: Bool = false
+    ) {
         self.id = id
         self.name = name
         self.productIDs = productIDs
@@ -68,9 +62,7 @@ public struct DeviceProfile: Sendable {
         self.noiseControl = noiseControl
         self.modePolicy = modePolicy
         self.batteryLayout = batteryLayout
-        self.buttonBitmapBigEndian = buttonBitmapBigEndian
         self.voicePromptToggleHasSideEffect = voicePromptToggleHasSideEffect
-        self.provenance = provenance
     }
 
     public func supports(_ feature: FeatureID, access: FeatureAccess = .read) -> Bool {

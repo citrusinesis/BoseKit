@@ -15,9 +15,9 @@ struct DeviceInformation: View {
             }
             InformationRow(.deviceBluetoothAddress, value: device.id)
             if let components = device.battery?.components {
-                ForEach(components.keys.sorted(), id: \.self) { component in
+                ForEach(components.sorted { $0.key < $1.key }, id: \.key) { component, percentage in
                     InformationRow(title: component.title) {
-                        Text(.deviceBatteryPercentage(UInt32(components[component] ?? 0)))
+                        Text(.deviceBatteryPercentage(UInt32(percentage)))
                     }
                 }
             }

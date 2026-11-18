@@ -2,12 +2,21 @@ public struct EQBand: Equatable, Sendable, Identifiable {
     public let id: UInt8
     public let range: ClosedRange<Int8>
     public let value: Int8
+
+    public func adjustment(to value: Int8) throws -> EQAdjustment {
+        guard range.contains(value) else { throw BoseError.invalidArgument("EQ band \(id) must be \(range)") }
+        return EQAdjustment(band: id, value: value)
+    }
 }
 
 public struct EQAdjustment: Sendable {
     public let band: UInt8
     public let value: Int8
-    public init(band: UInt8, value: Int8) { self.band = band; self.value = value }
+
+    init(band: UInt8, value: Int8) {
+        self.band = band
+        self.value = value
+    }
 }
 
 public struct CNCStatus: Equatable, Sendable {
@@ -33,9 +42,19 @@ public struct AudioSource: Equatable, Sendable {
 }
 
 public struct FavoriteModes: Equatable, Sendable {
+    public static let maximumSlotCount: UInt8 = 16
+
     public let slotCount: UInt8
     public let slots: Set<UInt8>
-    public init(slotCount: UInt8, slots: Set<UInt8>) {
-        self.slotCount = slotCount; self.slots = slots
+
+    public init(slotCount: UInt8, slots: Set<UInt8>) throws {
+        guard slotCount <= Self.maximumSlotCount else {
+            throw BoseError.invalidArgument("Favorite slot count must be at most \(Self.maximumSlotCount)")
+        }
+        guard slots.allSatisfy({ $0 < slotCount }) else {
+            throw BoseError.invalidArgument("Favorite slots must be below \(slotCount)")
+        }
+        self.slotCount = slotCount
+        self.slots = slots
     }
 }

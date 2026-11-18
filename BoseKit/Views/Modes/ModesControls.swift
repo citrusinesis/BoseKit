@@ -27,7 +27,7 @@ struct ModesControls: View {
             VStack(spacing: 10) {
                 ForEach(device.selectableModes) { mode in
                     ModeRow(device: device, mode: mode,
-                            edit: { editorDraft = ModeEditorDraft(editing: mode) },
+                            edit: ModeEditorDraft(editing: mode).map { draft in { editorDraft = draft } },
                             delete: { pendingDeletion = mode })
                 }
             }
@@ -59,14 +59,15 @@ struct ModeEditorDraft: Identifiable {
     let draft: ModeDraft
     var id: UInt8 { draft.slot }
 
-    init(newModeIn slot: ModeConfiguration) {
+    init?(newModeIn slot: ModeConfiguration) {
         let prompt = ModePrompt.work
-        draft = ModeDraft(slot: slot.id, voicePrompt: prompt, name: prompt.title,
-                          audio: AudioSettings(cnc: 0, ancEnabled: slot.audio?.ancEnabled))
+        guard let name = ModeName(rawValue: prompt.title) else { return nil }
+        draft = ModeDraft(slot: slot.id, prompt: prompt, name: name,
+                          audio: AudioSettings(cnc: .minimum, ancEnabled: slot.audio?.ancEnabled))
     }
 
     init?(editing mode: ModeConfiguration) {
-        guard let audio = mode.audio else { return nil }
-        draft = ModeDraft(slot: mode.id, prompt: mode.prompt, name: mode.name, audio: audio)
+        guard let audio = mode.audio, let name = ModeName(rawValue: mode.name) else { return nil }
+        draft = ModeDraft(slot: mode.id, prompt: mode.prompt, name: name, audio: audio)
     }
 }
