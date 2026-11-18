@@ -1,0 +1,3192 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "common.app" : {
+      "comment" : "Common interface label or message: app.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "App"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "앱"
+          }
+        }
+      }
+    },
+    "common.appName" : {
+      "comment" : "Common interface label or message: appName.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "BoseKit"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "BoseKit"
+          }
+        }
+      }
+    },
+    "common.cancel" : {
+      "comment" : "Common interface label or message: cancel.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cancel"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "취소"
+          }
+        }
+      }
+    },
+    "common.change" : {
+      "comment" : "Common interface label or message: change.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Change"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "변경"
+          }
+        }
+      }
+    },
+    "common.delete" : {
+      "comment" : "Common interface label or message: delete.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delete"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "삭제"
+          }
+        }
+      }
+    },
+    "common.device" : {
+      "comment" : "Common interface label or message: device.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기"
+          }
+        }
+      }
+    },
+    "common.edit" : {
+      "comment" : "Common interface label or message: edit.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Edit"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "편집"
+          }
+        }
+      }
+    },
+    "common.high" : {
+      "comment" : "Common interface label or message: high.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "High"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "높음"
+          }
+        }
+      }
+    },
+    "common.low" : {
+      "comment" : "Common interface label or message: low.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Low"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "낮음"
+          }
+        }
+      }
+    },
+    "common.medium" : {
+      "comment" : "Common interface label or message: medium.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Medium"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "중간"
+          }
+        }
+      }
+    },
+    "common.modes" : {
+      "comment" : "Common interface label or message: modes.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Modes"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모드"
+          }
+        }
+      }
+    },
+    "common.name" : {
+      "comment" : "Common interface label or message: name.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Name"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이름"
+          }
+        }
+      }
+    },
+    "common.none" : {
+      "comment" : "Common interface label or message: none.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "None"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "없음"
+          }
+        }
+      }
+    },
+    "common.notSelected" : {
+      "comment" : "Common interface label or message: notSelected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not Selected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "선택되지 않음"
+          }
+        }
+      }
+    },
+    "common.off" : {
+      "comment" : "Common interface label or message: off.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Off"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "끔"
+          }
+        }
+      }
+    },
+    "common.save" : {
+      "comment" : "Common interface label or message: save.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Save"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "저장"
+          }
+        }
+      }
+    },
+    "common.selected" : {
+      "comment" : "Common interface label or message: selected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Selected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "선택됨"
+          }
+        }
+      }
+    },
+    "common.settings" : {
+      "comment" : "Common interface label or message: settings.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "설정"
+          }
+        }
+      }
+    },
+    "common.sound" : {
+      "comment" : "Common interface label or message: sound.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sound"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "사운드"
+          }
+        }
+      }
+    },
+    "connection.connect" : {
+      "comment" : "Connection interface label or message: connect.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connect"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결"
+          }
+        }
+      }
+    },
+    "connection.connected" : {
+      "comment" : "Connection interface label or message: connected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결됨"
+          }
+        }
+      }
+    },
+    "connection.connecting" : {
+      "comment" : "Connection interface label or message: connecting.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connecting"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결 중"
+          }
+        }
+      }
+    },
+    "connection.disconnect" : {
+      "comment" : "Connection interface label or message: disconnect.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Disconnect Device Controls"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 제어 연결 해제"
+          }
+        }
+      }
+    },
+    "connection.disconnected" : {
+      "comment" : "Connection interface label or message: disconnected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결되지 않음"
+          }
+        }
+      }
+    },
+    "connection.discoveryHelp" : {
+      "comment" : "Connection interface label or message: discoveryHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "BoseKit shows supported paired devices and automatically connects to devices available over Bluetooth."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "BoseKit은 페어링된 지원 기기를 표시하고, Bluetooth로 연결할 수 있는 기기에 자동으로 연결합니다."
+          }
+        }
+      }
+    },
+    "connection.emptyHelp" : {
+      "comment" : "Connection interface label or message: emptyHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pair a supported Bose device in macOS Bluetooth settings to see it here."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "macOS Bluetooth 설정에서 지원되는 Bose 기기를 페어링하면 여기에 표시됩니다."
+          }
+        }
+      }
+    },
+    "connection.emptyTitle" : {
+      "comment" : "Connection interface label or message: emptyTitle.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connect a Bose Device"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bose 기기 연결"
+          }
+        }
+      }
+    },
+    "connection.help" : {
+      "comment" : "Connection interface label or message: help.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Make sure your device is on and within Bluetooth range of your Mac."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기의 전원이 켜져 있고 Mac의 Bluetooth 연결 범위 안에 있는지 확인하세요."
+          }
+        }
+      }
+    },
+    "connection.openBluetoothSettings" : {
+      "comment" : "Connection interface label or message: openBluetoothSettings.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open Bluetooth Settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bluetooth 설정 열기"
+          }
+        }
+      }
+    },
+    "connection.refreshHelp" : {
+      "comment" : "Connection interface label or message: refreshHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "While this view is open, settings refresh periodically to reflect changes from other apps or headphone buttons."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 화면이 열려 있는 동안 다른 앱이나 헤드폰 버튼으로 변경한 내용이 반영되도록 설정을 주기적으로 갱신합니다."
+          }
+        }
+      }
+    },
+    "connection.resume" : {
+      "comment" : "Connection interface label or message: resume.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Resume Automatic Connection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "자동 연결 다시 켜기"
+          }
+        }
+      }
+    },
+    "connection.title" : {
+      "comment" : "Connection interface label or message: title.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device Connection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 연결"
+          }
+        }
+      }
+    },
+    "connection.updating" : {
+      "comment" : "Connection interface label or message: updating.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Updating…"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "갱신 중…"
+          }
+        }
+      }
+    },
+    "connection.waiting" : {
+      "comment" : "Connection interface label or message: waiting.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Waiting for Connection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결 대기 중"
+          }
+        }
+      }
+    },
+    "device.action" : {
+      "comment" : "Fallback shortcut action name; the argument is the action identifier, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Action %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "동작 %u"
+          }
+        }
+      }
+    },
+    "device.activeSource" : {
+      "comment" : "Tag on the paired device currently sending audio to the headphones.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playing"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재생 중"
+          }
+        }
+      }
+    },
+    "device.appAction" : {
+      "comment" : "Device interface label or message: appAction.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "App Action"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "앱 동작"
+          }
+        }
+      }
+    },
+    "device.audioSource" : {
+      "comment" : "Device interface label or message: audioSource.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio Source"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "오디오 소스"
+          }
+        }
+      }
+    },
+    "device.autoAnswer" : {
+      "comment" : "Device interface label or message: autoAnswer.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Answer calls when worn"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "착용하면 전화 자동 응답"
+          }
+        }
+      }
+    },
+    "device.autoPause" : {
+      "comment" : "Device interface label or message: autoPause.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pause when removed"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "벗으면 자동 일시 정지"
+          }
+        }
+      }
+    },
+    "device.battery" : {
+      "comment" : "Fallback battery label; the argument is the component identifier, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Battery %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "배터리 %u"
+          }
+        }
+      }
+    },
+    "device.batteryLevel" : {
+      "comment" : "Device interface label or message: batteryLevel.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Battery Level"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "배터리 잔량"
+          }
+        }
+      }
+    },
+    "device.batteryPercentage" : {
+      "comment" : "Battery percentage; the argument is a number from 0 to 100.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%u%%"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%u%%"
+          }
+        }
+      }
+    },
+    "device.bluetooth" : {
+      "comment" : "Device interface label or message: bluetooth.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bluetooth"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bluetooth"
+          }
+        }
+      }
+    },
+    "device.bluetoothAddress" : {
+      "comment" : "Device interface label or message: bluetoothAddress.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bluetooth Address"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bluetooth 주소"
+          }
+        }
+      }
+    },
+    "device.caseBattery" : {
+      "comment" : "Device interface label or message: caseBattery.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Case Battery"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "케이스 배터리"
+          }
+        }
+      }
+    },
+    "device.confirmPowerOff" : {
+      "comment" : "Device interface label or message: confirmPowerOff.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Power Off"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "전원 끄기"
+          }
+        }
+      }
+    },
+    "device.confirmSwitchSource" : {
+      "comment" : "Device interface label or message: confirmSwitchSource.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Switch to This Source"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 소스로 전환"
+          }
+        }
+      }
+    },
+    "device.connectionDetails" : {
+      "comment" : "Device connection and shortcut controls: connectionDetails.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connection Details"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결 정보"
+          }
+        }
+      }
+    },
+    "device.conversationMode" : {
+      "comment" : "Device interface label or message: conversationMode.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Conversation Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "대화 모드"
+          }
+        }
+      }
+    },
+    "device.cycleModes" : {
+      "comment" : "Device interface label or message: cycleModes.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cycle Modes"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모드 순환"
+          }
+        }
+      }
+    },
+    "device.decreaseAmbient" : {
+      "comment" : "Device interface label or message: decreaseAmbient.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Decrease Ambient Sound"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리 줄이기"
+          }
+        }
+      }
+    },
+    "device.disabled" : {
+      "comment" : "Device interface label or message: disabled.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Disabled"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "사용 안 함"
+          }
+        }
+      }
+    },
+    "device.firmware" : {
+      "comment" : "Device interface label or message: firmware.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firmware"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "펌웨어"
+          }
+        }
+      }
+    },
+    "device.increaseAmbient" : {
+      "comment" : "Device interface label or message: increaseAmbient.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Increase Ambient Sound"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리 늘리기"
+          }
+        }
+      }
+    },
+    "device.information" : {
+      "comment" : "Device interface label or message: information.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device Information"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 정보"
+          }
+        }
+      }
+    },
+    "device.leftBattery" : {
+      "comment" : "Device interface label or message: leftBattery.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Left Battery"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "왼쪽 배터리"
+          }
+        }
+      }
+    },
+    "device.linkDevices" : {
+      "comment" : "Shortcut button action that links devices.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device Connection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 연결"
+          }
+        }
+      }
+    },
+    "device.longPress" : {
+      "comment" : "Device connection and shortcut controls: longPress.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Press and Hold"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "길게 누르기"
+          }
+        }
+      }
+    },
+    "device.model" : {
+      "comment" : "Device interface label or message: model.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Model"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모델"
+          }
+        }
+      }
+    },
+    "device.multipoint" : {
+      "comment" : "Device interface label or message: multipoint.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Multipoint"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "멀티포인트"
+          }
+        }
+      }
+    },
+    "device.multipointListHelp" : {
+      "comment" : "Device connection and shortcut controls: multipointListHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "BoseKit can show the current audio source, but cannot yet list every device connected to these headphones."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "현재 오디오 소스는 표시할 수 있지만, 헤드폰에 연결된 전체 기기 목록은 아직 조회할 수 없습니다."
+          }
+        }
+      }
+    },
+    "device.name" : {
+      "comment" : "Device interface label or message: name.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device Name"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 이름"
+          }
+        }
+      }
+    },
+    "device.nextTrack" : {
+      "comment" : "Device interface label or message: nextTrack.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Next Track"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "다음 트랙"
+          }
+        }
+      }
+    },
+    "device.notConnected" : {
+      "comment" : "Status of a paired device that is not connected to the headphones.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not Connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 안 됨"
+          }
+        }
+      }
+    },
+    "device.notifications" : {
+      "comment" : "Device interface label or message: notifications.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Notifications"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "알림"
+          }
+        }
+      }
+    },
+    "device.overallBattery" : {
+      "comment" : "Device interface label or message: overallBattery.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Overall Battery"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "전체 배터리"
+          }
+        }
+      }
+    },
+    "device.pairing" : {
+      "comment" : "Device interface label or message: pairing.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pair a new device"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "새 기기 페어링"
+          }
+        }
+      }
+    },
+    "device.pairingHelp" : {
+      "comment" : "Device connection and shortcut controls: pairingHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose these headphones in the other device’s Bluetooth settings."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "다른 기기의 Bluetooth 설정에서 이 헤드폰을 선택하세요."
+          }
+        }
+      }
+    },
+    "device.playPause" : {
+      "comment" : "Device interface label or message: playPause.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Play / Pause"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "재생 / 일시 정지"
+          }
+        }
+      }
+    },
+    "device.powerOff" : {
+      "comment" : "Device interface label or message: powerOff.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Power Off Headphones"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "헤드폰 전원 끄기"
+          }
+        }
+      }
+    },
+    "device.powerOffConfirmation" : {
+      "comment" : "Device interface label or message: powerOffConfirmation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Power off your headphones?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "헤드폰의 전원을 끄겠습니까?"
+          }
+        }
+      }
+    },
+    "device.powerOffHelp" : {
+      "comment" : "Device interface label or message: powerOffHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playback and calls will end. You will need to turn your headphones back on manually."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "재생과 통화가 종료됩니다. 헤드폰의 전원은 직접 다시 켜야 합니다."
+          }
+        }
+      }
+    },
+    "device.previousTrack" : {
+      "comment" : "Device interface label or message: previousTrack.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Previous Track"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이전 트랙"
+          }
+        }
+      }
+    },
+    "device.promptLanguage" : {
+      "comment" : "Device interface label or message: promptLanguage.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Prompt Language"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 안내 언어"
+          }
+        }
+      }
+    },
+    "device.rightBattery" : {
+      "comment" : "Device interface label or message: rightBattery.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Right Battery"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "오른쪽 배터리"
+          }
+        }
+      }
+    },
+    "device.selfVoice" : {
+      "comment" : "Device interface label or message: selfVoice.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Self Voice During Calls"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "통화 중 내 목소리 듣기"
+          }
+        }
+      }
+    },
+    "device.serialNumber" : {
+      "comment" : "Device interface label or message: serialNumber.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Serial Number"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "일련 번호"
+          }
+        }
+      }
+    },
+    "device.settings" : {
+      "comment" : "Device interface label or message: settings.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device Settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 설정"
+          }
+        }
+      }
+    },
+    "device.shortcut" : {
+      "comment" : "Device interface label or message: shortcut.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Shortcut Button"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "단축 버튼"
+          }
+        }
+      }
+    },
+    "device.shortcutAction" : {
+      "comment" : "Device connection and shortcut controls: shortcutAction.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Button Action"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "버튼 동작"
+          }
+        }
+      }
+    },
+    "device.sourceAddress" : {
+      "comment" : "Device interface label or message: sourceAddress.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connected source’s Bluetooth address"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결된 소스의 Bluetooth 주소"
+          }
+        }
+      }
+    },
+    "device.sourceDevices" : {
+      "comment" : "Section title listing devices paired with the headphones.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Devices"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기기"
+          }
+        }
+      }
+    },
+    "device.sourceUnknown" : {
+      "comment" : "Device connection and shortcut controls: sourceUnknown.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current audio source unavailable"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "현재 오디오 소스를 확인할 수 없음"
+          }
+        }
+      }
+    },
+    "device.spotify" : {
+      "comment" : "Device interface label or message: spotify.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Spotify"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Spotify"
+          }
+        }
+      }
+    },
+    "device.stopPairing" : {
+      "comment" : "Device connection and shortcut controls: stopPairing.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Stop Pairing"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "페어링 종료"
+          }
+        }
+      }
+    },
+    "device.switchDevice" : {
+      "comment" : "Device interface label or message: switchDevice.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Switch Device"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기 전환"
+          }
+        }
+      }
+    },
+    "device.switchSource" : {
+      "comment" : "Device interface label or message: switchSource.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Switch Audio Source"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "오디오 소스 전환"
+          }
+        }
+      }
+    },
+    "device.switchToDevice" : {
+      "comment" : "Button that makes a connected device the headphones' audio source.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Switch"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전환"
+          }
+        }
+      }
+    },
+    "device.thisMac" : {
+      "comment" : "Tag on the paired device that is the Mac running BoseKit.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This Mac"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 Mac"
+          }
+        }
+      }
+    },
+    "device.unavailableHelp" : {
+      "comment" : "Device interface label or message: unavailableHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Some features did not respond and are hidden for this connection. Reconnect to check them again."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "응답하지 않은 일부 기능은 현재 연결에서 표시하지 않습니다. 다시 연결하면 해당 기능을 확인합니다."
+          }
+        }
+      }
+    },
+    "device.voiceAssistant" : {
+      "comment" : "Device interface label or message: voiceAssistant.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Voice Assistant"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 비서"
+          }
+        }
+      }
+    },
+    "device.voicePromptConfirmation" : {
+      "comment" : "Device interface label or message: voicePromptConfirmation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Change voice prompt settings?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 안내 설정을 변경할까요?"
+          }
+        }
+      }
+    },
+    "device.voicePromptWarning" : {
+      "comment" : "Device interface label or message: voicePromptWarning.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "On first-generation QC Ultra headphones, turning voice prompts off and back on leaves some internal prompt settings changed. Button announcements are unaffected."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "QC Ultra 1세대 헤드폰에서 음성 안내를 껐다 켜면 일부 내부 안내 설정이 원래대로 복원되지 않습니다. 버튼 안내에는 영향이 없습니다."
+          }
+        }
+      }
+    },
+    "device.voicePrompts" : {
+      "comment" : "Device interface label or message: voicePrompts.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Voice Prompts"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 안내"
+          }
+        }
+      }
+    },
+    "device.wakeWord" : {
+      "comment" : "Device interface label or message: wakeWord.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wake Word"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 호출"
+          }
+        }
+      }
+    },
+    "device.wired" : {
+      "comment" : "Device interface label or message: wired.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wired"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "유선"
+          }
+        }
+      }
+    },
+    "device.wiredInput" : {
+      "comment" : "Device interface label or message: wiredInput.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wired Input"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "유선 입력"
+          }
+        }
+      }
+    },
+    "errors.disconnected" : {
+      "comment" : "Errors interface label or message: disconnected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The device disconnected. Check its connection."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기와의 연결이 끊어졌습니다. 연결 상태를 확인하세요."
+          }
+        }
+      }
+    },
+    "errors.invalidValue" : {
+      "comment" : "Errors interface label or message: invalidValue.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The setting could not be applied. Check the value you entered."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "설정을 적용하지 못했습니다. 입력한 값을 확인하세요."
+          }
+        }
+      }
+    },
+    "errors.rejected" : {
+      "comment" : "Errors interface label or message: rejected.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The device rejected this change. Check the current mode and connection."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기가 변경을 허용하지 않았습니다. 현재 모드와 연결 상태를 확인하세요."
+          }
+        }
+      }
+    },
+    "errors.timeout" : {
+      "comment" : "Errors interface label or message: timeout.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The device did not respond. BoseKit will try to reconnect shortly."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기가 응답하지 않았습니다. BoseKit이 잠시 후 다시 연결을 시도합니다."
+          }
+        }
+      }
+    },
+    "errors.transport" : {
+      "comment" : "Errors interface label or message: transport.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The Bluetooth connection failed. Check that your device is on and BoseKit has Bluetooth access."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bluetooth 연결에 실패했습니다. 기기의 전원이 켜져 있고 BoseKit에 Bluetooth 접근 권한이 있는지 확인하세요."
+          }
+        }
+      }
+    },
+    "errors.unsupported" : {
+      "comment" : "Errors interface label or message: unsupported.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This feature is not supported by this device or its current mode."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 기기 또는 현재 모드에서는 이 기능을 지원하지 않습니다."
+          }
+        }
+      }
+    },
+    "errors.verification" : {
+      "comment" : "Errors interface label or message: verification.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The verified setting differs from the requested value. Refresh to check the current setting."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기에서 확인한 설정이 요청한 값과 다릅니다. 새로 고침하여 현재 설정을 확인하세요."
+          }
+        }
+      }
+    },
+    "language.arabic" : {
+      "comment" : "Language interface label or message: arabic.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Arabic"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "아랍어"
+          }
+        }
+      }
+    },
+    "language.cantonese" : {
+      "comment" : "Language interface label or message: cantonese.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cantonese"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "광둥어"
+          }
+        }
+      }
+    },
+    "language.danish" : {
+      "comment" : "Language interface label or message: danish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Danish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "덴마크어"
+          }
+        }
+      }
+    },
+    "language.dutch" : {
+      "comment" : "Language interface label or message: dutch.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Dutch"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "네덜란드어"
+          }
+        }
+      }
+    },
+    "language.englishUK" : {
+      "comment" : "Language interface label or message: englishUK.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "English (UK)"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "영어(영국)"
+          }
+        }
+      }
+    },
+    "language.englishUS" : {
+      "comment" : "Language interface label or message: englishUS.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "English (US)"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "영어(미국)"
+          }
+        }
+      }
+    },
+    "language.finnish" : {
+      "comment" : "Language interface label or message: finnish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Finnish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "핀란드어"
+          }
+        }
+      }
+    },
+    "language.french" : {
+      "comment" : "Language interface label or message: french.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "French"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "프랑스어"
+          }
+        }
+      }
+    },
+    "language.german" : {
+      "comment" : "Language interface label or message: german.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "German"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "독일어"
+          }
+        }
+      }
+    },
+    "language.hebrew" : {
+      "comment" : "Language interface label or message: hebrew.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hebrew"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "히브리어"
+          }
+        }
+      }
+    },
+    "language.hindi" : {
+      "comment" : "Language interface label or message: hindi.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hindi"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "힌디어"
+          }
+        }
+      }
+    },
+    "language.italian" : {
+      "comment" : "Language interface label or message: italian.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Italian"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이탈리아어"
+          }
+        }
+      }
+    },
+    "language.japanese" : {
+      "comment" : "Language interface label or message: japanese.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Japanese"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "일본어"
+          }
+        }
+      }
+    },
+    "language.korean" : {
+      "comment" : "Language interface label or message: korean.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Korean"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "한국어"
+          }
+        }
+      }
+    },
+    "language.mandarin" : {
+      "comment" : "Language interface label or message: mandarin.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mandarin Chinese"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "중국어(표준어)"
+          }
+        }
+      }
+    },
+    "language.norwegian" : {
+      "comment" : "Language interface label or message: norwegian.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Norwegian"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "노르웨이어"
+          }
+        }
+      }
+    },
+    "language.polish" : {
+      "comment" : "Language interface label or message: polish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Polish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "폴란드어"
+          }
+        }
+      }
+    },
+    "language.portuguese" : {
+      "comment" : "Language interface label or message: portuguese.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Portuguese"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "포르투갈어"
+          }
+        }
+      }
+    },
+    "language.russian" : {
+      "comment" : "Language interface label or message: russian.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Russian"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "러시아어"
+          }
+        }
+      }
+    },
+    "language.spanish" : {
+      "comment" : "Language interface label or message: spanish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Spanish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "스페인어"
+          }
+        }
+      }
+    },
+    "language.spanishMexico" : {
+      "comment" : "Language interface label or message: spanishMexico.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Spanish (Mexico)"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "스페인어(멕시코)"
+          }
+        }
+      }
+    },
+    "language.swedish" : {
+      "comment" : "Language interface label or message: swedish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Swedish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "스웨덴어"
+          }
+        }
+      }
+    },
+    "language.turkish" : {
+      "comment" : "Language interface label or message: turkish.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Turkish"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "튀르키예어"
+          }
+        }
+      }
+    },
+    "language.unknown" : {
+      "comment" : "Fallback voice prompt language; the argument is the language identifier, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Language %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "언어 %u"
+          }
+        }
+      }
+    },
+    "menu.hiddenHelp" : {
+      "comment" : "Menu interface label or message: hiddenHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The icon returns when a device connects. While it is hidden, open BoseKit from Finder or Spotlight to access settings."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기가 연결되면 아이콘이 다시 나타납니다. 아이콘이 숨겨져 있을 때는 Finder 또는 Spotlight에서 BoseKit을 열어 설정에 접근할 수 있습니다."
+          }
+        }
+      }
+    },
+    "menu.hideWhenUnavailable" : {
+      "comment" : "Menu interface label or message: hideWhenUnavailable.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hide when no supported device is connected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "연결된 지원 기기가 없으면 숨기기"
+          }
+        }
+      }
+    },
+    "menu.openWindow" : {
+      "comment" : "Menu interface label or message: openWindow.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open in a Window"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "창으로 열기"
+          }
+        }
+      }
+    },
+    "menu.quit" : {
+      "comment" : "Menu interface label or message: quit.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Quit"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "종료"
+          }
+        }
+      }
+    },
+    "menu.refresh" : {
+      "comment" : "Menu interface label or message: refresh.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Refresh"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "새로고침"
+          }
+        }
+      }
+    },
+    "menu.showBattery" : {
+      "comment" : "Menu interface label or message: showBattery.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Show battery in the menu bar"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "메뉴 막대에 배터리 표시"
+          }
+        }
+      }
+    },
+    "menu.tagline" : {
+      "comment" : "Menu interface label or message: tagline.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Your sound, within reach"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "나만의 사운드를 더 가까이"
+          }
+        }
+      }
+    },
+    "menu.title" : {
+      "comment" : "Menu interface label or message: title.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Menu Bar"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "메뉴 막대"
+          }
+        }
+      }
+    },
+    "modes.create" : {
+      "comment" : "Modes interface label or message: create.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "New Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "새 모드"
+          }
+        }
+      }
+    },
+    "modes.current" : {
+      "comment" : "Modes interface label or message: current.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "현재 모드"
+          }
+        }
+      }
+    },
+    "modes.custom" : {
+      "comment" : "Modes interface label or message: custom.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "사용자 모드"
+          }
+        }
+      }
+    },
+    "modes.delete" : {
+      "comment" : "Modes interface label or message: delete.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delete Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모드 삭제"
+          }
+        }
+      }
+    },
+    "modes.deleteConfirmation" : {
+      "comment" : "Modes interface label or message: deleteConfirmation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delete this custom mode?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 사용자 모드를 삭제할까요?"
+          }
+        }
+      }
+    },
+    "modes.deleteHelp" : {
+      "comment" : "Modes interface label or message: deleteHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "If this mode is active, your headphones will switch to a preset before it is deleted."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "현재 사용 중인 모드라면 헤드폰이 프리셋으로 전환된 후 삭제됩니다."
+          }
+        }
+      }
+    },
+    "modes.emptyHelp" : {
+      "comment" : "Modes interface label or message: emptyHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This device does not support modes, or the mode list has not loaded yet."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 기기는 모드 기능을 지원하지 않거나 아직 모드 목록을 불러오지 못했습니다."
+          }
+        }
+      }
+    },
+    "modes.emptyTitle" : {
+      "comment" : "Modes interface label or message: emptyTitle.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No Modes"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모드 없음"
+          }
+        }
+      }
+    },
+    "modes.fallbackName" : {
+      "comment" : "Fallback mode name; the argument is the one-based mode slot, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mode %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "모드 %u"
+          }
+        }
+      }
+    },
+    "modes.favorite" : {
+      "comment" : "Accessibility label for a mode favorite button; the argument is the device-provided mode name.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Favorite %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ 즐겨찾기"
+          }
+        }
+      }
+    },
+    "modes.favoritesHelp" : {
+      "comment" : "Modes interface label or message: favoritesHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Use the headphone button to cycle through starred modes."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "헤드폰 버튼을 누르면 별표로 표시한 모드를 차례로 전환합니다."
+          }
+        }
+      }
+    },
+    "modes.invalidName" : {
+      "comment" : "Modes interface label or message: invalidName.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enter a name of up to 31 UTF-8 bytes."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "UTF-8 기준 31바이트 이내의 이름을 입력하세요."
+          }
+        }
+      }
+    },
+    "modes.manage" : {
+      "comment" : "Accessibility label for a mode actions menu; the argument is the mode name.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Manage %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ 관리"
+          }
+        }
+      }
+    },
+    "modes.newName" : {
+      "comment" : "Initial editable name for a newly created custom mode. Saved to the headphones only after confirmation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Work"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "업무"
+          }
+        }
+      }
+    },
+    "modes.powerOn" : {
+      "comment" : "Modes interface label or message: powerOn.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Power-On Mode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "전원을 켤 때 사용할 모드"
+          }
+        }
+      }
+    },
+    "modes.preset" : {
+      "comment" : "Modes interface label or message: preset.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preset"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "프리셋"
+          }
+        }
+      }
+    },
+    "modes.promptName" : {
+      "comment" : "Fallback voice prompt name; the argument is a prompt identifier, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Name %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이름 %u"
+          }
+        }
+      }
+    },
+    "modes.title" : {
+      "comment" : "Modes interface label or message: title.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Listening Modes"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "청취 모드"
+          }
+        }
+      }
+    },
+    "modes.voicePromptHelp" : {
+      "comment" : "Modes interface label or message: voicePromptHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The Bose app may display the voice prompt name instead."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bose 앱에서는 입력한 이름 대신 음성 안내 이름이 표시될 수 있습니다."
+          }
+        }
+      }
+    },
+    "modes.voicePromptName" : {
+      "comment" : "Modes interface label or message: voicePromptName.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Voice Prompt Name"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "음성 안내 이름"
+          }
+        }
+      }
+    },
+    "sound.ambient" : {
+      "comment" : "Sound interface label or message: ambient.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Ambient Sound"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리"
+          }
+        }
+      }
+    },
+    "sound.ambientLevel" : {
+      "comment" : "Ambient sound stepper label; the argument is the current level from 0 to 10.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Ambient Sound: %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리: %u"
+          }
+        }
+      }
+    },
+    "sound.automaticAmbient" : {
+      "comment" : "Sound interface label or message: automaticAmbient.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Automatic Ambient Sound"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리 자동 조절"
+          }
+        }
+      }
+    },
+    "sound.band" : {
+      "comment" : "Equalizer band name; the argument is the band identifier, not a count.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Band %u"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "밴드 %u"
+          }
+        }
+      }
+    },
+    "sound.bass" : {
+      "comment" : "Sound interface label or message: bass.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bass"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "저음"
+          }
+        }
+      }
+    },
+    "sound.empty" : {
+      "comment" : "Sound interface label or message: empty.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No adjustable sound settings are available for this device."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이 기기에는 조절할 수 있는 사운드 설정이 없습니다."
+          }
+        }
+      }
+    },
+    "sound.equalizer" : {
+      "comment" : "Sound interface label or message: equalizer.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Equalizer"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이퀄라이저"
+          }
+        }
+      }
+    },
+    "sound.immersiveAudio" : {
+      "comment" : "Sound interface label or message: immersiveAudio.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Immersive Audio"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "공간 음향"
+          }
+        }
+      }
+    },
+    "sound.maximumAwareness" : {
+      "comment" : "Sound interface label or message: maximumAwareness.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum Awareness"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "주변 소리 최대"
+          }
+        }
+      }
+    },
+    "sound.maximumCancellation" : {
+      "comment" : "Sound interface label or message: maximumCancellation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum Cancellation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "노이즈 캔슬링 최대"
+          }
+        }
+      }
+    },
+    "sound.midrange" : {
+      "comment" : "Sound interface label or message: midrange.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Midrange"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "중음"
+          }
+        }
+      }
+    },
+    "sound.motion" : {
+      "comment" : "Sound interface label or message: motion.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Motion"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "움직임"
+          }
+        }
+      }
+    },
+    "sound.noiseCancellation" : {
+      "comment" : "Sound interface label or message: noiseCancellation.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Noise Cancellation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "노이즈 캔슬링"
+          }
+        }
+      }
+    },
+    "sound.presetHelp" : {
+      "comment" : "Sound interface label or message: presetHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preset settings cannot be changed. Create a custom mode in Listening Modes to adjust them."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프리셋 설정은 변경할 수 없습니다. 설정을 조절하려면 청취 모드에서 사용자 모드를 만드세요."
+          }
+        }
+      }
+    },
+    "sound.resetEqualizer" : {
+      "comment" : "Sound interface label or message: resetEqualizer.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Reset Equalizer"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "이퀄라이저 초기화"
+          }
+        }
+      }
+    },
+    "sound.still" : {
+      "comment" : "Sound interface label or message: still.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Still"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "고정"
+          }
+        }
+      }
+    },
+    "sound.treble" : {
+      "comment" : "Sound interface label or message: treble.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Treble"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "고음"
+          }
+        }
+      }
+    },
+    "sound.windBlock" : {
+      "comment" : "Sound interface label or message: windBlock.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wind Block"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "바람 소리 감소"
+          }
+        }
+      }
+    },
+    "sound.windBlockHelp" : {
+      "comment" : "Sound interface label or message: windBlockHelp.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Ambient sound adjustments are limited while Wind Block is on."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "바람 소리 감소가 켜져 있으면 주변 소리 조절이 제한됩니다."
+          }
+        }
+      }
+    },
+    "sound.windReduction" : {
+      "comment" : "Sound interface label or message: windReduction.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wind Reduction"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "바람 소리 감소"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.3"
+}

@@ -1,0 +1,99 @@
+import BoseKitEngine
+
+extension DeviceController {
+    var activeMode: ModeConfiguration? { modes.first { $0.id == currentMode } }
+
+    var freeModeSlot: ModeConfiguration? {
+        modes.first { !$0.configured && profile.modePolicy?.editableSlots.contains($0.id) == true }
+    }
+
+    var canEditAudio: Bool {
+        switch profile.noiseControl {
+        case .modeConfiguration: activeMode?.editable == true
+        case .unavailable: false
+        case .anr, .directCNC, .audioSettings: true
+        @unknown default: false
+        }
+    }
+
+    var canAdjustCNC: Bool {
+        switch profile.noiseControl {
+        case .unavailable, .anr: false
+        case .modeConfiguration: supports(.modes, write: true)
+        case .audioSettings: supports(.audioSettings, write: true)
+        case .directCNC: supports(.cnc, write: true)
+        @unknown default: false
+        }
+    }
+
+    var hasListeningControls: Bool { audio != nil || cnc != nil || anr != nil }
+    var hasPlaybackSettings: Bool { autoPause != nil || autoAnswer != nil || sidetone != nil }
+    var hasConnectionSettings: Bool { multipoint != nil || pairing != nil || supports(.routing, write: true) }
+}
+
+extension DeviceController {
+    var currentModeSelection: UInt8 {
+        get { currentMode ?? 0 }
+        set { selectMode(newValue) }
+    }
+
+    var defaultModeSelection: UInt8 {
+        get { defaultMode ?? 0 }
+        set { setDefaultMode(newValue) }
+    }
+
+    var anrSelection: ANRLevel {
+        get { anr ?? .off }
+        set { setANR(newValue) }
+    }
+
+    var spatialAudioSelection: SpatialAudio {
+        get { audio?.spatial ?? .off }
+        set { setSpatialAudio(newValue) }
+    }
+
+    var windBlockEnabled: Bool {
+        get { audio?.windBlock ?? false }
+        set { setWindBlock(newValue) }
+    }
+
+    var ancEnabled: Bool {
+        get { audio?.ancEnabled ?? false }
+        set { setANCEnabled(newValue) }
+    }
+
+    var automaticCNCEnabled: Bool {
+        get { audio?.automaticCNC ?? false }
+        set { setAutomaticCNC(newValue) }
+    }
+
+    var multipointEnabled: Bool {
+        get { multipoint ?? false }
+        set { setMultipoint(newValue) }
+    }
+
+    var autoPauseEnabled: Bool {
+        get { autoPause ?? false }
+        set { setAutoPause(newValue) }
+    }
+
+    var autoAnswerEnabled: Bool {
+        get { autoAnswer ?? false }
+        set { setAutoAnswer(newValue) }
+    }
+
+    var sidetoneSelection: SidetoneLevel {
+        get { sidetone ?? .off }
+        set { setSidetone(newValue) }
+    }
+
+    var voicePromptLanguageSelection: VoicePromptLanguage {
+        get { voicePrompts?.language ?? .englishUS }
+        set { setVoicePromptLanguage(newValue) }
+    }
+
+    var shortcutSelection: ButtonAction {
+        get { buttons?.assignment.action ?? .disabled }
+        set { setShortcut(newValue) }
+    }
+}

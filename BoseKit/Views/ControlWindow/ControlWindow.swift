@@ -1,0 +1,107 @@
+import SwiftUI
+import BoseKitEngine
+
+enum ControlPage: String, CaseIterable, Identifiable {
+    case sound, device, app
+
+    var id: Self { self }
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .sound: L10n.Common.sound
+        case .device: L10n.Common.device
+        case .app: L10n.Common.app
+        }
+    }
+}
+
+struct ControlWindow: View {
+    static let id = "control"
+
+    @Bindable var model: BoseAppModel
+    @State private var page: ControlPage = .sound
+
+    var body: some View {
+        VStack(spacing: 0) {
+            DeviceHeader(model: model)
+            Picker(L10n.Common.settings, selection: $page) {
+                ForEach(ControlPage.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .accessibilityIdentifier("controlPage")
+            .padding(.horizontal, 20)
+            .padding(.bottom, 8)
+
+            ScrollView {
+                ControlPageContent(model: model, page: page)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 12)
+                    .padding(.bottom, 20)
+                    .settingsContentStyle()
+            }
+            Divider()
+            AppFooter(model: model)
+        }
+        .frame(width: 420, height: 650)
+    }
+}
+
+private struct ControlPageContent: View {
+    let model: BoseAppModel
+    let page: ControlPage
+
+    var body: some View {
+        switch page {
+        case .app:
+            AppPreferencesView(model: model)
+        case .sound, .device:
+            if let device = model.selected {
+                DeviceContent(device: device, page: page).id(device.id)
+            } else {
+                ConnectionPlaceholder()
+            }
+        }
+    }
+}
+
+private struct DeviceContent: View {
+    let device: DeviceController
+    let page: ControlPage
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            if let error = device.errorMessage {
+                Label(error, systemImage: "exclamationmark.circle")
+                    .font(.callout)
+                    .foregroundStyle(.orange)
+                    .textSelection(.enabled)
+            }
+            if device.connected {
+                DevicePage(device: device, page: page)
+                    .disabled(device.busy)
+            } else {
+                ConnectionPlaceholder(device: device)
+            }
+        }
+        .tracksDeviceVisibility(device)
+    }
+}
+
+private struct DevicePage: View {
+    let device: DeviceController
+    let page: ControlPage
+
+    var body: some View {
+        switch page {
+        case .sound: SoundSettings(device: device)
+        case .device: DeviceSettings(device: device)
+        case .app: EmptyView()
+        }
+    }
+}
+
+#Preview("Control window") {
+    ControlWindow(model: BoseAppModel())
+}
