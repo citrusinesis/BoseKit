@@ -1,19 +1,13 @@
 import SwiftUI
-import BoseKitEngine
 
 @main
 struct BoseKitApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
-    @State private var model: BoseAppModel
 
-    init() {
-        let appModel = BoseAppModel()
-        _model = State(initialValue: appModel)
-        delegate.model = appModel
-    }
+    private var model: BoseAppModel { delegate.model }
 
     var body: some Scene {
-        Window(L10n.Common.appName, id: ControlWindow.id) {
+        Window(.commonAppName, id: ControlWindow.id) {
             ControlWindow(model: model)
         }
         .defaultSize(width: 420, height: 650)
@@ -21,7 +15,7 @@ struct BoseKitApp: App {
         .defaultLaunchBehavior(.presented)
         .restorationBehavior(.disabled)
 
-        MenuBarExtra(isInserted: $model.menuInserted) {
+        MenuBarExtra(isInserted: Bindable(model).menuInserted) {
             MenuBarControls(model: model)
         } label: {
             MenuBarLabel(batteryPercentage: model.menuBatteryPercentage)

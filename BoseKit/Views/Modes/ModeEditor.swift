@@ -14,25 +14,25 @@ struct ModeEditor: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text(L10n.Modes.custom)
+            Text(.modesCustom)
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
             Divider()
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    SettingsSection(title: L10n.Common.name) {
-                        SettingsPicker(title: L10n.Modes.voicePromptName, selection: $draft.voicePrompt) {
+                    SettingsSection(title: .commonName) {
+                        SettingsPicker(title: .modesVoicePromptName, selection: $draft.voicePrompt) {
                             ForEach(promptChoices, id: \.self) { Text($0.title).tag($0) }
                         }
                     }
-                    SettingsSection(title: L10n.Common.sound) {
+                    SettingsSection(title: .commonSound) {
                         ModeAudioEditor(profile: device.profile, audio: $draft.audio,
                                         allowsSpatialAudio: device.supports(.spatialAudio, write: true),
                                         allowsWindBlock: device.supports(.windBlock, write: true))
                     }
-                    if let error = device.errorMessage {
-                        Text(error).font(.caption).foregroundStyle(.orange)
+                    if let error = device.error {
+                        Text(error.message).font(.caption).foregroundStyle(.orange)
                     }
                 }
                 .padding(20)
@@ -41,9 +41,9 @@ struct ModeEditor: View {
             HStack(spacing: 12) {
                 if saving { ProgressView().controlSize(.small) }
                 Spacer()
-                Button(L10n.Common.cancel) { dismiss() }
+                Button(.commonCancel) { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button(L10n.Common.save, action: save)
+                Button(.commonSave, action: save)
                     .buttonStyle(.glassProminent)
                     .keyboardShortcut(.defaultAction)
             }
@@ -82,10 +82,10 @@ private struct ModeAudioEditor: View {
     var body: some View {
         let cncLocked = audio.windBlock && profile.modePolicy?.windForcesMaximumANC == true
         VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.Sound.ambientLevel(audio.cnc))
+            Text(.soundAmbientLevel(UInt32(audio.cnc)))
                 .monospacedDigit()
             Slider(value: $audio.cncLevel, in: 0...10, step: 1)
-                .accessibilityLabel(L10n.Sound.ambient)
+                .accessibilityLabel(.soundAmbient)
                 .disabled(cncLocked)
             NoiseControlRangeLabels()
         }
@@ -95,13 +95,13 @@ private struct ModeAudioEditor: View {
         }
         if allowsWindBlock {
             Divider()
-            SettingsToggle(title: L10n.Sound.windBlock, isOn: $audio.windBlock)
+            SettingsToggle(title: .soundWindBlock, isOn: $audio.windBlock)
         }
         if profile.modePolicy?.allowsCustomAutoCNC == true {
-            SettingsToggle(title: L10n.Sound.automaticAmbient, isOn: $audio.automaticCNC)
+            SettingsToggle(title: .soundAutomaticAmbient, isOn: $audio.automaticCNC)
         }
         if audio.ancEnabled != nil {
-            SettingsToggle(title: L10n.Sound.noiseCancellation, isOn: $audio.ancToggle)
+            SettingsToggle(title: .soundNoiseCancellation, isOn: $audio.ancToggle)
         }
     }
 }

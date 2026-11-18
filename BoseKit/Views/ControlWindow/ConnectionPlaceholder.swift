@@ -8,12 +8,12 @@ struct ConnectionPlaceholder: View {
         ContentUnavailableView {
             Label(title, systemImage: "headphones")
         } description: {
-            Text(device == nil ? L10n.Connection.emptyHelp : L10n.Connection.help)
+            Text(device == nil ? .connectionEmptyHelp : .connectionHelp)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
         } actions: {
             if let device {
-                Button(L10n.Connection.connect) { Task { await device.connect() } }
+                Button(.connectionConnect) { Task { await device.connect() } }
                     .buttonStyle(.glassProminent)
                     .disabled(device.connecting)
             } else {
@@ -27,8 +27,8 @@ struct ConnectionPlaceholder: View {
     }
 
     private var title: LocalizedStringResource {
-        guard let device else { return L10n.Connection.emptyTitle }
-        return device.connecting ? L10n.Connection.connecting : L10n.Connection.disconnected
+        guard let device else { return .connectionEmptyTitle }
+        return device.connecting ? .connectionConnecting : .connectionDisconnected
     }
 }
 

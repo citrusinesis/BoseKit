@@ -18,7 +18,7 @@ struct ModeRow: View {
                         .foregroundStyle(isCurrent ? AnyShapeStyle(.tint) : AnyShapeStyle(.secondary))
                     VStack(alignment: .leading, spacing: 3) {
                         Text(mode.displayName).fontWeight(.medium)
-                        Text(mode.editable ? L10n.Modes.custom : L10n.Modes.preset)
+                        Text(mode.editable ? .modesCustom : .modesPreset)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -33,14 +33,14 @@ struct ModeRow: View {
             }
             if mode.editable, device.supports(.modes, write: true) {
                 Menu {
-                    Button(L10n.Common.edit, systemImage: "pencil", action: edit)
-                    Button(L10n.Common.delete, systemImage: "trash", role: .destructive, action: delete)
+                    Button(.commonEdit, systemImage: "pencil", action: edit)
+                    Button(.commonDelete, systemImage: "trash", role: .destructive, action: delete)
                 } label: {
                     Image(systemName: "ellipsis")
                 }
                 .menuStyle(.borderlessButton)
                 .fixedSize()
-                .accessibilityLabel(L10n.Modes.manage(mode.displayName))
+                .accessibilityLabel(.modesManage(mode.displayName))
             }
         }
         .padding(.horizontal, 14)
@@ -66,8 +66,8 @@ private struct FavoriteButton: View {
         } label: {
             Image(systemName: isFavorite ? "star.fill" : "star")
         }
-        .accessibilityLabel(L10n.Modes.favorite(mode.displayName))
-        .accessibilityValue(Text(isFavorite ? L10n.Common.selected : L10n.Common.notSelected))
+        .accessibilityLabel(.modesFavorite(mode.displayName))
+        .accessibilityValue(Text(isFavorite ? .commonSelected : .commonNotSelected))
         .disabled(!device.supports(.favorites, write: true))
     }
 }

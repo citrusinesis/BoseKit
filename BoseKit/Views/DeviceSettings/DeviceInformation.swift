@@ -6,23 +6,23 @@ struct DeviceInformation: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            InformationRow(L10n.Device.model, value: device.modelName ?? device.profile.name)
+            InformationRow(.deviceModel, value: device.modelName ?? device.profile.name)
             if let firmware = device.firmware {
-                InformationRow(L10n.Device.firmware, value: firmware)
+                InformationRow(.deviceFirmware, value: firmware)
             }
             if let serial = device.serial {
-                InformationRow(L10n.Device.serialNumber, value: serial)
+                InformationRow(.deviceSerialNumber, value: serial)
             }
-            InformationRow(L10n.Device.bluetoothAddress, value: device.id)
+            InformationRow(.deviceBluetoothAddress, value: device.id)
             if let components = device.battery?.components {
                 ForEach(components.keys.sorted(), id: \.self) { component in
                     InformationRow(title: component.title) {
-                        Text(L10n.Device.batteryPercentage(components[component] ?? 0))
+                        Text(.deviceBatteryPercentage(UInt32(components[component] ?? 0)))
                     }
                 }
             }
             if let source = device.source {
-                InformationRow(L10n.Device.audioSource, value: source.kind.title)
+                InformationRow(.deviceAudioSource, value: source.kind.title)
                 if let address = source.bluetoothAddress {
                     Text(address.description)
                         .font(.caption)
@@ -30,7 +30,7 @@ struct DeviceInformation: View {
                 }
             }
             if !device.unavailable.isEmpty {
-                SettingsFootnote(L10n.Device.unavailableHelp)
+                SettingsFootnote(.deviceUnavailableHelp)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

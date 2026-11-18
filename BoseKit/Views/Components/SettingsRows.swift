@@ -136,18 +136,18 @@ extension View {
     @Previewable @State var enabled = true
     @Previewable @State var level = 1
     VStack(spacing: 16) {
-        SettingsSection(title: L10n.Connection.title) {
-            SettingsToggle(title: L10n.Device.multipoint, isOn: $enabled)
+        SettingsSection(title: .connectionTitle) {
+            SettingsToggle(title: .deviceMultipoint, isOn: $enabled)
             Divider()
-            SettingsPicker(title: L10n.Device.selfVoice, selection: $level) {
-                Text(L10n.Common.off).tag(0)
-                Text(L10n.Common.low).tag(1)
+            SettingsPicker(title: .deviceSelfVoice, selection: $level) {
+                Text(.commonOff).tag(0)
+                Text(.commonLow).tag(1)
             }
-            SettingsFootnote(L10n.Device.multipointListHelp)
+            SettingsFootnote(.deviceMultipointListHelp)
         }
-        SettingsSection(title: L10n.Device.information) {
-            InformationRow(L10n.Device.model, value: "QuietComfort Ultra Headphones")
-            InformationRow(L10n.Device.firmware, value: "1.6.7")
+        SettingsSection(title: .deviceInformation) {
+            InformationRow(.deviceModel, value: "QuietComfort Ultra Headphones")
+            InformationRow(.deviceFirmware, value: "1.6.7")
         }
     }
     .settingsContentStyle()

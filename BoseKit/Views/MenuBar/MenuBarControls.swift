@@ -20,7 +20,7 @@ struct MenuBarControls: View {
             .frame(height: min(contentHeight, 380))
             Divider()
             HStack {
-                Button(L10n.Common.settings, systemImage: "gearshape") {
+                Button(.commonSettings, systemImage: "gearshape") {
                     openWindow(id: ControlWindow.id)
                     NSApp.activate()
                 }
@@ -45,8 +45,8 @@ private struct MenuBarContent: View {
             QuickDeviceControls(device: device).id(device.id)
         } else {
             VStack(alignment: .leading, spacing: 8) {
-                Text(L10n.Connection.emptyTitle).font(.headline)
-                Text(L10n.Connection.emptyHelp).foregroundStyle(.secondary)
+                Text(.connectionEmptyTitle).font(.headline)
+                Text(.connectionEmptyHelp).foregroundStyle(.secondary)
                 OpenBluetoothSettingsButton()
             }
         }
@@ -58,8 +58,8 @@ private struct QuickDeviceControls: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            if let error = device.errorMessage {
-                Label(error, systemImage: "exclamationmark.circle")
+            if let error = device.error {
+                Label(error.message, systemImage: "exclamationmark.circle")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -70,13 +70,13 @@ private struct QuickDeviceControls: View {
             case .connecting:
                 HStack {
                     ProgressView().controlSize(.small)
-                    Text(L10n.Connection.connecting).foregroundStyle(.secondary)
+                    Text(.connectionConnecting).foregroundStyle(.secondary)
                 }
             case .disconnected:
                 HStack {
-                    Text(L10n.Connection.disconnected).foregroundStyle(.secondary)
+                    Text(.connectionDisconnected).foregroundStyle(.secondary)
                     Spacer()
-                    Button(L10n.Connection.connect) { Task { await device.connect() } }
+                    Button(.connectionConnect) { Task { await device.connect() } }
                 }
             }
         }
@@ -95,7 +95,7 @@ private struct CompactSoundControls: View {
                 DisclosureGroup {
                     EqualizerControls(device: device).padding(.top, 8)
                 } label: {
-                    Text(L10n.Sound.equalizer)
+                    Text(.soundEqualizer)
                 }
             }
         }
@@ -109,11 +109,11 @@ struct MenuBarLabel: View {
         HStack(spacing: 4) {
             Image(systemName: "headphones")
             if let batteryPercentage {
-                Text(L10n.Device.batteryPercentage(batteryPercentage))
+                Text(.deviceBatteryPercentage(UInt32(batteryPercentage)))
                     .monospacedDigit()
             }
         }
-        .accessibilityLabel(L10n.Common.appName)
+        .accessibilityLabel(.commonAppName)
     }
 }
 

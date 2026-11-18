@@ -15,7 +15,7 @@ final class DeviceController: Identifiable {
     private(set) var connection: Connection = .disconnected
     private(set) var busy = false
     private(set) var isSuspended = false
-    private(set) var errorMessage: String?
+    private(set) var error: AppError?
     private(set) var refreshRevision = 0
     private(set) var unavailable: Set<FeatureID> = []
 
@@ -108,7 +108,7 @@ final class DeviceController: Identifiable {
         guard connection == .disconnected, !busy else { return }
         connection = .connecting
         isSuspended = false
-        errorMessage = nil
+        error = nil
         do {
             device = try await connectDevice(id, profile)
             connection = .connected
@@ -270,7 +270,7 @@ final class DeviceController: Identifiable {
         waitingActions -= 1
         guard connected, !busy, let device else { return false }
         busy = true
-        errorMessage = nil
+        error = nil
         do {
             try await action(device)
             busy = false
@@ -310,7 +310,7 @@ final class DeviceController: Identifiable {
     func suspendBeforePowerOff() { isSuspended = true }
 
     private func handle(_ error: any Error) async {
-        errorMessage = L10n.Errors.message(for: error)
+        self.error = AppError(error)
         switch error as? BoseError {
         case .disconnected?, .timeout?, .transport?:
             failures += 1

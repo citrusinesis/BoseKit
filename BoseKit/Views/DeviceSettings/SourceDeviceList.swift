@@ -6,7 +6,7 @@ struct SourceDeviceList: View {
 
     var body: some View {
         let canSwitch = device.supports(.routing, write: true)
-        SettingsSection(title: L10n.Device.sourceDevices) {
+        SettingsSection(title: .deviceSourceDevices) {
             ForEach(device.sourceDevices) { source in
                 SourceDeviceRow(source: source, canSwitch: canSwitch) {
                     device.routeAudio(to: source.address)
@@ -32,10 +32,10 @@ private struct SourceDeviceRow: View {
                 Text(source.name.isEmpty ? source.address.description : source.name)
                     .foregroundStyle(source.isConnected ? .primary : .secondary)
                 HStack(spacing: 4) {
-                    if source.isRequestingHost { SourceTag(text: L10n.Device.thisMac) }
-                    if source.isActiveSource { SourceTag(text: L10n.Device.activeSource, prominent: true) }
+                    if source.isRequestingHost { SourceTag(text: .deviceThisMac) }
+                    if source.isActiveSource { SourceTag(text: .deviceActiveSource, prominent: true) }
                     if !source.isActiveSource {
-                        Text(source.isConnected ? L10n.Connection.connected : L10n.Device.notConnected)
+                        Text(source.isConnected ? .connectionConnected : .deviceNotConnected)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -43,7 +43,7 @@ private struct SourceDeviceRow: View {
             }
             Spacer(minLength: 8)
             if canSwitch && source.isConnected && !source.isActiveSource {
-                Button(L10n.Device.switchToDevice, action: switchTo)
+                Button(.deviceSwitchToDevice, action: switchTo)
                     .controlSize(.small)
             }
         }

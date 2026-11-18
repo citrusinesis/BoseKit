@@ -10,12 +10,12 @@ struct SoundSettings: View {
                 ModesControls(device: device)
             }
             if device.hasListeningControls {
-                SettingsSection(title: L10n.Common.sound) {
+                SettingsSection(title: .commonSound) {
                     ListeningControls(device: device)
                 }
             }
             if !device.equalizer.isEmpty {
-                SettingsSection(title: L10n.Sound.equalizer) {
+                SettingsSection(title: .soundEqualizer) {
                     EqualizerControls(device: device)
                 }
             }
@@ -23,7 +23,7 @@ struct SoundSettings: View {
                 PlaybackSettings(device: device)
             }
             if isEmpty {
-                Text(L10n.Sound.empty).foregroundStyle(.secondary)
+                Text(.soundEmpty).foregroundStyle(.secondary)
             }
         }
     }

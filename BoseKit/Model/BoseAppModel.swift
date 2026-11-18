@@ -11,7 +11,7 @@ final class BoseAppModel {
 
     var devices: [DeviceController] = []
     var selectedID: String?
-    private(set) var discoveryError: String?
+    private(set) var discoveryError: AppError?
 
     var hideWhenUnavailable = UserDefaults.standard.bool(forKey: DefaultsKey.hideWhenUnavailable) {
         didSet {
@@ -103,7 +103,7 @@ final class BoseAppModel {
             }
             discoveryError = nil
         } catch {
-            discoveryError = error.localizedDescription
+            discoveryError = AppError(error)
         }
     }
 }

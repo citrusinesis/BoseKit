@@ -3,7 +3,7 @@
   "strings" : {
     "common.app" : {
       "comment" : "Common interface label or message: app.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -21,7 +21,7 @@
     },
     "common.appName" : {
       "comment" : "Common interface label or message: appName.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -39,7 +39,7 @@
     },
     "common.cancel" : {
       "comment" : "Common interface label or message: cancel.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -57,7 +57,7 @@
     },
     "common.change" : {
       "comment" : "Common interface label or message: change.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -75,7 +75,7 @@
     },
     "common.delete" : {
       "comment" : "Common interface label or message: delete.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -93,7 +93,7 @@
     },
     "common.device" : {
       "comment" : "Common interface label or message: device.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -111,7 +111,7 @@
     },
     "common.edit" : {
       "comment" : "Common interface label or message: edit.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -129,7 +129,7 @@
     },
     "common.high" : {
       "comment" : "Common interface label or message: high.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -147,7 +147,7 @@
     },
     "common.low" : {
       "comment" : "Common interface label or message: low.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -165,7 +165,7 @@
     },
     "common.medium" : {
       "comment" : "Common interface label or message: medium.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -183,7 +183,7 @@
     },
     "common.modes" : {
       "comment" : "Common interface label or message: modes.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -201,7 +201,7 @@
     },
     "common.name" : {
       "comment" : "Common interface label or message: name.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -219,7 +219,7 @@
     },
     "common.none" : {
       "comment" : "Common interface label or message: none.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -237,7 +237,7 @@
     },
     "common.notSelected" : {
       "comment" : "Common interface label or message: notSelected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -255,7 +255,7 @@
     },
     "common.off" : {
       "comment" : "Common interface label or message: off.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -273,7 +273,7 @@
     },
     "common.save" : {
       "comment" : "Common interface label or message: save.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -291,7 +291,7 @@
     },
     "common.selected" : {
       "comment" : "Common interface label or message: selected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -309,7 +309,7 @@
     },
     "common.settings" : {
       "comment" : "Common interface label or message: settings.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -327,7 +327,7 @@
     },
     "common.sound" : {
       "comment" : "Common interface label or message: sound.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -345,7 +345,7 @@
     },
     "connection.connect" : {
       "comment" : "Connection interface label or message: connect.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -363,7 +363,7 @@
     },
     "connection.connected" : {
       "comment" : "Connection interface label or message: connected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -381,7 +381,7 @@
     },
     "connection.connecting" : {
       "comment" : "Connection interface label or message: connecting.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -399,7 +399,7 @@
     },
     "connection.disconnect" : {
       "comment" : "Connection interface label or message: disconnect.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -417,7 +417,7 @@
     },
     "connection.disconnected" : {
       "comment" : "Connection interface label or message: disconnected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -435,7 +435,7 @@
     },
     "connection.discoveryHelp" : {
       "comment" : "Connection interface label or message: discoveryHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -453,7 +453,7 @@
     },
     "connection.emptyHelp" : {
       "comment" : "Connection interface label or message: emptyHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -471,7 +471,7 @@
     },
     "connection.emptyTitle" : {
       "comment" : "Connection interface label or message: emptyTitle.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -489,7 +489,7 @@
     },
     "connection.help" : {
       "comment" : "Connection interface label or message: help.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -507,7 +507,7 @@
     },
     "connection.openBluetoothSettings" : {
       "comment" : "Connection interface label or message: openBluetoothSettings.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -525,7 +525,7 @@
     },
     "connection.refreshHelp" : {
       "comment" : "Connection interface label or message: refreshHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -543,7 +543,7 @@
     },
     "connection.resume" : {
       "comment" : "Connection interface label or message: resume.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -561,7 +561,7 @@
     },
     "connection.title" : {
       "comment" : "Connection interface label or message: title.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -579,7 +579,7 @@
     },
     "connection.updating" : {
       "comment" : "Connection interface label or message: updating.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -597,7 +597,7 @@
     },
     "connection.waiting" : {
       "comment" : "Connection interface label or message: waiting.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -615,7 +615,7 @@
     },
     "device.action" : {
       "comment" : "Fallback shortcut action name; the argument is the action identifier, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -633,7 +633,7 @@
     },
     "device.activeSource" : {
       "comment" : "Tag on the paired device currently sending audio to the headphones.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -651,7 +651,7 @@
     },
     "device.appAction" : {
       "comment" : "Device interface label or message: appAction.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -669,7 +669,7 @@
     },
     "device.audioSource" : {
       "comment" : "Device interface label or message: audioSource.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -687,7 +687,7 @@
     },
     "device.autoAnswer" : {
       "comment" : "Device interface label or message: autoAnswer.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -705,7 +705,7 @@
     },
     "device.autoPause" : {
       "comment" : "Device interface label or message: autoPause.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -723,7 +723,7 @@
     },
     "device.battery" : {
       "comment" : "Fallback battery label; the argument is the component identifier, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -741,7 +741,7 @@
     },
     "device.batteryLevel" : {
       "comment" : "Device interface label or message: batteryLevel.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -759,7 +759,7 @@
     },
     "device.batteryPercentage" : {
       "comment" : "Battery percentage; the argument is a number from 0 to 100.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -777,7 +777,7 @@
     },
     "device.bluetooth" : {
       "comment" : "Device interface label or message: bluetooth.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -795,7 +795,7 @@
     },
     "device.bluetoothAddress" : {
       "comment" : "Device interface label or message: bluetoothAddress.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -813,7 +813,7 @@
     },
     "device.caseBattery" : {
       "comment" : "Device interface label or message: caseBattery.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -831,7 +831,7 @@
     },
     "device.confirmPowerOff" : {
       "comment" : "Device interface label or message: confirmPowerOff.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -849,7 +849,7 @@
     },
     "device.confirmSwitchSource" : {
       "comment" : "Device interface label or message: confirmSwitchSource.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -867,7 +867,7 @@
     },
     "device.connectionDetails" : {
       "comment" : "Device connection and shortcut controls: connectionDetails.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -885,7 +885,7 @@
     },
     "device.conversationMode" : {
       "comment" : "Device interface label or message: conversationMode.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -903,7 +903,7 @@
     },
     "device.cycleModes" : {
       "comment" : "Device interface label or message: cycleModes.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -921,7 +921,7 @@
     },
     "device.decreaseAmbient" : {
       "comment" : "Device interface label or message: decreaseAmbient.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -939,7 +939,7 @@
     },
     "device.disabled" : {
       "comment" : "Device interface label or message: disabled.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -957,7 +957,7 @@
     },
     "device.firmware" : {
       "comment" : "Device interface label or message: firmware.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -975,7 +975,7 @@
     },
     "device.increaseAmbient" : {
       "comment" : "Device interface label or message: increaseAmbient.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -993,7 +993,7 @@
     },
     "device.information" : {
       "comment" : "Device interface label or message: information.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1011,7 +1011,7 @@
     },
     "device.leftBattery" : {
       "comment" : "Device interface label or message: leftBattery.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1029,7 +1029,7 @@
     },
     "device.linkDevices" : {
       "comment" : "Shortcut button action that links devices.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1047,7 +1047,7 @@
     },
     "device.longPress" : {
       "comment" : "Device connection and shortcut controls: longPress.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1065,7 +1065,7 @@
     },
     "device.model" : {
       "comment" : "Device interface label or message: model.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1083,7 +1083,7 @@
     },
     "device.multipoint" : {
       "comment" : "Device interface label or message: multipoint.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1101,7 +1101,7 @@
     },
     "device.multipointListHelp" : {
       "comment" : "Device connection and shortcut controls: multipointListHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1119,7 +1119,7 @@
     },
     "device.name" : {
       "comment" : "Device interface label or message: name.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1137,7 +1137,7 @@
     },
     "device.nextTrack" : {
       "comment" : "Device interface label or message: nextTrack.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1155,7 +1155,7 @@
     },
     "device.notConnected" : {
       "comment" : "Status of a paired device that is not connected to the headphones.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1173,7 +1173,7 @@
     },
     "device.notifications" : {
       "comment" : "Device interface label or message: notifications.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1191,7 +1191,7 @@
     },
     "device.overallBattery" : {
       "comment" : "Device interface label or message: overallBattery.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1209,7 +1209,7 @@
     },
     "device.pairing" : {
       "comment" : "Device interface label or message: pairing.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1227,7 +1227,7 @@
     },
     "device.pairingHelp" : {
       "comment" : "Device connection and shortcut controls: pairingHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1245,7 +1245,7 @@
     },
     "device.playPause" : {
       "comment" : "Device interface label or message: playPause.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1263,7 +1263,7 @@
     },
     "device.powerOff" : {
       "comment" : "Device interface label or message: powerOff.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1281,7 +1281,7 @@
     },
     "device.powerOffConfirmation" : {
       "comment" : "Device interface label or message: powerOffConfirmation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1299,7 +1299,7 @@
     },
     "device.powerOffHelp" : {
       "comment" : "Device interface label or message: powerOffHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1317,7 +1317,7 @@
     },
     "device.previousTrack" : {
       "comment" : "Device interface label or message: previousTrack.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1335,7 +1335,7 @@
     },
     "device.promptLanguage" : {
       "comment" : "Device interface label or message: promptLanguage.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1353,7 +1353,7 @@
     },
     "device.rightBattery" : {
       "comment" : "Device interface label or message: rightBattery.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1371,7 +1371,7 @@
     },
     "device.selfVoice" : {
       "comment" : "Device interface label or message: selfVoice.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1389,7 +1389,7 @@
     },
     "device.serialNumber" : {
       "comment" : "Device interface label or message: serialNumber.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1407,7 +1407,7 @@
     },
     "device.settings" : {
       "comment" : "Device interface label or message: settings.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1425,7 +1425,7 @@
     },
     "device.shortcut" : {
       "comment" : "Device interface label or message: shortcut.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1443,7 +1443,7 @@
     },
     "device.shortcutAction" : {
       "comment" : "Device connection and shortcut controls: shortcutAction.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1461,7 +1461,7 @@
     },
     "device.sourceAddress" : {
       "comment" : "Device interface label or message: sourceAddress.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1479,7 +1479,7 @@
     },
     "device.sourceDevices" : {
       "comment" : "Section title listing devices paired with the headphones.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1497,7 +1497,7 @@
     },
     "device.sourceUnknown" : {
       "comment" : "Device connection and shortcut controls: sourceUnknown.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1515,7 +1515,7 @@
     },
     "device.spotify" : {
       "comment" : "Device interface label or message: spotify.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1533,7 +1533,7 @@
     },
     "device.stopPairing" : {
       "comment" : "Device connection and shortcut controls: stopPairing.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1551,7 +1551,7 @@
     },
     "device.switchDevice" : {
       "comment" : "Device interface label or message: switchDevice.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1569,7 +1569,7 @@
     },
     "device.switchSource" : {
       "comment" : "Device interface label or message: switchSource.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1587,7 +1587,7 @@
     },
     "device.switchToDevice" : {
       "comment" : "Button that makes a connected device the headphones' audio source.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1605,7 +1605,7 @@
     },
     "device.thisMac" : {
       "comment" : "Tag on the paired device that is the Mac running BoseKit.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1623,7 +1623,7 @@
     },
     "device.unavailableHelp" : {
       "comment" : "Device interface label or message: unavailableHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1641,7 +1641,7 @@
     },
     "device.voiceAssistant" : {
       "comment" : "Device interface label or message: voiceAssistant.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1659,7 +1659,7 @@
     },
     "device.voicePromptConfirmation" : {
       "comment" : "Device interface label or message: voicePromptConfirmation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1677,7 +1677,7 @@
     },
     "device.voicePromptWarning" : {
       "comment" : "Device interface label or message: voicePromptWarning.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1695,7 +1695,7 @@
     },
     "device.voicePrompts" : {
       "comment" : "Device interface label or message: voicePrompts.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1713,7 +1713,7 @@
     },
     "device.wakeWord" : {
       "comment" : "Device interface label or message: wakeWord.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1731,7 +1731,7 @@
     },
     "device.wired" : {
       "comment" : "Device interface label or message: wired.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1749,7 +1749,7 @@
     },
     "device.wiredInput" : {
       "comment" : "Device interface label or message: wiredInput.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1767,7 +1767,7 @@
     },
     "errors.disconnected" : {
       "comment" : "Errors interface label or message: disconnected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1785,7 +1785,7 @@
     },
     "errors.invalidValue" : {
       "comment" : "Errors interface label or message: invalidValue.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1803,7 +1803,7 @@
     },
     "errors.rejected" : {
       "comment" : "Errors interface label or message: rejected.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1821,7 +1821,7 @@
     },
     "errors.timeout" : {
       "comment" : "Errors interface label or message: timeout.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1839,7 +1839,7 @@
     },
     "errors.transport" : {
       "comment" : "Errors interface label or message: transport.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1857,7 +1857,7 @@
     },
     "errors.unsupported" : {
       "comment" : "Errors interface label or message: unsupported.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1875,7 +1875,7 @@
     },
     "errors.verification" : {
       "comment" : "Errors interface label or message: verification.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1893,7 +1893,7 @@
     },
     "language.arabic" : {
       "comment" : "Language interface label or message: arabic.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1911,7 +1911,7 @@
     },
     "language.cantonese" : {
       "comment" : "Language interface label or message: cantonese.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1929,7 +1929,7 @@
     },
     "language.danish" : {
       "comment" : "Language interface label or message: danish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1947,7 +1947,7 @@
     },
     "language.dutch" : {
       "comment" : "Language interface label or message: dutch.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1965,7 +1965,7 @@
     },
     "language.englishUK" : {
       "comment" : "Language interface label or message: englishUK.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1983,7 +1983,7 @@
     },
     "language.englishUS" : {
       "comment" : "Language interface label or message: englishUS.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2001,7 +2001,7 @@
     },
     "language.finnish" : {
       "comment" : "Language interface label or message: finnish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2019,7 +2019,7 @@
     },
     "language.french" : {
       "comment" : "Language interface label or message: french.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2037,7 +2037,7 @@
     },
     "language.german" : {
       "comment" : "Language interface label or message: german.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2055,7 +2055,7 @@
     },
     "language.hebrew" : {
       "comment" : "Language interface label or message: hebrew.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2073,7 +2073,7 @@
     },
     "language.hindi" : {
       "comment" : "Language interface label or message: hindi.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2091,7 +2091,7 @@
     },
     "language.italian" : {
       "comment" : "Language interface label or message: italian.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2109,7 +2109,7 @@
     },
     "language.japanese" : {
       "comment" : "Language interface label or message: japanese.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2127,7 +2127,7 @@
     },
     "language.korean" : {
       "comment" : "Language interface label or message: korean.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2145,7 +2145,7 @@
     },
     "language.mandarin" : {
       "comment" : "Language interface label or message: mandarin.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2163,7 +2163,7 @@
     },
     "language.norwegian" : {
       "comment" : "Language interface label or message: norwegian.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2181,7 +2181,7 @@
     },
     "language.polish" : {
       "comment" : "Language interface label or message: polish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2199,7 +2199,7 @@
     },
     "language.portuguese" : {
       "comment" : "Language interface label or message: portuguese.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2217,7 +2217,7 @@
     },
     "language.russian" : {
       "comment" : "Language interface label or message: russian.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2235,7 +2235,7 @@
     },
     "language.spanish" : {
       "comment" : "Language interface label or message: spanish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2253,7 +2253,7 @@
     },
     "language.spanishMexico" : {
       "comment" : "Language interface label or message: spanishMexico.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2271,7 +2271,7 @@
     },
     "language.swedish" : {
       "comment" : "Language interface label or message: swedish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2289,7 +2289,7 @@
     },
     "language.turkish" : {
       "comment" : "Language interface label or message: turkish.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2307,7 +2307,7 @@
     },
     "language.unknown" : {
       "comment" : "Fallback voice prompt language; the argument is the language identifier, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2325,7 +2325,7 @@
     },
     "menu.hiddenHelp" : {
       "comment" : "Menu interface label or message: hiddenHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2343,7 +2343,7 @@
     },
     "menu.hideWhenUnavailable" : {
       "comment" : "Menu interface label or message: hideWhenUnavailable.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2361,7 +2361,7 @@
     },
     "menu.openWindow" : {
       "comment" : "Menu interface label or message: openWindow.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2379,7 +2379,7 @@
     },
     "menu.quit" : {
       "comment" : "Menu interface label or message: quit.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2397,7 +2397,7 @@
     },
     "menu.refresh" : {
       "comment" : "Menu interface label or message: refresh.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2415,7 +2415,7 @@
     },
     "menu.showBattery" : {
       "comment" : "Menu interface label or message: showBattery.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2433,7 +2433,7 @@
     },
     "menu.tagline" : {
       "comment" : "Menu interface label or message: tagline.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2451,7 +2451,7 @@
     },
     "menu.title" : {
       "comment" : "Menu interface label or message: title.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2469,7 +2469,7 @@
     },
     "modes.create" : {
       "comment" : "Modes interface label or message: create.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2487,7 +2487,7 @@
     },
     "modes.current" : {
       "comment" : "Modes interface label or message: current.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2505,7 +2505,7 @@
     },
     "modes.custom" : {
       "comment" : "Modes interface label or message: custom.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2523,7 +2523,7 @@
     },
     "modes.delete" : {
       "comment" : "Modes interface label or message: delete.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2541,7 +2541,7 @@
     },
     "modes.deleteConfirmation" : {
       "comment" : "Modes interface label or message: deleteConfirmation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2559,7 +2559,7 @@
     },
     "modes.deleteHelp" : {
       "comment" : "Modes interface label or message: deleteHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2577,7 +2577,7 @@
     },
     "modes.emptyHelp" : {
       "comment" : "Modes interface label or message: emptyHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2595,7 +2595,7 @@
     },
     "modes.emptyTitle" : {
       "comment" : "Modes interface label or message: emptyTitle.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2613,7 +2613,7 @@
     },
     "modes.fallbackName" : {
       "comment" : "Fallback mode name; the argument is the one-based mode slot, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2631,7 +2631,7 @@
     },
     "modes.favorite" : {
       "comment" : "Accessibility label for a mode favorite button; the argument is the device-provided mode name.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2649,7 +2649,7 @@
     },
     "modes.favoritesHelp" : {
       "comment" : "Modes interface label or message: favoritesHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2667,7 +2667,7 @@
     },
     "modes.invalidName" : {
       "comment" : "Modes interface label or message: invalidName.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2685,7 +2685,7 @@
     },
     "modes.manage" : {
       "comment" : "Accessibility label for a mode actions menu; the argument is the mode name.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2703,7 +2703,7 @@
     },
     "modes.newName" : {
       "comment" : "Initial editable name for a newly created custom mode. Saved to the headphones only after confirmation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2721,7 +2721,7 @@
     },
     "modes.powerOn" : {
       "comment" : "Modes interface label or message: powerOn.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2739,7 +2739,7 @@
     },
     "modes.preset" : {
       "comment" : "Modes interface label or message: preset.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2757,7 +2757,7 @@
     },
     "modes.promptName" : {
       "comment" : "Fallback voice prompt name; the argument is a prompt identifier, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2775,7 +2775,7 @@
     },
     "modes.title" : {
       "comment" : "Modes interface label or message: title.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2793,7 +2793,7 @@
     },
     "modes.voicePromptHelp" : {
       "comment" : "Modes interface label or message: voicePromptHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2811,7 +2811,7 @@
     },
     "modes.voicePromptName" : {
       "comment" : "Modes interface label or message: voicePromptName.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2829,7 +2829,7 @@
     },
     "sound.ambient" : {
       "comment" : "Sound interface label or message: ambient.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2847,7 +2847,7 @@
     },
     "sound.ambientLevel" : {
       "comment" : "Ambient sound stepper label; the argument is the current level from 0 to 10.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2865,7 +2865,7 @@
     },
     "sound.automaticAmbient" : {
       "comment" : "Sound interface label or message: automaticAmbient.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2883,7 +2883,7 @@
     },
     "sound.band" : {
       "comment" : "Equalizer band name; the argument is the band identifier, not a count.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2901,7 +2901,7 @@
     },
     "sound.bass" : {
       "comment" : "Sound interface label or message: bass.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2919,7 +2919,7 @@
     },
     "sound.empty" : {
       "comment" : "Sound interface label or message: empty.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2937,7 +2937,7 @@
     },
     "sound.equalizer" : {
       "comment" : "Sound interface label or message: equalizer.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2955,7 +2955,7 @@
     },
     "sound.immersiveAudio" : {
       "comment" : "Sound interface label or message: immersiveAudio.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2973,7 +2973,7 @@
     },
     "sound.maximumAwareness" : {
       "comment" : "Sound interface label or message: maximumAwareness.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2991,7 +2991,7 @@
     },
     "sound.maximumCancellation" : {
       "comment" : "Sound interface label or message: maximumCancellation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3009,7 +3009,7 @@
     },
     "sound.midrange" : {
       "comment" : "Sound interface label or message: midrange.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3027,7 +3027,7 @@
     },
     "sound.motion" : {
       "comment" : "Sound interface label or message: motion.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3045,7 +3045,7 @@
     },
     "sound.noiseCancellation" : {
       "comment" : "Sound interface label or message: noiseCancellation.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3063,7 +3063,7 @@
     },
     "sound.presetHelp" : {
       "comment" : "Sound interface label or message: presetHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3081,7 +3081,7 @@
     },
     "sound.resetEqualizer" : {
       "comment" : "Sound interface label or message: resetEqualizer.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3099,7 +3099,7 @@
     },
     "sound.still" : {
       "comment" : "Sound interface label or message: still.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3117,7 +3117,7 @@
     },
     "sound.treble" : {
       "comment" : "Sound interface label or message: treble.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3135,7 +3135,7 @@
     },
     "sound.windBlock" : {
       "comment" : "Sound interface label or message: windBlock.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3153,7 +3153,7 @@
     },
     "sound.windBlockHelp" : {
       "comment" : "Sound interface label or message: windBlockHelp.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3171,7 +3171,7 @@
     },
     "sound.windReduction" : {
       "comment" : "Sound interface label or message: windReduction.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {

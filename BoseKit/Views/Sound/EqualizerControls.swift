@@ -19,7 +19,7 @@ struct EqualizerControls: View {
                     .frame(maxWidth: .infinity)
                 }
             }
-            Button(L10n.Sound.resetEqualizer) { device.resetEqualizer() }
+            Button(.soundResetEqualizer) { device.resetEqualizer() }
         }
         .disabled(!editable)
     }

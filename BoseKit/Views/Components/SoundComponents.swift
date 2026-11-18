@@ -5,7 +5,7 @@ struct SpatialAudioPicker: View {
     @Binding var selection: SpatialAudio
 
     var body: some View {
-        SettingsPicker(title: L10n.Sound.immersiveAudio, selection: $selection) {
+        SettingsPicker(title: .soundImmersiveAudio, selection: $selection) {
             ForEach(SpatialAudio.allCases, id: \.self) { Text($0.title).tag($0) }
         }
     }
@@ -14,9 +14,9 @@ struct SpatialAudioPicker: View {
 struct NoiseControlRangeLabels: View {
     var body: some View {
         HStack {
-            Text(L10n.Sound.maximumCancellation)
+            Text(.soundMaximumCancellation)
             Spacer()
-            Text(L10n.Sound.maximumAwareness)
+            Text(.soundMaximumAwareness)
         }
         .font(.caption)
         .foregroundStyle(.secondary)

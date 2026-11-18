@@ -12,7 +12,7 @@ struct DeviceHeader: View {
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 if model.devices.count > 1 {
-                    Picker(L10n.Common.device, selection: $model.selectedID) {
+                    Picker(.commonDevice, selection: $model.selectedID) {
                         ForEach(model.devices) { Text($0.name).tag(Optional($0.id)) }
                     }
                     .labelsHidden()
@@ -20,7 +20,7 @@ struct DeviceHeader: View {
                 } else if let device = model.selected {
                     Text(device.name).font(.headline)
                 } else {
-                    Text(L10n.Common.appName).font(.headline)
+                    Text(.commonAppName).font(.headline)
                 }
                 subtitle
                     .font(.caption)
@@ -37,7 +37,7 @@ struct DeviceHeader: View {
     }
 
     private var subtitle: Text {
-        if let name = model.selected?.profile.name { Text(name) } else { Text(L10n.Menu.tagline) }
+        if let name = model.selected?.profile.name { Text(name) } else { Text(.menuTagline) }
     }
 }
 
@@ -47,7 +47,7 @@ private struct BatteryBadge: View {
     var body: some View {
         VStack(spacing: 4) {
             Image(systemName: percent < 20 ? "battery.25percent" : "battery.100percent")
-            Text(L10n.Device.batteryPercentage(percent))
+            Text(.deviceBatteryPercentage(UInt32(percent)))
                 .monospacedDigit()
                 .font(.caption)
         }

@@ -7,16 +7,16 @@ struct VoicePromptSettings: View {
 
     var body: some View {
         if let prompts = device.voicePrompts {
-            SettingsToggle(title: L10n.Device.voicePrompts, isOn: enabled(prompts.enabled))
+            SettingsToggle(title: .deviceVoicePrompts, isOn: enabled(prompts.enabled))
             Divider()
-            SettingsPicker(title: L10n.Device.promptLanguage, selection: $device.voicePromptLanguageSelection) {
+            SettingsPicker(title: .devicePromptLanguage, selection: $device.voicePromptLanguageSelection) {
                 ForEach(languages(including: prompts.language), id: \.self) { Text($0.title).tag($0) }
             }
-            .confirmationDialog(L10n.Device.voicePromptConfirmation, isPresented: $confirmingToggle,
+            .confirmationDialog(.deviceVoicePromptConfirmation, isPresented: $confirmingToggle,
                                 titleVisibility: .visible) {
-                Button(L10n.Common.change) { device.setVoicePromptsEnabled(!prompts.enabled) }
+                Button(.commonChange) { device.setVoicePromptsEnabled(!prompts.enabled) }
             } message: {
-                Text(L10n.Device.voicePromptWarning)
+                Text(.deviceVoicePromptWarning)
             }
         }
     }

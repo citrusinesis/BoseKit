@@ -5,9 +5,9 @@ struct ConnectionSettings: View {
     @Bindable var device: DeviceController
 
     var body: some View {
-        SettingsSection(title: L10n.Connection.title) {
+        SettingsSection(title: .connectionTitle) {
             if let multipoint = device.multipoint {
-                SettingsToggle(title: L10n.Device.multipoint, isOn: $device.multipointEnabled)
+                SettingsToggle(title: .deviceMultipoint, isOn: $device.multipointEnabled)
                     .disabled(!device.supports(.multipoint, write: true))
                 if multipoint && device.sourceDevices.isEmpty {
                     SourceDetails(source: device.source)
@@ -32,10 +32,10 @@ private struct PairingControls: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button(isPairing ? L10n.Device.stopPairing : L10n.Device.pairing,
+            Button(isPairing ? .deviceStopPairing : .devicePairing,
                    systemImage: isPairing ? "xmark.circle" : "plus.circle", action: action)
             if isPairing {
-                SettingsFootnote(L10n.Device.pairingHelp)
+                SettingsFootnote(.devicePairingHelp)
             }
         }
     }
@@ -53,7 +53,7 @@ private struct SourceDetails: View {
                         Image(systemName: source.kind.systemImage)
                             .foregroundStyle(.secondary)
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(L10n.Device.audioSource)
+                            Text(.deviceAudioSource)
                             Text(source.kind.title).foregroundStyle(.secondary)
                             if let address = source.bluetoothAddress {
                                 Text(address.description)
@@ -64,14 +64,14 @@ private struct SourceDetails: View {
                         }
                     }
                 } else {
-                    Text(L10n.Device.sourceUnknown).foregroundStyle(.secondary)
+                    Text(.deviceSourceUnknown).foregroundStyle(.secondary)
                 }
-                SettingsFootnote(L10n.Device.multipointListHelp)
+                SettingsFootnote(.deviceMultipointListHelp)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 8)
         } label: {
-            Text(L10n.Device.connectionDetails)
+            Text(.deviceConnectionDetails)
         }
     }
 }
@@ -83,10 +83,10 @@ private struct RoutingControls: View {
     var body: some View {
         let parsed = BluetoothAddress(string: address)
         VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.Device.switchSource)
-            TextField(L10n.Device.sourceAddress, text: $address)
+            Text(.deviceSwitchSource)
+            TextField(.deviceSourceAddress, text: $address)
                 .textFieldStyle(.roundedBorder)
-            Button(L10n.Device.confirmSwitchSource) {
+            Button(.deviceConfirmSwitchSource) {
                 if let parsed { device.routeAudio(to: parsed) }
             }
             .disabled(parsed == nil)
@@ -95,7 +95,7 @@ private struct RoutingControls: View {
 }
 
 #Preview("Pairing") {
-    SettingsSection(title: L10n.Connection.title) {
+    SettingsSection(title: .connectionTitle) {
         PairingControls(isPairing: true) {}
     }
     .settingsContentStyle()

@@ -13,7 +13,7 @@ extension View {
 
 struct OpenBluetoothSettingsButton: View {
     var body: some View {
-        Button(L10n.Connection.openBluetoothSettings) {
+        Button(.connectionOpenBluetoothSettings) {
             if let url = URL(string: "x-apple.systempreferences:com.apple.BluetoothSettings") {
                 NSWorkspace.shared.open(url)
             }

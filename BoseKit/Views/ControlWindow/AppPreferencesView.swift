@@ -6,16 +6,16 @@ struct AppPreferencesView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            SettingsSection(title: L10n.Menu.title) {
-                SettingsToggle(title: L10n.Menu.hideWhenUnavailable, isOn: $model.hideWhenUnavailable)
+            SettingsSection(title: .menuTitle) {
+                SettingsToggle(title: .menuHideWhenUnavailable, isOn: $model.hideWhenUnavailable)
                     .accessibilityIdentifier("hideWhenUnavailable")
-                SettingsFootnote(L10n.Menu.hiddenHelp)
+                SettingsFootnote(.menuHiddenHelp)
                 Divider()
-                SettingsToggle(title: L10n.Menu.showBattery, isOn: $model.showBattery)
+                SettingsToggle(title: .menuShowBattery, isOn: $model.showBattery)
                     .accessibilityIdentifier("showBattery")
             }
-            SettingsSection(title: L10n.Connection.title) {
-                Text(L10n.Connection.discoveryHelp)
+            SettingsSection(title: .connectionTitle) {
+                Text(.connectionDiscoveryHelp)
                     .foregroundStyle(.secondary)
                 OpenBluetoothSettingsButton()
                 if let device = model.selected {
@@ -23,9 +23,9 @@ struct AppPreferencesView: View {
                     ConnectionToggleButton(device: device)
                 }
                 if let error = model.discoveryError {
-                    Text(error).foregroundStyle(.orange)
+                    Text(error.message).foregroundStyle(.orange)
                 }
-                SettingsFootnote(L10n.Connection.refreshHelp)
+                SettingsFootnote(.connectionRefreshHelp)
             }
         }
     }
@@ -35,7 +35,7 @@ private struct ConnectionToggleButton: View {
     let device: DeviceController
 
     var body: some View {
-        Button(device.isSuspended ? L10n.Connection.resume : L10n.Connection.disconnect) {
+        Button(device.isSuspended ? .connectionResume : .connectionDisconnect) {
             Task {
                 if device.isSuspended { await device.connect() } else { await device.disconnect() }
             }

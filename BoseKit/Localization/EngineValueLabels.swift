@@ -1,30 +1,37 @@
 import Foundation
 import BoseKitEngine
 
-extension L10n.Errors {
-    static func message(for error: any Error) -> String {
-        guard let error = error as? BoseError else { return error.localizedDescription }
-        let resource: LocalizedStringResource = switch error {
-        case .disconnected: disconnected
-        case .timeout: timeout
-        case .transport: transport
-        case .unsupported: unsupported
-        case .device: rejected
-        case .verificationFailed: verification
-        default: invalidValue
+extension AppError {
+    var message: String {
+        switch self {
+        case .engine(let error): String(localized: error.title)
+        case .unexpected(let description): description
         }
-        return String(localized: resource)
+    }
+}
+
+extension BoseError {
+    var title: LocalizedStringResource {
+        switch self {
+        case .disconnected: .errorsDisconnected
+        case .timeout: .errorsTimeout
+        case .transport: .errorsTransport
+        case .unsupported: .errorsUnsupported
+        case .device: .errorsRejected
+        case .verificationFailed: .errorsVerification
+        case .invalidPayload, .invalidArgument, .invalidState, .duplicateProduct: .errorsInvalidValue
+        }
     }
 }
 
 extension ANRLevel {
     var title: LocalizedStringResource {
         switch self {
-        case .off: L10n.Common.off
-        case .high: L10n.Common.high
-        case .wind: L10n.Sound.windReduction
-        case .low: L10n.Common.low
-        @unknown default: L10n.Common.none
+        case .off: .commonOff
+        case .high: .commonHigh
+        case .wind: .soundWindReduction
+        case .low: .commonLow
+        @unknown default: .commonNone
         }
     }
 }
@@ -32,11 +39,11 @@ extension ANRLevel {
 extension SidetoneLevel {
     var title: LocalizedStringResource {
         switch self {
-        case .off: L10n.Common.off
-        case .low: L10n.Common.low
-        case .medium: L10n.Common.medium
-        case .high: L10n.Common.high
-        @unknown default: L10n.Common.none
+        case .off: .commonOff
+        case .low: .commonLow
+        case .medium: .commonMedium
+        case .high: .commonHigh
+        @unknown default: .commonNone
         }
     }
 
@@ -46,10 +53,10 @@ extension SidetoneLevel {
 extension SpatialAudio {
     var title: LocalizedStringResource {
         switch self {
-        case .off: L10n.Common.off
-        case .still: L10n.Sound.still
-        case .motion: L10n.Sound.motion
-        @unknown default: L10n.Common.none
+        case .off: .commonOff
+        case .still: .soundStill
+        case .motion: .soundMotion
+        @unknown default: .commonNone
         }
     }
 }
@@ -57,10 +64,10 @@ extension SpatialAudio {
 extension EQBand {
     var title: LocalizedStringResource {
         switch id {
-        case 0: L10n.Sound.bass
-        case 1: L10n.Sound.midrange
-        case 2: L10n.Sound.treble
-        default: L10n.Sound.band(id)
+        case 0: .soundBass
+        case 1: .soundMidrange
+        case 2: .soundTreble
+        default: .soundBand(UInt32(id))
         }
     }
 }
@@ -68,9 +75,9 @@ extension EQBand {
 extension AudioSourceKind {
     var title: LocalizedStringResource {
         switch self {
-        case .bluetooth: L10n.Device.bluetooth
-        case .wired: L10n.Device.wired
-        default: L10n.Common.none
+        case .bluetooth: .deviceBluetooth
+        case .wired: .deviceWired
+        default: .commonNone
         }
     }
 
@@ -80,45 +87,45 @@ extension AudioSourceKind {
 extension BatteryComponent {
     var title: LocalizedStringResource {
         switch self {
-        case .right: L10n.Device.rightBattery
-        case .left: L10n.Device.leftBattery
-        case .chargingCase: L10n.Device.caseBattery
-        case .overall: L10n.Device.overallBattery
-        default: L10n.Device.battery(rawValue)
+        case .right: .deviceRightBattery
+        case .left: .deviceLeftBattery
+        case .chargingCase: .deviceCaseBattery
+        case .overall: .deviceOverallBattery
+        default: .deviceBattery(UInt32(rawValue))
         }
     }
 }
 
 extension ButtonEvent {
     var title: LocalizedStringResource {
-        self == .longPress ? L10n.Device.longPress : L10n.Device.shortcutAction
+        self == .longPress ? .deviceLongPress : .deviceShortcutAction
     }
 }
 
 extension ButtonAction {
     var title: LocalizedStringResource {
         switch self {
-        case .voiceAssistant: L10n.Device.voiceAssistant
-        case .noiseControl: L10n.Sound.noiseCancellation
-        case .batteryLevel: L10n.Device.batteryLevel
-        case .playPause: L10n.Device.playPause
-        case .increaseAmbient: L10n.Device.increaseAmbient
-        case .decreaseAmbient: L10n.Device.decreaseAmbient
-        case .wakeWord: L10n.Device.wakeWord
-        case .switchDevice: L10n.Device.switchDevice
-        case .conversationMode: L10n.Device.conversationMode
-        case .nextTrack: L10n.Device.nextTrack
-        case .previousTrack: L10n.Device.previousTrack
-        case .notifications: L10n.Device.notifications
-        case .windBlock: L10n.Sound.windBlock
-        case .disabled: L10n.Device.disabled
-        case .appAction: L10n.Device.appAction
-        case .spotify: L10n.Device.spotify
-        case .cycleModes: L10n.Device.cycleModes
-        case .immersiveAudio: L10n.Sound.immersiveAudio
-        case .wiredInput: L10n.Device.wiredInput
-        case .linkDevices: L10n.Device.linkDevices
-        default: L10n.Device.action(rawValue)
+        case .voiceAssistant: .deviceVoiceAssistant
+        case .noiseControl: .soundNoiseCancellation
+        case .batteryLevel: .deviceBatteryLevel
+        case .playPause: .devicePlayPause
+        case .increaseAmbient: .deviceIncreaseAmbient
+        case .decreaseAmbient: .deviceDecreaseAmbient
+        case .wakeWord: .deviceWakeWord
+        case .switchDevice: .deviceSwitchDevice
+        case .conversationMode: .deviceConversationMode
+        case .nextTrack: .deviceNextTrack
+        case .previousTrack: .devicePreviousTrack
+        case .notifications: .deviceNotifications
+        case .windBlock: .soundWindBlock
+        case .disabled: .deviceDisabled
+        case .appAction: .deviceAppAction
+        case .spotify: .deviceSpotify
+        case .cycleModes: .deviceCycleModes
+        case .immersiveAudio: .soundImmersiveAudio
+        case .wiredInput: .deviceWiredInput
+        case .linkDevices: .deviceLinkDevices
+        default: .deviceAction(UInt32(rawValue))
         }
     }
 }
@@ -126,30 +133,30 @@ extension ButtonAction {
 extension VoicePromptLanguage {
     var title: LocalizedStringResource {
         switch self {
-        case .englishUK: L10n.Language.englishUK
-        case .englishUS: L10n.Language.englishUS
-        case .french: L10n.Language.french
-        case .italian: L10n.Language.italian
-        case .german: L10n.Language.german
-        case .spanish: L10n.Language.spanish
-        case .spanishMexico: L10n.Language.spanishMexico
-        case .portuguese: L10n.Language.portuguese
-        case .mandarin: L10n.Language.mandarin
-        case .korean: L10n.Language.korean
-        case .russian: L10n.Language.russian
-        case .polish: L10n.Language.polish
-        case .hebrew: L10n.Language.hebrew
-        case .turkish: L10n.Language.turkish
-        case .dutch: L10n.Language.dutch
-        case .japanese: L10n.Language.japanese
-        case .cantonese: L10n.Language.cantonese
-        case .arabic: L10n.Language.arabic
-        case .swedish: L10n.Language.swedish
-        case .danish: L10n.Language.danish
-        case .norwegian: L10n.Language.norwegian
-        case .finnish: L10n.Language.finnish
-        case .hindi: L10n.Language.hindi
-        default: L10n.Language.unknown(rawValue)
+        case .englishUK: .languageEnglishUK
+        case .englishUS: .languageEnglishUS
+        case .french: .languageFrench
+        case .italian: .languageItalian
+        case .german: .languageGerman
+        case .spanish: .languageSpanish
+        case .spanishMexico: .languageSpanishMexico
+        case .portuguese: .languagePortuguese
+        case .mandarin: .languageMandarin
+        case .korean: .languageKorean
+        case .russian: .languageRussian
+        case .polish: .languagePolish
+        case .hebrew: .languageHebrew
+        case .turkish: .languageTurkish
+        case .dutch: .languageDutch
+        case .japanese: .languageJapanese
+        case .cantonese: .languageCantonese
+        case .arabic: .languageArabic
+        case .swedish: .languageSwedish
+        case .danish: .languageDanish
+        case .norwegian: .languageNorwegian
+        case .finnish: .languageFinnish
+        case .hindi: .languageHindi
+        default: .languageUnknown(UInt32(rawValue))
         }
     }
 }
@@ -160,10 +167,10 @@ extension ModeConfiguration {
             return promptName
         }
         if !name.isEmpty && name != "None" { return name }
-        return voicePrompt.protocolName ?? String(localized: L10n.Modes.fallbackName(id + 1))
+        return voicePrompt.protocolName ?? String(localized: .modesFallbackName(UInt32(id) + 1))
     }
 }
 
 extension ModePrompt {
-    var title: String { protocolName ?? String(localized: L10n.Modes.promptName(rawValue)) }
+    var title: String { protocolName ?? String(localized: .modesPromptName(UInt32(rawValue))) }
 }

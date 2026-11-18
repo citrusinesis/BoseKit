@@ -8,7 +8,7 @@ struct AudioControls: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             VStack(alignment: .leading, spacing: 8) {
-                ValueSlider(title: L10n.Sound.ambient, value: Double(audio.cnc), range: 0...10,
+                ValueSlider(title: .soundAmbient, value: Double(audio.cnc), range: 0...10,
                             revision: device.refreshRevision, editingChanged: device.setEditing) {
                     device.setCNC(UInt8($0))
                 }
@@ -16,7 +16,7 @@ struct AudioControls: View {
                 NoiseControlRangeLabels()
             }
             if !device.canEditAudio && device.profile.noiseControl == .modeConfiguration {
-                Label(L10n.Sound.presetHelp, systemImage: "info.circle")
+                Label(.soundPresetHelp, systemImage: "info.circle")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -25,17 +25,17 @@ struct AudioControls: View {
                     .disabled(!device.canEditAudio || !device.supports(.spatialAudio, write: true))
             }
             if device.supports(.windBlock) {
-                SettingsToggle(title: L10n.Sound.windBlock, isOn: $device.windBlockEnabled)
+                SettingsToggle(title: .soundWindBlock, isOn: $device.windBlockEnabled)
                     .disabled(!device.canEditAudio || !device.supports(.windBlock, write: true))
                 if audio.windBlock {
-                    SettingsFootnote(L10n.Sound.windBlockHelp)
+                    SettingsFootnote(.soundWindBlockHelp)
                 }
             }
             if audio.ancEnabled != nil, device.supports(.ancToggle, write: true) {
-                SettingsToggle(title: L10n.Sound.noiseCancellation, isOn: $device.ancEnabled)
+                SettingsToggle(title: .soundNoiseCancellation, isOn: $device.ancEnabled)
             }
             if device.supports(.audioSettings, write: true) {
-                SettingsToggle(title: L10n.Sound.automaticAmbient, isOn: $device.automaticCNCEnabled)
+                SettingsToggle(title: .soundAutomaticAmbient, isOn: $device.automaticCNCEnabled)
             }
         }
     }

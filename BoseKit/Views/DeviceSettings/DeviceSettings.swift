@@ -16,17 +16,17 @@ struct DeviceSettings: View {
                 SourceDeviceList(device: device)
             }
             if device.buttons != nil {
-                SettingsSection(title: L10n.Device.shortcut) {
+                SettingsSection(title: .deviceShortcut) {
                     ShortcutSettings(device: device)
                 }
             }
             if device.voicePrompts != nil {
-                SettingsSection(title: L10n.Device.voicePrompts) {
+                SettingsSection(title: .deviceVoicePrompts) {
                     VoicePromptSettings(device: device)
                         .disabled(!device.supports(.voicePrompts, write: true))
                 }
             }
-            SettingsSection(title: L10n.Device.information) {
+            SettingsSection(title: .deviceInformation) {
                 DeviceInformation(device: device)
             }
             if device.supports(.power, write: true) {
@@ -42,11 +42,11 @@ private struct DeviceNameSettings: View {
     @State private var newName = ""
 
     var body: some View {
-        SettingsSection(title: L10n.Device.name) {
+        SettingsSection(title: .deviceName) {
             HStack(alignment: .firstTextBaseline, spacing: 10) {
-                TextField(L10n.Device.name, text: $newName)
+                TextField(.deviceName, text: $newName)
                     .textFieldStyle(.roundedBorder)
-                Button(L10n.Common.save) { device.rename(to: newName) }
+                Button(.commonSave) { device.rename(to: newName) }
                     .disabled(!isValid)
             }
         }
@@ -63,14 +63,14 @@ private struct PowerOffButton: View {
     @State private var confirming = false
 
     var body: some View {
-        Button(L10n.Device.powerOff, systemImage: "power", role: .destructive) { confirming = true }
-            .confirmationDialog(L10n.Device.powerOffConfirmation, isPresented: $confirming,
+        Button(.devicePowerOff, systemImage: "power", role: .destructive) { confirming = true }
+            .confirmationDialog(.devicePowerOffConfirmation, isPresented: $confirming,
                                 titleVisibility: .visible) {
-                Button(L10n.Device.confirmPowerOff, role: .destructive) {
+                Button(.deviceConfirmPowerOff, role: .destructive) {
                     Task { await device.powerOff() }
                 }
             } message: {
-                Text(L10n.Device.powerOffHelp)
+                Text(.devicePowerOffHelp)
             }
     }
 }

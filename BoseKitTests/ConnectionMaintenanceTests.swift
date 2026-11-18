@@ -144,7 +144,7 @@ struct ConnectionMaintenanceTests {
         controller.attachView()
         await controller.maintain()
         #expect(!controller.connected)
-        #expect(controller.errorMessage != nil)
+        #expect(controller.error != nil)
         #expect(await transport.requests.allSatisfy { $0[2] == 1 })
     }
 

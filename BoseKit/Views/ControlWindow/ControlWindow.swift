@@ -8,9 +8,9 @@ enum ControlPage: String, CaseIterable, Identifiable {
 
     var title: LocalizedStringResource {
         switch self {
-        case .sound: L10n.Common.sound
-        case .device: L10n.Common.device
-        case .app: L10n.Common.app
+        case .sound: .commonSound
+        case .device: .commonDevice
+        case .app: .commonApp
         }
     }
 }
@@ -24,7 +24,7 @@ struct ControlWindow: View {
     var body: some View {
         VStack(spacing: 0) {
             DeviceHeader(model: model)
-            Picker(L10n.Common.settings, selection: $page) {
+            Picker(.commonSettings, selection: $page) {
                 ForEach(ControlPage.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
@@ -72,8 +72,8 @@ private struct DeviceContent: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if let error = device.errorMessage {
-                Label(error, systemImage: "exclamationmark.circle")
+            if let error = device.error {
+                Label(error.message, systemImage: "exclamationmark.circle")
                     .font(.callout)
                     .foregroundStyle(.orange)
                     .textSelection(.enabled)

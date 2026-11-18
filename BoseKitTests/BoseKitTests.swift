@@ -6,7 +6,7 @@ import BoseKitEngine
 @MainActor
 struct BoseKitTests {
     @Test func semanticResourcesResolveInBothLanguages() {
-        var title = L10n.Menu.title
+        var title = LocalizedStringResource.menuTitle
         title.locale = Locale(identifier: "en")
         #expect(String(localized: title) == "Menu Bar")
         title.locale = Locale(identifier: "ko")

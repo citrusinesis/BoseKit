@@ -9,20 +9,20 @@ struct ModesControls: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text(L10n.Modes.title)
+                Text(.modesTitle)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
                 if let slot = device.freeModeSlot, device.supports(.modes, write: true) {
-                    Button(L10n.Modes.create, systemImage: "plus") {
+                    Button(.modesCreate, systemImage: "plus") {
                         editorDraft = ModeEditorDraft(newModeIn: slot)
                     }
                     .buttonStyle(.glass)
                 }
             }
             if device.selectableModes.isEmpty {
-                ContentUnavailableView(L10n.Modes.emptyTitle, systemImage: "waveform",
-                                       description: Text(L10n.Modes.emptyHelp))
+                ContentUnavailableView(.modesEmptyTitle, systemImage: "waveform",
+                                       description: Text(.modesEmptyHelp))
             }
             VStack(spacing: 10) {
                 ForEach(device.selectableModes) { mode in
@@ -32,21 +32,21 @@ struct ModesControls: View {
                 }
             }
             if device.favorites != nil {
-                SettingsFootnote(L10n.Modes.favoritesHelp)
+                SettingsFootnote(.modesFavoritesHelp)
             }
             if device.defaultMode != nil {
-                Picker(L10n.Modes.powerOn, selection: $device.defaultModeSelection) {
+                Picker(.modesPowerOn, selection: $device.defaultModeSelection) {
                     ForEach(device.selectableModes) { Text($0.displayName).tag($0.id) }
                 }
                 .disabled(!device.supports(.defaultMode, write: true))
             }
         }
         .sheet(item: $editorDraft) { ModeEditor(device: device, initial: $0.draft) }
-        .confirmationDialog(Text(L10n.Modes.deleteConfirmation), isPresented: isConfirmingDeletion,
+        .confirmationDialog(Text(.modesDeleteConfirmation), isPresented: isConfirmingDeletion,
                             titleVisibility: .visible, presenting: pendingDeletion) { mode in
-            Button(L10n.Modes.delete, role: .destructive) { device.deleteMode(mode.id) }
+            Button(.modesDelete, role: .destructive) { device.deleteMode(mode.id) }
         } message: { _ in
-            Text(L10n.Modes.deleteHelp)
+            Text(.modesDeleteHelp)
         }
     }
 
