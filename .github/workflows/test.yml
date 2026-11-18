@@ -15,11 +15,21 @@ concurrency:
 jobs:
   test:
     name: Tests
-    runs-on: macos-latest
+    # project.xcproj is the JSON project format introduced in Xcode 27.2; older Xcode cannot open it.
+    runs-on: xcode-27
+    env:
+      XCODE_APP: /Applications/Xcode_27.2.app
     steps:
       - uses: actions/checkout@v5
-      - name: Show toolchain
-        run: xcodebuild -version
+      - name: Select Xcode 27.2
+        run: |
+          if [ ! -d "$XCODE_APP" ]; then
+            echo "::error::$XCODE_APP is not installed on this runner. Installed versions:"
+            ls -d /Applications/Xcode*.app
+            exit 1
+          fi
+          sudo xcode-select -s "$XCODE_APP"
+          xcodebuild -version
       # UI tests need a paired physical device, so CI skips them; ad-hoc signing avoids needing a development team on the runner.
       - name: Build and test
         run: >
