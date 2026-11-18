@@ -47,6 +47,16 @@
                ReferencedContainer = "container:BoseKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BoseKitEngineTests"
+               BuildableName = "BoseKitEngineTests"
+               BlueprintName = "BoseKitEngineTests"
+               ReferencedContainer = "container:Packages/BoseKitEngine">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

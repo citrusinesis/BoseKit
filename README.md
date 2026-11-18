@@ -45,18 +45,18 @@ Reports for other models are welcome.
 
 ## Building
 
-Open `BoseKit.xcodeproj` in Xcode, select the **BoseKit** scheme and run.
+Open `BoseKit.xcworkspace` in Xcode, select the **BoseKit** scheme and run.
 Allow Bluetooth access when prompted.
 
-Run the library tests without Xcode:
+Run the app and library tests (UI tests need a paired device and are skipped here):
 
 ```sh
-swift test
+xcodebuild test -workspace BoseKit.xcworkspace -scheme BoseKit -destination 'platform=macOS' -skip-testing:BoseKitUITests
 ```
 
 ## Using the Library
 
-`BoseKitEngine` is also a Swift package:
+`BoseKitEngine` is a local Swift package in `Packages/BoseKitEngine`, used by the app:
 
 ```swift
 import BoseKitEngine
@@ -79,9 +79,9 @@ Writes are verified by reading the value back from the device. Check
 ## Project Structure
 
 ```text
-BoseKitEngine/   Swift library: protocol, transport, device profiles and workflows
-BoseKit/         SwiftUI menu bar app
-docs/            Engine notes and per-device verification notes
+Packages/BoseKitEngine/   Swift library: protocol, transport, device profiles and workflows
+BoseKit/                  SwiftUI menu bar app
+docs/                     Engine notes and per-device verification notes
 ```
 
 See [docs/engine-notes.md](docs/engine-notes.md) for architecture and protocol

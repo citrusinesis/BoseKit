@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Show toolchain
+        run: xcodebuild -version
+      # UI tests need a paired physical device, so CI skips them; ad-hoc signing avoids needing a development team on the runner.
+      - name: Build and test
+        run: >
+          xcodebuild test
+          -workspace BoseKit.xcworkspace
+          -scheme BoseKit
+          -destination 'platform=macOS'
+          -skip-testing:BoseKitUITests
+          CODE_SIGN_IDENTITY=-
