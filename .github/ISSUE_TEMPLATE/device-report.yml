@@ -1,0 +1,71 @@
+name: Device report
+description: Tell us how BoseKit works with your Bose model.
+title: "[Device] "
+labels: ["device-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing BoseKit with your device. Reports help move models from
+        "Implemented, untested" to "Verified" in the README.
+        Please do not include Bluetooth addresses or the names of other paired devices.
+  - type: dropdown
+    id: model
+    attributes:
+      label: Model
+      options:
+        - QuietComfort Ultra Headphones (1st Gen)
+        - QuietComfort Ultra Headphones (2nd Gen)
+        - QuietComfort Headphones (2nd Gen)
+        - QuietComfort Ultra Earbuds (2nd Gen)
+        - QuietComfort Headphones
+        - QuietComfort 45
+        - QuietComfort 35 / 35 II
+        - Noise Cancelling Headphones 700
+        - QuietComfort Earbuds
+        - Ultra Open Earbuds
+        - Other (describe below)
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware version
+      description: Shown under Device → Information in BoseKit.
+      placeholder: "1.6.7"
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "26.1"
+    validations:
+      required: true
+  - type: input
+    id: bosekit
+    attributes:
+      label: BoseKit version or commit
+      placeholder: "main @ 35a6e80"
+    validations:
+      required: true
+  - type: checkboxes
+    id: working
+    attributes:
+      label: What works
+      description: Check everything you tried that behaved correctly.
+      options:
+        - label: Connects and shows battery level
+        - label: Lists and switches listening modes
+        - label: Creates, edits or deletes custom modes
+        - label: Noise control (ambient level, wind reduction, spatial audio)
+        - label: Equalizer
+        - label: Device settings (name, auto pause/answer, self voice, shortcut, voice prompts)
+        - label: Multipoint device list
+  - type: textarea
+    id: problems
+    attributes:
+      label: What did not work
+      description: Describe controls that were missing, wrong or showed an error, and the error message.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
