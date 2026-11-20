@@ -31,7 +31,7 @@ The labels in the table are suggestions; any text works.
 - Keep a charging cable within reach.
 - Note whether this Mac is the audio source when the run starts.
 
-Run the probe from `Packages/BoseKitEngine` and keep a copy of the output:
+Run the probe from `Packages/BoseKitProbe` and keep a copy of the output:
 
 ```sh
 swift run bosekit-probe monitor --snapshots 2>&1 | tee notification-run-1.log

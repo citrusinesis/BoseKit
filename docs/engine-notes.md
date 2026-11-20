@@ -105,11 +105,11 @@ Implementation details for contributors. For an overview, see the [README](../RE
 
 ## Probing Notifications
 
-`bosekit-probe` is a command-line tool in the engine package for finding out what a device sends on its own and what changes when the user does something.
+`bosekit-probe` is a command-line tool in its own package, `Packages/BoseKitProbe`, for finding out what a device sends on its own and what changes when the user does something.
 Quit BoseKit first, because only one control connection can be open at a time.
 
 ```sh
-cd Packages/BoseKitEngine
+cd Packages/BoseKitProbe
 swift run bosekit-probe list
 swift run bosekit-probe monitor --address <AA:BB:CC:DD:EE:FF>
 swift run bosekit-probe monitor --address <AA:BB:CC:DD:EE:FF> --subscribe 1,2,4,5,31

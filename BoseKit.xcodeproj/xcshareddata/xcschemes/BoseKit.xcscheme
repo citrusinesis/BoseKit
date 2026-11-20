@@ -64,7 +64,7 @@
                BlueprintIdentifier = "BoseKitProbeTests"
                BuildableName = "BoseKitProbeTests"
                BlueprintName = "BoseKitProbeTests"
-               ReferencedContainer = "container:Packages/BoseKitEngine">
+               ReferencedContainer = "container:Packages/BoseKitProbe">
             </BuildableReference>
          </TestableReference>
       </Testables>

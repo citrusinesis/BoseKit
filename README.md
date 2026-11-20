@@ -85,6 +85,7 @@ Built-in profiles are also available by name, for example `DeviceProfile.lonesta
 
 ```text
 Packages/BoseKitEngine/   Swift library: protocol, transport, device profiles and workflows
+Packages/BoseKitProbe/    Command-line tool for inspecting what a device reports
 BoseKit/                  SwiftUI menu bar app
 docs/                     Engine notes and per-device verification notes
 ```
