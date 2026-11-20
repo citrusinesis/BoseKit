@@ -41,8 +41,27 @@ Reports for other models are welcome.
 
 - App: macOS 26 or later
 - Library (`BoseKitEngine`): macOS 14 or later
-- Xcode with Swift 6
+- Building from source: Xcode with Swift 6
 - The headphones must already be paired with the Mac
+
+## Installing
+
+Download `BoseKit-<version>.dmg` from the [latest release](../../releases/latest), open it and drag BoseKit into Applications.
+
+BoseKit is not notarized by Apple, so macOS blocks it the first time it is opened:
+
+1. Open BoseKit. macOS reports that it cannot verify the app; dismiss the dialog.
+2. Open System Settings, go to Privacy & Security and scroll down to Security.
+3. Click **Open Anyway** next to the message about BoseKit and confirm.
+
+Alternatively, remove the download quarantine in Terminal before the first launch:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/BoseKit.app
+```
+
+Allow Bluetooth access when prompted.
+Each release is signed ad hoc, so macOS may ask for Bluetooth access again after an update.
 
 ## Building
 
@@ -53,6 +72,12 @@ Run the app and library tests (UI tests need a paired device and are skipped her
 
 ```sh
 xcodebuild test -workspace BoseKit.xcworkspace -scheme BoseKit -destination 'platform=macOS' -skip-testing:BoseKitUITests
+```
+
+Build the release disk image, which ends up in `build/`:
+
+```sh
+scripts/build-dmg.sh 0.1.0
 ```
 
 ## Using the Library
