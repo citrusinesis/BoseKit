@@ -8,7 +8,7 @@ struct ModeRow: View {
     let delete: () -> Void
 
     var body: some View {
-        let isCurrent = device.currentMode == mode.id
+        let isCurrent = device.shownMode == mode.id
         HStack(spacing: 12) {
             Button {
                 device.selectMode(mode.id)
@@ -28,8 +28,8 @@ struct ModeRow: View {
             }
             .buttonStyle(.plain)
             .disabled(!device.supports(.currentMode, write: true))
-            if let favorites = device.favorites {
-                FavoriteButton(device: device, mode: mode, isFavorite: favorites.slots.contains(mode.id))
+            if let isFavorite = device.isFavorite(mode.id) {
+                FavoriteButton(device: device, mode: mode, isFavorite: isFavorite)
             }
             if mode.editable, device.supports(.modes, write: true) {
                 Menu {

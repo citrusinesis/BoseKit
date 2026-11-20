@@ -6,7 +6,7 @@ struct ConnectionSettings: View {
 
     var body: some View {
         SettingsSection(title: .connectionTitle) {
-            if let multipoint = device.multipoint {
+            if let multipoint = device.shownMultipoint {
                 SettingsToggle(title: .deviceMultipoint, isOn: $device.multipointEnabled)
                     .disabled(!device.supports(.multipoint, write: true))
                 if multipoint && device.sourceDevices.isEmpty {

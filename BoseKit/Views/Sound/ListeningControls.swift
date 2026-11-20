@@ -7,7 +7,7 @@ struct ListeningControls: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            if compact, device.currentMode != nil, !device.selectableModes.isEmpty {
+            if compact, device.shownMode != nil, !device.selectableModes.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
                     Label(.modesTitle, systemImage: "waveform").font(.headline)
                     Picker(.modesCurrent, selection: $device.currentModeSelection) {
@@ -16,10 +16,10 @@ struct ListeningControls: View {
                     .disabled(!device.supports(.currentMode, write: true))
                 }
             }
-            if let audio = device.audio, !compact || device.canEditAudio {
+            if let audio = device.shownAudio, !compact || device.canEditAudio {
                 AudioControls(device: device, audio: audio)
-            } else if let cnc = device.cnc, !compact || device.canEditAudio {
-                ValueSlider(title: .soundAmbient, value: Double(cnc.current),
+            } else if let cnc = device.cnc, let level = device.shownCNC, !compact || device.canEditAudio {
+                ValueSlider(title: .soundAmbient, value: Double(level),
                             range: 0...min(Double(cnc.maximum), CNCLevel.sliderRange.upperBound),
                             revision: device.refreshRevision, editingChanged: device.setEditing) {
                     device.setCNC(CNCLevel(sliderValue: $0))

@@ -10,8 +10,9 @@ struct HeadsetFixture {
     let controller: DeviceController
 
     init(features: [FeatureID: FeatureAccess] = [.battery: .read], noiseControl: NoiseControlStrategy = .unavailable,
-         modePolicy: ModePolicy? = nil) {
-        profile = Self.profile(features: features, noiseControl: noiseControl, modePolicy: modePolicy)
+         modePolicy: ModePolicy? = nil, voicePromptToggleHasSideEffect: Bool = false) {
+        profile = Self.profile(features: features, noiseControl: noiseControl, modePolicy: modePolicy,
+                               voicePromptToggleHasSideEffect: voicePromptToggleHasSideEffect)
         controller = DeviceController(id: "test", name: "Test", profile: profile) { [headset] _, profile in
             try await BoseDevice.connect(profile: profile, transport: headset)
         }
@@ -19,9 +20,10 @@ struct HeadsetFixture {
 
     static func profile(features: [FeatureID: FeatureAccess] = [.battery: .read],
                         noiseControl: NoiseControlStrategy = .unavailable,
-                        modePolicy: ModePolicy? = nil) -> DeviceProfile {
+                        modePolicy: ModePolicy? = nil, voicePromptToggleHasSideEffect: Bool = false) -> DeviceProfile {
         DeviceProfile(id: "test", name: "Test", productIDs: [1], rfcommChannel: 2,
-                      features: features, noiseControl: noiseControl, modePolicy: modePolicy)
+                      features: features, noiseControl: noiseControl, modePolicy: modePolicy,
+                      voicePromptToggleHasSideEffect: voicePromptToggleHasSideEffect)
     }
 
     static func withModes() -> HeadsetFixture {

@@ -1,7 +1,7 @@
 import BoseKitEngine
 
 extension DeviceController {
-    var activeMode: ModeConfiguration? { modes.first { $0.id == currentMode } }
+    var activeMode: ModeConfiguration? { modes.first { $0.id == shownMode } }
 
     var freeModeSlot: ModeConfiguration? {
         modes.first { !$0.configured && profile.modePolicy?.editableSlots.contains($0.id) == true }
@@ -26,74 +26,74 @@ extension DeviceController {
         }
     }
 
-    var hasListeningControls: Bool { audio != nil || cnc != nil || anr != nil }
+    var hasListeningControls: Bool { shownAudio != nil || cnc != nil || anr != nil }
     var hasPlaybackSettings: Bool { autoPause != nil || autoAnswer != nil || sidetone != nil }
     var hasConnectionSettings: Bool { multipoint != nil || pairing != nil || supports(.routing, write: true) }
 }
 
 extension DeviceController {
     var currentModeSelection: UInt8 {
-        get { currentMode ?? 0 }
+        get { shownMode ?? 0 }
         set { selectMode(newValue) }
     }
 
     var defaultModeSelection: UInt8 {
-        get { defaultMode ?? 0 }
+        get { shownDefaultMode ?? 0 }
         set { setDefaultMode(newValue) }
     }
 
     var anrSelection: ANRLevel {
-        get { anr ?? .off }
+        get { shownANR ?? .off }
         set { setANR(newValue) }
     }
 
     var spatialAudioSelection: SpatialAudio {
-        get { audio?.spatial ?? .off }
+        get { shownAudio?.spatial ?? .off }
         set { setSpatialAudio(newValue) }
     }
 
     var windBlockEnabled: Bool {
-        get { audio?.windBlock ?? false }
+        get { shownAudio?.windBlock ?? false }
         set { setWindBlock(newValue) }
     }
 
     var ancEnabled: Bool {
-        get { audio?.ancEnabled ?? false }
+        get { shownAudio?.ancEnabled ?? false }
         set { setANCEnabled(newValue) }
     }
 
     var automaticCNCEnabled: Bool {
-        get { audio?.automaticCNC ?? false }
+        get { shownAudio?.automaticCNC ?? false }
         set { setAutomaticCNC(newValue) }
     }
 
     var multipointEnabled: Bool {
-        get { multipoint ?? false }
+        get { shownMultipoint ?? false }
         set { setMultipoint(newValue) }
     }
 
     var autoPauseEnabled: Bool {
-        get { autoPause ?? false }
+        get { shownAutoPause ?? false }
         set { setAutoPause(newValue) }
     }
 
     var autoAnswerEnabled: Bool {
-        get { autoAnswer ?? false }
+        get { shownAutoAnswer ?? false }
         set { setAutoAnswer(newValue) }
     }
 
     var sidetoneSelection: SidetoneLevel {
-        get { sidetone ?? .off }
+        get { shownSidetone ?? .off }
         set { setSidetone(newValue) }
     }
 
     var voicePromptLanguageSelection: VoicePromptLanguage {
-        get { voicePrompts?.language ?? .englishUS }
+        get { shownVoicePrompts?.language ?? .englishUS }
         set { setVoicePromptLanguage(newValue) }
     }
 
     var shortcutSelection: ButtonAction {
-        get { buttons?.assignment.action ?? .disabled }
+        get { shownShortcut ?? .disabled }
         set { setShortcut(newValue) }
     }
 }

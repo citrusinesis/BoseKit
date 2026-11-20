@@ -10,7 +10,7 @@ struct EqualizerControls: View {
             HStack(alignment: .top, spacing: 16) {
                 ForEach(device.equalizer) { band in
                     VerticalValueSlider(title: band.title,
-                                        value: Double(band.value),
+                                        value: Double(device.shownValue(of: band)),
                                         range: Double(band.range.lowerBound)...Double(band.range.upperBound),
                                         revision: device.refreshRevision,
                                         editingChanged: device.setEditing) {

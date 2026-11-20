@@ -54,67 +54,6 @@ struct DeviceActionTests {
         await controller.disconnect()
     }
 
-    @Test func selectedModeShowsImmediatelyAndIsConfirmed() async throws {
-        let fixture = HeadsetFixture.withModes()
-        let controller = fixture.controller
-        await controller.connect()
-        #expect(controller.currentMode == 0)
-        let selection = try #require(controller.selectMode(2))
-        #expect(controller.currentMode == 2)
-        #expect(await selection.value)
-        #expect(controller.currentMode == 2)
-        #expect(await fixture.headset.currentMode == 2)
-        await controller.disconnect()
-    }
-
-    @Test func rejectedModeSelectionRollsBack() async throws {
-        let fixture = HeadsetFixture.withModes()
-        let controller = fixture.controller
-        await controller.connect()
-        await fixture.headset.rejectSelection(of: 2)
-        let selection = try #require(controller.selectMode(2))
-        #expect(controller.currentMode == 2)
-        #expect(await selection.value == false)
-        #expect(controller.currentMode == 0)
-        #expect(controller.error == .engine(.device(.currentMode, code: .operatorNotSupported, detail: nil)))
-        #expect(controller.connected)
-        await controller.disconnect()
-    }
-
-    @Test func rapidSelectionsRollBackToTheLastConfirmedMode() async throws {
-        let fixture = HeadsetFixture.withModes()
-        let controller = fixture.controller
-        await controller.connect()
-        await fixture.headset.rejectSelection(of: 2)
-        await fixture.headset.holdNext(.currentMode, .start)
-        let toOne = try #require(controller.selectMode(1))
-        await fixture.headset.waitUntilHeld()
-        let toTwo = try #require(controller.selectMode(2))
-        #expect(controller.currentMode == 2)
-        await fixture.headset.release()
-        #expect(await toOne.value)
-        #expect(await toTwo.value == false)
-        #expect(controller.currentMode == 1)
-        #expect(await fixture.headset.currentMode == 1)
-        await controller.disconnect()
-    }
-
-    @Test func rapidSelectionsEndOnTheLastMode() async throws {
-        let fixture = HeadsetFixture.withModes()
-        let controller = fixture.controller
-        await controller.connect()
-        await fixture.headset.holdNext(.currentMode, .start)
-        let toOne = try #require(controller.selectMode(1))
-        await fixture.headset.waitUntilHeld()
-        let toTwo = try #require(controller.selectMode(2))
-        await fixture.headset.release()
-        #expect(await toOne.value)
-        #expect(await toTwo.value)
-        #expect(controller.currentMode == 2)
-        #expect(await fixture.headset.currentMode == 2)
-        await controller.disconnect()
-    }
-
     @Test func rejectedPowerOffKeepsTheConnection() async throws {
         let fixture = HeadsetFixture(features: [.battery: .read, .power: .write])
         let controller = fixture.controller

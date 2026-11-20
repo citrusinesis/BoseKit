@@ -78,8 +78,17 @@ Implementation details for contributors. For an overview, see the [README](../RE
   User actions interrupt a poll between requests.
 - User actions run one at a time in the order they were made, and the controls stay usable while they run.
   Only destructive actions (power off, deleting a mode) wait until no action is pending, and the mode editor is locked while its own save is in flight.
-- The app shows only values the device has confirmed; it never shows a requested value before the device's read-back.
-  Mode selection is the exception: the selected mode is highlighted at once and rolls back to the last confirmed mode if the device rejects it.
+- Each user-settable value keeps the value the device last confirmed and, while a request for it is outstanding, the requested value; controls show the requested value from the moment the user changes it.
+  When the action succeeds, the device's read-back becomes the confirmed value and the requested value is dropped; when it fails, only the requested value is dropped, so the control returns to the confirmed value and the error stays visible.
+  Polls only ever update confirmed values, so a poll that finishes while a request is outstanding does not change what a control shows.
+  When several queued requests target the same value, the control shows the most recent one until that request settles; an earlier request that completes first only updates the confirmed value.
+  Composite audio settings track each changed field separately, so a pending spatial audio change does not hold back a wind block change that has already settled.
+  Disconnecting or losing the connection drops every requested value.
+- Shown values are mode selection, the power-on mode, favorites, CNC level, ANR, spatial audio, wind block, the noise cancellation toggle, automatic CNC, EQ bands and reset, multipoint, auto pause, auto answer, sidetone, the shortcut and the voice prompt language.
+  Power off, deleting or saving a mode, routing audio, pairing mode and renaming only ever show confirmed values.
+  The voice prompt switch shows the requested value too, except on devices where switching voice prompts has side effects and asks for confirmation first.
+- Selecting a mode highlights it at once and shows that mode's audio settings and editability until the device confirms or rejects the selection.
+  Turning wind block on locks the CNC slider at once, and on devices whose mode policy forces maximum cancellation with wind block the slider shows that level before the device confirms it.
 - When an action's workflow returns the device's read-back, that value is shown as soon as the action succeeds, including fields the device normalized, such as CNC forced to maximum by wind block.
 - After the last pending action, one refresh covers whatever the actions could have changed beyond their own confirmed values.
   Self-contained settings (toggles, sidetone, ANR, name, default mode, shortcut, favorites, EQ, voice prompts, and saving a mode that is not active) need no refresh.

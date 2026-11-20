@@ -5,6 +5,7 @@ import BoseKitEngine
 @MainActor @Observable
 final class DeviceController: Identifiable {
     typealias Connector = @MainActor (String, DeviceProfile) async throws -> BoseDevice
+    typealias Action = @MainActor (BoseDevice) async throws -> ConfirmedChange?
 
     enum Connection: Equatable {
         case disconnected, connecting, connected
@@ -18,11 +19,6 @@ final class DeviceController: Identifiable {
         case connectionEstablished
         case connectionLost
         case autoConnectPauseChanged(AutoConnectPause?)
-    }
-
-    private struct ModeSelection {
-        var confirmed: UInt8?
-        var outstanding = 0
     }
 
     private struct RefreshPreempted: Error {}
@@ -71,6 +67,7 @@ final class DeviceController: Identifiable {
     private(set) var buttons: ButtonConfiguration?
     private(set) var source: AudioSource?
     private(set) var sourceDevices: [SourceDevice] = []
+    @ObservationIgnored let pending = PendingChanges()
 
     @ObservationIgnored private var device: BoseDevice?
     @ObservationIgnored private var permanentlyUnavailable: Set<FeatureID> = []
@@ -81,7 +78,6 @@ final class DeviceController: Identifiable {
     @ObservationIgnored private var lastFullRefresh = Date.distantPast
     @ObservationIgnored private var visibleViews = 0
     @ObservationIgnored private var editingSessions = 0
-    @ObservationIgnored private var modeSelection: ModeSelection?
     @ObservationIgnored private let actions = ActionQueue()
     @ObservationIgnored private var deferredRefresh: RefreshScope?
     @ObservationIgnored private var maintenanceTask: Task<Void, Never>?
@@ -178,7 +174,7 @@ final class DeviceController: Identifiable {
     func closeConnection() async {
         connectionGeneration += 1
         connection = .disconnected
-        modeSelection = nil
+        pending.clear()
         let old = device
         device = nil
         await old?.close()
@@ -327,7 +323,6 @@ final class DeviceController: Identifiable {
             sourceDevices = snapshot.sourceDevices
             lastFullRefresh = Date()
         }
-        guard modeSelection == nil else { return }
         currentMode = snapshot.currentMode
         cnc = snapshot.cnc
         anr = snapshot.anr
@@ -343,9 +338,11 @@ final class DeviceController: Identifiable {
     private func apply(_ change: ConfirmedChange) {
         switch change {
         case .name(let value): name = value
+        case .cnc(let value): cnc = value
         case .anr(let value): anr = value
         case .equalizer(let value): equalizer = value
         case .audio(let value): applyConfirmedAudio(value)
+        case .currentMode(let value): applyConfirmedCurrentMode(value)
         case .mode(let value): applyConfirmedMode(value)
         case .favorites(let value): favorites = value
         case .defaultMode(let value): defaultMode = value
@@ -360,23 +357,23 @@ final class DeviceController: Identifiable {
         refreshRevision += 1
     }
 
-    private var deviceMode: UInt8? {
-        if let modeSelection { return modeSelection.confirmed }
-        return currentMode
-    }
-
     private func applyConfirmedAudio(_ newAudio: AudioSettings) {
-        if modeSelection == nil { audio = newAudio }
+        audio = newAudio
         guard profile.noiseControl == .modeConfiguration,
-              let mode = modes.first(where: { $0.id == deviceMode }) else { return }
+              let mode = modes.first(where: { $0.id == currentMode }) else { return }
         replaceMode(ModeConfiguration(id: mode.id, prompt: mode.prompt, name: mode.name, editable: mode.editable,
                                       configured: mode.configured, favorite: mode.favorite, audio: newAudio,
                                       rawPayload: mode.rawPayload))
     }
 
+    private func applyConfirmedCurrentMode(_ slot: UInt8) {
+        currentMode = slot
+        if let modeAudio = modes.first(where: { $0.id == slot })?.audio { audio = modeAudio }
+    }
+
     private func applyConfirmedMode(_ mode: ModeConfiguration) {
         replaceMode(mode)
-        guard modeSelection == nil, mode.id == currentMode, profile.noiseControl == .modeConfiguration,
+        guard mode.id == currentMode, profile.noiseControl == .modeConfiguration,
               let modeAudio = mode.audio else { return }
         audio = modeAudio
     }
@@ -386,22 +383,28 @@ final class DeviceController: Identifiable {
     }
 
     @discardableResult
-    func perform(refreshing scope: RefreshScope? = nil,
-                 _ action: @MainActor (BoseDevice) async throws -> ConfirmedChange?) async -> Bool {
+    func perform(refreshing scope: RefreshScope? = nil, settling tickets: [PendingChanges.Ticket] = [],
+                 _ action: Action) async -> Bool {
         if actions.isEmpty { error = nil }
         busy = true
         await actions.enter()
         await refreshTask?.task.value
         var succeeded = false
+        var failure: (any Error)?
         if connected, let device {
             do {
                 if let change = try await action(device) { apply(change) }
                 succeeded = true
-                if let scope { deferRefresh(scope) }
             } catch {
-                await handle(error)
-                deferRefresh(.full)
+                failure = error
             }
+        }
+        tickets.forEach { $0.settle() }
+        if let failure {
+            await handle(failure)
+            deferRefresh(.full)
+        } else if succeeded, let scope {
+            deferRefresh(scope)
         }
         actions.leave()
         if actions.isEmpty {
@@ -412,36 +415,15 @@ final class DeviceController: Identifiable {
     }
 
     @discardableResult
-    func selectMode(_ slot: UInt8) -> Task<Bool, Never>? {
-        guard connected, currentMode != slot else { return nil }
-        var selection = modeSelection ?? ModeSelection(confirmed: currentMode)
-        selection.outstanding += 1
-        modeSelection = selection
-        currentMode = slot
-        if let modeAudio = modes.first(where: { $0.id == slot })?.audio { audio = modeAudio }
-        return send(refreshing: .live) { device in
-            defer { self.settleModeSelection() }
-            try await device.selectMode(slot)
-            self.modeSelection?.confirmed = slot
-            return nil
-        }
-    }
-
-    private func settleModeSelection() {
-        guard var selection = modeSelection else { return }
-        selection.outstanding -= 1
-        guard selection.outstanding == 0 else {
-            modeSelection = selection
-            return
-        }
-        modeSelection = nil
-        if currentMode != selection.confirmed { currentMode = selection.confirmed }
+    func send(refreshing scope: RefreshScope? = nil, pending tickets: [PendingChanges.Ticket] = [],
+              _ action: @escaping Action) -> Task<Bool, Never> {
+        Task { await perform(refreshing: scope, settling: tickets, action) }
     }
 
     @discardableResult
-    func send(refreshing scope: RefreshScope? = nil,
-              _ action: @escaping @MainActor (BoseDevice) async throws -> ConfirmedChange?) -> Task<Bool, Never> {
-        Task { await perform(refreshing: scope, action) }
+    func send<Value>(_ value: Value, pending field: ReferenceWritableKeyPath<PendingChanges, PendingValue<Value>>,
+                     refreshing scope: RefreshScope? = nil, _ action: @escaping Action) -> Task<Bool, Never> {
+        send(refreshing: scope, pending: [pending.request(value, at: field)], action)
     }
 
     private func handle(_ error: any Error) async {

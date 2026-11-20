@@ -6,7 +6,7 @@ struct VoicePromptSettings: View {
     @State private var confirmingToggle = false
 
     var body: some View {
-        if let prompts = device.voicePrompts {
+        if let prompts = device.shownVoicePrompts {
             SettingsToggle(title: .deviceVoicePrompts, isOn: enabled(prompts.enabled))
             Divider()
             SettingsPicker(title: .devicePromptLanguage, selection: $device.voicePromptLanguageSelection) {
