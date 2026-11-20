@@ -46,7 +46,7 @@ Reports for other models are welcome.
 
 ## Installing
 
-Download `BoseKit-<version>.dmg` from the [latest release](../../releases/latest), open it and drag BoseKit into Applications.
+Download `BoseKit-<version>.dmg` from the [releases page](../../releases), open it and drag BoseKit into Applications.
 
 BoseKit is not notarized by Apple, so macOS blocks it the first time it is opened:
 
