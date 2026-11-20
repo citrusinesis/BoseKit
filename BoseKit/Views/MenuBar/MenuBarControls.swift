@@ -65,7 +65,6 @@ private struct QuickDeviceControls: View {
             switch device.connection {
             case .connected:
                 CompactSoundControls(device: device)
-                    .disabled(device.busy)
             case .connecting:
                 HStack {
                     ProgressView().controlSize(.small)

@@ -57,6 +57,16 @@
                ReferencedContainer = "container:Packages/BoseKitEngine">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BoseKitProbeTests"
+               BuildableName = "BoseKitProbeTests"
+               BlueprintName = "BoseKitProbeTests"
+               ReferencedContainer = "container:Packages/BoseKitEngine">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -24,11 +24,22 @@ public struct BluetoothProductIdentity: Equatable, Sendable {
     }
 }
 
+public enum PairedDeviceListingError: Error, Equatable, Sendable {
+    case systemListUnavailable
+}
+
 public struct PairedBluetoothDevice: Identifiable, Sendable {
     public let id: String
     public let name: String
     public let identity: BluetoothProductIdentity?
     public let isConnected: Bool
+
+    public init(id: String, name: String, identity: BluetoothProductIdentity?, isConnected: Bool) {
+        self.id = id
+        self.name = name
+        self.identity = identity
+        self.isConnected = isConnected
+    }
 
     public func profile(in registry: DeviceRegistry) -> DeviceProfile? {
         guard let identity, identity.isBose else { return nil }

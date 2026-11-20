@@ -14,36 +14,32 @@ struct MenuVisibilityTests {
         #expect(BoseAppModel.shouldShowMenu(hide: true, hasConnectedDevice: true))
     }
 
-    @Test func staleNativeConnectionDoesNotKeepMenuVisible() throws {
-        let profile = HeadsetFixture().profile
-        let model = BoseAppModel(defaults: try isolatedDefaults())
-        let second = DeviceController(id: "two", name: "Two", profile: profile)
-        model.devices = [DeviceController(id: "one", name: "One", profile: profile), second]
+    @Test func systemConnectionFlagDoesNotKeepMenuVisible() async throws {
+        let paired = try PairedHeadsets(["one", "two"], defaults: try isolatedDefaults())
+        let model = paired.model
+        paired.listing.set([PairedHeadsets.entry("one"), PairedHeadsets.entry("two", isConnected: true)])
+        try await model.syncPairedDevices()
         model.hideWhenUnavailable = true
-        #expect(!model.menuInserted)
-        second.nativeConnected = true
-        #expect(!model.menuInserted)
-        second.nativeConnected = false
         #expect(!model.menuInserted)
     }
 
     @Test func menuFollowsLiveConnectionAndBatteryWithoutPollingVisibility() async throws {
-        let fixture = HeadsetFixture()
-        let model = BoseAppModel(defaults: try isolatedDefaults())
-        model.devices = [DeviceController(id: "offline", name: "Offline", profile: fixture.profile), fixture.controller]
+        let paired = try PairedHeadsets(["offline", "online"], defaults: try isolatedDefaults())
+        let model = paired.model
+        try await model.syncPairedDevices()
         model.selectedID = "offline"
         model.hideWhenUnavailable = true
         model.showBattery = true
         #expect(!model.menuInserted)
         #expect(model.menuBatteryPercentage == nil)
-        await fixture.controller.connect()
+        let online = try paired.controller("online")
+        await online.connect()
         #expect(model.menuInserted)
         #expect(model.menuBatteryPercentage == 90)
         model.showBattery = false
         #expect(model.menuBatteryPercentage == nil)
         model.showBattery = true
-        fixture.controller.nativeConnected = true
-        await fixture.controller.disconnect()
+        await online.disconnect()
         #expect(!model.menuInserted)
         #expect(model.menuBatteryPercentage == nil)
     }

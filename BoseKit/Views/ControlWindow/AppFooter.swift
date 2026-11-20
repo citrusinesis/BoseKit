@@ -46,7 +46,7 @@ struct AppActionsMenu: View {
                     await model.selected?.refresh()
                 }
             }
-            .disabled(model.selected?.busy == true || model.selected?.connecting == true)
+            .disabled(model.selected?.connecting == true)
             Divider()
             Button(.menuQuit) { NSApp.terminate(nil) }
         } label: {

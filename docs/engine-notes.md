@@ -33,11 +33,17 @@ Implementation details for contributors. For an overview, see the [README](../RE
 - Timeout or cancellation of an in-flight request closes the session. BMAP has no
   transaction ID, so a late reply could otherwise be matched to a later request.
   Reconnect with a new transport; writes are never replayed automatically.
-- Unsolicited packets are available through per-subscriber `AsyncStream` events
-  (bounded to 256 packets). Response matching never depends on these streams.
+- Every received packet is published through per-subscriber `AsyncStream` events (bounded to 256 events), tagged as a `reply` to the request in flight or as `unsolicited`.
+  A packet counts as a reply when its address is one the request in flight is waiting on, so a notification for that same address is indistinguishable from the reply.
+  Response matching never depends on these streams.
 - Errors distinguish malformed device payloads (`invalidPayload`), rejected caller values (`invalidArgument`), device states that forbid an operation (`invalidState`), operations a profile cannot perform (`unsupported`) and writes whose read-back does not match (`verificationFailed`).
   The last three carry typed reasons (`BoseError.InvalidState`, `BoseError.Unsupported`, `BoseError.VerificationFailure`).
-  A device error packet without a payload reports `BoseError.device(_, code: nil)`.
+  A device error packet reports `BoseError.device(_, code:detail:)` with its first payload byte as a `BMAPErrorCode`, or `code: nil` when the packet has no payload.
+  Unknown codes keep their raw value.
+  For `FblockSpecific` (`0xFF`) the byte after the code is kept uninterpreted as `detail`; every other code has `detail: nil`.
+- The names of the error codes come from two third-party reverse-engineering projects derived from the vendor app, not from an official specification.
+  Only `03` (`FblockNotSupp`), `04` (`FuncNotSupp`) and `05` (`OpNotSupp`) have been observed on hardware so far.
+  `BMAPErrorCode.disposition` classifies them: `03`, `04` and `05` are `permanent`; `07` (`DataUnavailable`), `08` (`Runtime`), `09` (`Timeout`), `0A` (`InvalidState`) and `0C` (`Busy`) are `transient`; every other code, an unknown code and a missing code are `indeterminate`.
 
 ## Payloads
 
@@ -63,15 +69,86 @@ Implementation details for contributors. For an overview, see the [README](../RE
 
 ## App Behavior
 
-- Discovery runs every five seconds; each supported paired device gets its own
-  control connection, even when its audio is connected to another host.
-- Visible controls poll live state every five seconds and all settings every 30
-  seconds; hidden controls only probe battery every 30 seconds. User actions
-  interrupt a poll between requests.
-- A healthy control session takes precedence over the paired-device cache, whose
-  connection flag can be stale.
-- Unavailable devices retry with bounded backoff; explicit disconnection or power
-  off stops automatic reconnection.
+- Discovery runs every five seconds; each supported paired device gets its own control connection, even when its audio is connected to another host.
+- Entries that share an address, such as the classic and LE identities of one headset, map to a single device.
+- A device that is no longer paired has its control connection closed and is removed from the list.
+- `RFCOMMTransport.pairedDevices()` throws `PairedDeviceListingError.systemListUnavailable` when macOS returns no list, which is distinct from an empty list.
+  The app then keeps its current devices, logs the failure and continues maintaining the connections.
+- Visible controls poll live state every five seconds and all settings every 30 seconds; hidden controls only probe battery every 30 seconds.
+  User actions interrupt a poll between requests.
+- User actions run one at a time in the order they were made, and the controls stay usable while they run.
+  Only destructive actions (power off, deleting a mode) wait until no action is pending, and the mode editor is locked while its own save is in flight.
+- The app shows only values the device has confirmed; it never shows a requested value before the device's read-back.
+  Mode selection is the exception: the selected mode is highlighted at once and rolls back to the last confirmed mode if the device rejects it.
+- When an action's workflow returns the device's read-back, that value is shown as soon as the action succeeds, including fields the device normalized, such as CNC forced to maximum by wind block.
+- After the last pending action, one refresh covers whatever the actions could have changed beyond their own confirmed values.
+  Self-contained settings (toggles, sidetone, ANR, name, default mode, shortcut, favorites, EQ, voice prompts, and saving a mode that is not active) need no refresh.
+  Mode selection, audio changes and saving the active mode refresh live state, because the separately read CNC status follows the active mode.
+  Deleting a mode, routing audio and changing multipoint refresh all settings, because they can change the mode list, the current mode, favorites, the audio source or the source devices, none of which the workflow returns.
+  A failed action refreshes all settings so the screen returns to the device's state.
+- A poll that is in flight when an action starts either finishes before the action runs or is discarded and repeated afterwards, so a value read before the action never replaces the value the action confirmed.
+- The app's own control sessions decide which devices count as connected; the paired-device cache's connection flag can be stale and is ignored.
+- The selection changes automatically only on control connection transitions.
+  When a device connects while the selected device is not connected, the newly connected device is selected.
+  When the selected device's connection is lost or the device is removed, the first connected device in the list is selected; without one, a lost device stays selected and a removed one falls back to the first device.
+  Otherwise the selection stays where the user put it, including on a disconnected device.
+- The selected device is remembered across launches; when it is no longer paired, the first device is selected.
+- Unavailable devices retry with bounded backoff; explicit disconnection or power off stops automatic reconnection.
+  An explicit disconnection is remembered per device across launches until the user connects again or the device is unpaired.
+  Power off pauses reconnection only until the app relaunches.
+- A device error while reading a feature follows the code's disposition.
+  A `permanent` error hides the feature for the rest of the connection without probing it again.
+  A `transient` error keeps the value shown before and retries on the next refresh that covers the feature.
+  An `indeterminate` error hides the feature and probes it again on every full refresh.
+  Reconnecting clears all of this.
+- A failed user action shows a message for the device error code: not supported (`03`–`05`), invalid value (`06`), not possible in the current state (`0A`) or busy and temporarily unavailable (`07`–`09`, `0C`); other codes show the generic rejection message.
+
+## Probing Notifications
+
+`bosekit-probe` is a command-line tool in the engine package for finding out what a device sends on its own and what changes when the user does something.
+Quit BoseKit first, because only one control connection can be open at a time.
+
+```sh
+cd Packages/BoseKitEngine
+swift run bosekit-probe list
+swift run bosekit-probe monitor --address <AA:BB:CC:DD:EE:FF>
+swift run bosekit-probe monitor --address <AA:BB:CC:DD:EE:FF> --subscribe 1,2,4,5,31
+swift run bosekit-probe monitor --address <AA:BB:CC:DD:EE:FF> --snapshots
+```
+
+- `monitor` reads the notification subscription with GET `9,2` and then prints every packet with its origin until interrupted.
+  Without `--subscribe` it writes nothing to the device.
+  When the connection closes without Control-C, the tool reports it and exits with a failure status.
+- Each event line shows the register name after the address when the probe knows one, for example `[2.2]   battery`.
+  The names come from the engine's known addresses and from other open-source BMAP projects; they are reading aids, not verified meanings.
+- `--subscribe` sends SETGET `9,2` with `01` followed by a 4-byte big-endian bitmap of function blocks, the request the Bose app sends to the Noise Cancelling Headphones 700 (`01 00 05 02 37`).
+  `--subscribe none` sends an all-zero bitmap.
+- A subscription lasts only for the connection on the QuietComfort Ultra Headphones (1st Gen); which blocks other models accept is not yet verified.
+
+### Snapshots
+
+`--snapshots` finds changes the device does not push.
+Every line read from standard input is a free-text label; for each line the probe GETs every register in the snapshot set and prints a block headed by the time and the label.
+The first block lists every register that answered and every register that returned a device error, with the error payload, so it doubles as a capability scan.
+Later blocks list only the registers whose reply changed since the previous snapshot (old → new), or `no changes`.
+
+- Pushes keep printing while monitoring, including during a snapshot. Replies are not printed as event lines in this mode, because the snapshot blocks report them.
+- The default set holds GET-able registers of blocks 0, 1, 2, 4, 5, 9 and 31: the engine's known readable addresses and the registers other projects saw answering GET.
+  It leaves out blocks 3 (firmware update), 7 (control), 8 (debug) and 18 (authentication), `0,12`, which looks like a secret in upstream captures, and registers that need an argument (`4,5`, `31,6`) or are START enumerations (`31,1`).
+  `--snapshot-registers 2.5,2.9` replaces the set and `--skip-registers 2.2` removes registers from it.
+- Snapshot GETs time out after 2 seconds. Because a timeout closes the session (see [Requests and Transactions](#requests-and-transactions)), the probe then reconnects with a new transport, runs the profile's startup packets, re-applies `--subscribe`, marks the register as unresponsive for the rest of the run and continues the snapshot.
+  A device error reply is an ordinary result; a disconnect ends the run.
+- End of input stops labeling but not monitoring; Control-C still closes the connection cleanly.
+  To feed labels from another process, run the probe in the foreground on a FIFO and keep one writer open in a second shell, because the input ends when the last writer closes:
+
+```sh
+mkfifo /tmp/labels
+swift run bosekit-probe monitor --snapshots < /tmp/labels
+
+# in a second shell
+exec 3> /tmp/labels
+echo "before play" >&3
+```
 
 ## Device Notes
 

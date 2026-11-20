@@ -1981,6 +1981,24 @@
         }
       }
     },
+    "errors.temporarilyUnavailable" : {
+      "comment" : "Errors interface label or message: temporarilyUnavailable.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The device is busy or temporarily unavailable. Try again in a moment."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기가 사용 중이거나 일시적으로 응답할 수 없습니다. 잠시 후 다시 시도하세요."
+          }
+        }
+      }
+    },
     "errors.timeout" : {
       "comment" : "Errors interface label or message: timeout.",
       "extractionState" : "manual",
@@ -2013,6 +2031,24 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Bluetooth 연결에 실패했습니다. 기기의 전원이 켜져 있고 BoseKit에 Bluetooth 접근 권한이 있는지 확인하세요."
+          }
+        }
+      }
+    },
+    "errors.unavailableInCurrentState" : {
+      "comment" : "Errors interface label or message: unavailableInCurrentState.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This isn’t possible in the device’s current state. Check the device and try again."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "기기의 현재 상태에서는 이 작업을 할 수 없습니다. 기기 상태를 확인한 후 다시 시도하세요."
           }
         }
       }

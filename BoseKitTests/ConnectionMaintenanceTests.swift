@@ -15,7 +15,12 @@ struct ConnectionMaintenanceTests {
         await fixture.headset.waitUntilHeld()
         #expect(!controller.busy)
         var performed = false
-        let action = Task { await controller.perform { _ in performed = true } }
+        let action = Task {
+            await controller.perform { _ in
+                performed = true
+                return nil
+            }
+        }
         await until { controller.busy }
         #expect(!performed)
         await fixture.headset.release()
@@ -29,7 +34,6 @@ struct ConnectionMaintenanceTests {
     @Test func discoveredDeviceConnectsWithoutExistingMacAudioConnection() async throws {
         let fixture = HeadsetFixture()
         let controller = fixture.controller
-        #expect(!controller.nativeConnected)
         await controller.maintain()
         #expect(controller.connected)
         #expect(controller.battery?.percentage == 90)
@@ -39,19 +43,35 @@ struct ConnectionMaintenanceTests {
         #expect(await fixture.headset.requests.count == 1)
     }
 
-    @Test func healthyRFCOMMSurvivesStaleBluetoothDiscovery() async throws {
+    @Test func maintenanceKeepsAHealthySession() async throws {
         let fixture = HeadsetFixture()
         let controller = fixture.controller
         await controller.connect()
         #expect(controller.connected)
         #expect(controller.battery?.percentage == 90)
-        controller.nativeConnected = false
         controller.attachView()
         await controller.maintain()
         #expect(controller.connected)
         #expect(await fixture.headset.closes == 0)
         #expect(await fixture.headset.requests.count == 2)
         await controller.disconnect()
+    }
+
+    @Test func connectionOpenedAfterCloseIsDiscarded() async throws {
+        let headset = FakeHeadset()
+        let gate = Gate()
+        let controller = DeviceController(id: "test", name: "Test", profile: HeadsetFixture.profile()) { _, profile in
+            await gate.pass()
+            return try await BoseDevice.connect(profile: profile, transport: headset)
+        }
+        let connecting = Task { await controller.connect() }
+        await gate.waitUntilEntered()
+        await controller.closeConnection()
+        await gate.open()
+        await connecting.value
+        #expect(!controller.connected)
+        #expect(controller.error == nil)
+        #expect(await headset.closes > 0)
     }
 
     @Test func lostSessionIsDetectedWithoutReplayingWrites() async throws {
@@ -74,7 +94,7 @@ struct ConnectionMaintenanceTests {
         await fixture.headset.holdNext(.battery, .get)
         let poll = Task { await controller.refresh(.full) }
         await fixture.headset.waitUntilHeld()
-        let action = Task { await controller.perform { _ in } }
+        let action = Task { await controller.perform { _ in nil } }
         await until { controller.busy }
         await fixture.headset.release()
         await poll.value
@@ -118,11 +138,12 @@ struct ConnectionMaintenanceTests {
         await controller.disconnect()
     }
 
-    @Test func unavailableFeatureIsReprobedOnlyByFullRefresh() async throws {
+    @Test(arguments: [BMAPErrorCode.unknown, .invalidData, BMAPErrorCode(rawValue: 0x42), nil])
+    func indeterminateRejectionIsReprobedOnlyByFullRefresh(_ code: BMAPErrorCode?) async throws {
         let fixture = HeadsetFixture(features: [.battery: .read, .anr: .read, .multipoint: .read])
         let controller = fixture.controller
-        await fixture.headset.reject(.anr, .get)
-        await fixture.headset.reject(.multipoint, .get)
+        await fixture.headset.reject(.anr, .get, code: code)
+        await fixture.headset.reject(.multipoint, .get, code: code)
         await controller.connect()
         #expect(controller.connected)
         #expect(controller.unavailable == [.anr, .multipoint])
@@ -137,6 +158,56 @@ struct ConnectionMaintenanceTests {
         #expect(controller.unavailable.isEmpty)
         #expect(controller.anr == .high)
         #expect(controller.multipoint != nil)
+        await controller.disconnect()
+    }
+
+    @Test(arguments: [BMAPErrorCode.functionBlockNotSupported, .functionNotSupported, .operatorNotSupported])
+    func permanentRejectionIsNeverReprobed(_ code: BMAPErrorCode) async throws {
+        let fixture = HeadsetFixture(features: [.battery: .read, .anr: .read, .multipoint: .read])
+        let controller = fixture.controller
+        await fixture.headset.reject(.anr, .get, code: code)
+        await controller.connect()
+        #expect(controller.unavailable == [.anr])
+        #expect(!controller.supports(.anr))
+        await fixture.headset.accept(.anr)
+        await controller.refresh(.full)
+        await controller.refresh(.live)
+        #expect(await fixture.headset.requestCount(.anr) == 1)
+        #expect(await fixture.headset.requestCount(.multipoint) == 2)
+        #expect(controller.unavailable == [.anr])
+        #expect(controller.anr == nil)
+        await controller.disconnect()
+    }
+
+    @Test(arguments: [BMAPErrorCode.dataUnavailable, .runtime, .timeout, .invalidState, .busy])
+    func transientRejectionKeepsTheShownValueAndRetries(_ code: BMAPErrorCode) async throws {
+        let fixture = HeadsetFixture(features: [.battery: .read, .anr: .read, .multipoint: .read,
+                                                .sourceDevices: .read])
+        let controller = fixture.controller
+        await controller.connect()
+        let battery = try #require(controller.battery)
+        let multipoint = controller.multipoint
+        #expect(multipoint != nil)
+        let sourceDevices = controller.sourceDevices
+        #expect(!sourceDevices.isEmpty)
+        #expect(controller.anr == .high)
+        for address in [BMAPAddress.battery, .anr, .multipoint, .deviceList] {
+            await fixture.headset.reject(address, .get, code: code)
+        }
+        await controller.refresh(.full)
+        #expect(controller.unavailable.isEmpty)
+        #expect(controller.battery == battery)
+        #expect(controller.anr == .high)
+        #expect(controller.multipoint == multipoint)
+        #expect(controller.sourceDevices == sourceDevices)
+        #expect(controller.error == nil)
+        await controller.refresh(.live)
+        #expect(await fixture.headset.requestCount(.anr) == 3)
+        #expect(controller.anr == .high)
+        await fixture.headset.accept(.anr)
+        await controller.refresh(.live)
+        #expect(await fixture.headset.requestCount(.anr) == 4)
+        #expect(controller.anr == .high)
         await controller.disconnect()
     }
 }

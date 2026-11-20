@@ -24,7 +24,7 @@ public actor BoseDevice {
         }
     }
 
-    public func events() async -> AsyncStream<BMAPPacket> { await session.events() }
+    public func events() async -> AsyncStream<BMAPEvent> { await session.events() }
     public func close() async { await session.close() }
 
     public func read<V, I>(_ feature: BoseFeature<V, I>) async throws -> V {

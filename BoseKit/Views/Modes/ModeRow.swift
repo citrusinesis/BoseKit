@@ -37,6 +37,7 @@ struct ModeRow: View {
                         Button(.commonEdit, systemImage: "pencil", action: edit)
                     }
                     Button(.commonDelete, systemImage: "trash", role: .destructive, action: delete)
+                        .disabled(device.busy)
                 } label: {
                     Image(systemName: "ellipsis")
                 }

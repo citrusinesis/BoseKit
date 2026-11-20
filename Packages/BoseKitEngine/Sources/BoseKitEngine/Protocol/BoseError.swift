@@ -3,7 +3,7 @@ public enum BoseError: Error, Equatable, Sendable {
     case invalidArgument(String)
     case invalidState(InvalidState)
     case unsupported(Unsupported)
-    case device(BMAPAddress, code: UInt8?)
+    case device(BMAPAddress, code: BMAPErrorCode?, detail: UInt8?)
     case disconnected
     case timeout
     case transport(Int32)

@@ -41,6 +41,42 @@ struct EngineValueLabelTests {
             == resolve(.errorsModeNotEditable, in: "en"))
     }
 
+    @Test(arguments: [
+        (BMAPErrorCode?.some(.functionBlockNotSupported), LocalizedStringResource.errorsUnsupported),
+        (.functionNotSupported, .errorsUnsupported),
+        (.operatorNotSupported, .errorsUnsupported),
+        (.invalidData, .errorsInvalidValue),
+        (.invalidState, .errorsUnavailableInCurrentState),
+        (.busy, .errorsTemporarilyUnavailable),
+        (.dataUnavailable, .errorsTemporarilyUnavailable),
+        (.runtime, .errorsTemporarilyUnavailable),
+        (.timeout, .errorsTemporarilyUnavailable),
+        (.unknown, .errorsRejected),
+        (.length, .errorsRejected),
+        (.deviceNotFound, .errorsRejected),
+        (.functionBlockSpecific, .errorsRejected),
+        (BMAPErrorCode(rawValue: 0x42), .errorsRejected),
+        (nil, .errorsRejected),
+    ])
+    func deviceErrorMessagesFollowTheErrorCode(_ code: BMAPErrorCode?, _ expected: LocalizedStringResource) {
+        let title = BoseError.device(.anr, code: code, detail: nil).title
+        #expect(resolve(title, in: "en") == resolve(expected, in: "en"))
+        #expect(resolve(title, in: "ko") == resolve(expected, in: "ko"))
+    }
+
+    @Test func deviceErrorMessagesAreDistinctInBothLanguages() {
+        let titles: [LocalizedStringResource] = [.errorsRejected, .errorsUnsupported, .errorsInvalidValue,
+                                                 .errorsUnavailableInCurrentState, .errorsTemporarilyUnavailable]
+        for language in ["en", "ko"] {
+            let messages = titles.map { resolve($0, in: language) }
+            #expect(Set(messages).count == titles.count)
+            #expect(messages.allSatisfy { !$0.isEmpty && !$0.hasPrefix("errors.") })
+        }
+        #expect(resolve(.errorsTemporarilyUnavailable, in: "ko") != resolve(.errorsTemporarilyUnavailable, in: "en"))
+        #expect(resolve(.errorsUnavailableInCurrentState, in: "ko")
+            != resolve(.errorsUnavailableInCurrentState, in: "en"))
+    }
+
     @Test func customModeNamesFollowVoicePromptsAndPreserveUnknownNames() {
         let custom = ModeConfiguration(id: 3, prompt: .music, name: "Old custom name",
             editable: true, configured: true, favorite: false, audio: AudioSettings(cnc: 5), rawPayload: [])

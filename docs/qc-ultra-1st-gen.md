@@ -40,15 +40,31 @@ Verified on user hardware on 2026-11-17 with firmware `1.6.7+g6ebabd2`.
 - The headphones do not take playback away from a device that is playing. The source
   changes only after the current device stops and another starts playing.
 
+## Notifications
+
+Verified on 2026-11-19 with the same firmware.
+
+| Request | Reply | Meaning |
+| --- | --- | --- |
+| GET `9,2` after connecting | `00 00 00 00` | No function block is subscribed by default |
+| SETGET `9,2` `01 80 00 00 36` | STATUS `80 00 00 36` | Subscription to blocks 1, 2, 4, 5 and 31 accepted |
+
+- Without a subscription, no unsolicited packet arrived during 40 s.
+- The subscription lasts for the connection only: after reconnecting, GET `9,2` returns `00 00 00 00` again.
+- With the subscription, STATUS `2,2` (battery, for example `50 ff ff 00` at 80 %) arrives unsolicited about every 55 s, even when the value is unchanged.
+- STATUS `5,4` arrives unsolicited with the payloads `00 ff ff`, `01 ff ff` and `02 ff ff`; its meaning is not yet identified.
+
 ## Connection
 
 - Reopening RFCOMM immediately after closing is unreliable. The transport waits for
   the close callback plus 150 ms, which passed ten consecutive connect/read/close cycles.
 - The IOBluetooth paired-device cache can report the headphones as disconnected while
   a control session is active.
+- The IOBluetooth paired-device list contains two entries with the same address for these headphones.
 
 ## Not Yet Verified
 
 - Power off, pairing mode, renaming, voice prompt writes and turning multipoint off
-- Notifications from physical button presses
+- Whether mode changes made with the headphones' button are pushed
+- What the other subscribed blocks send
 - Sleep/wake and long-lived connections

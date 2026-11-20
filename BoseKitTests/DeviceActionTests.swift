@@ -14,10 +14,14 @@ struct DeviceActionTests {
             await controller.perform(refreshing: .probe) { _ in
                 await gate.pass()
                 order.append(1)
+                return nil
             }
         }
         await gate.waitUntilEntered()
-        let second = Task { await controller.perform(refreshing: .probe) { _ in order.append(2) } }
+        let second = Task { await controller.perform(refreshing: .probe) { _ in
+            order.append(2)
+            return nil
+        } }
         await Task.yield()
         #expect(controller.busy)
         await gate.open()
@@ -41,7 +45,7 @@ struct DeviceActionTests {
             }
         }
         await gate.waitUntilEntered()
-        let succeeding = Task { await controller.perform { _ in } }
+        let succeeding = Task { await controller.perform { _ in nil } }
         await Task.yield()
         await gate.open()
         #expect(await failing.value == false)
@@ -72,7 +76,7 @@ struct DeviceActionTests {
         #expect(controller.currentMode == 2)
         #expect(await selection.value == false)
         #expect(controller.currentMode == 0)
-        #expect(controller.error == .engine(.device(.currentMode, code: 5)))
+        #expect(controller.error == .engine(.device(.currentMode, code: .operatorNotSupported, detail: nil)))
         #expect(controller.connected)
         await controller.disconnect()
     }
@@ -119,7 +123,7 @@ struct DeviceActionTests {
         await controller.powerOff()
         #expect(controller.connected)
         #expect(!controller.isSuspended)
-        #expect(controller.error == .engine(.device(.power, code: 5)))
+        #expect(controller.error == .engine(.device(.power, code: .operatorNotSupported, detail: nil)))
         await controller.disconnect()
     }
 

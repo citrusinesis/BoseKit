@@ -52,7 +52,7 @@ struct ModeEditor: View {
         }
         .frame(width: 420, height: 540)
         .settingsContentStyle()
-        .disabled(saving || device.busy)
+        .disabled(saving)
         .interactiveDismissDisabled(saving)
         .onAppear { device.setEditing(true) }
         .onDisappear { device.setEditing(false) }

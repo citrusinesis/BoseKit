@@ -68,6 +68,7 @@ private struct PowerOffButton: View {
 
     var body: some View {
         Button(.devicePowerOff, systemImage: "power", role: .destructive) { confirming = true }
+            .disabled(device.busy)
             .confirmationDialog(.devicePowerOffConfirmation, isPresented: $confirming,
                                 titleVisibility: .visible) {
                 Button(.deviceConfirmPowerOff, role: .destructive) {

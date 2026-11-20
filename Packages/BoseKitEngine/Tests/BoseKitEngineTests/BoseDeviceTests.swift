@@ -53,7 +53,7 @@ struct BoseDeviceTests {
     @Test func remoteErrorOnWriteSkipsReadBack() async throws {
         let transport = ScriptedTransport(script: [[frame(.multipoint, .error, [5])]])
         let device = try await connectedDevice(on: transport)
-        await #expect(throws: BoseError.device(.multipoint, code: 5)) {
+        await #expect(throws: BoseError.device(.multipoint, code: .operatorNotSupported, detail: nil)) {
             try await device.write(BoseFeatures.multipoint, value: true)
         }
         #expect(await transport.writes.count == 1)

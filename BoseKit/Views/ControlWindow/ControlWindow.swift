@@ -87,7 +87,6 @@ private struct DeviceContent: View {
             }
             if device.connected {
                 DevicePageContent(device: device, page: page)
-                    .disabled(device.busy)
             } else {
                 ConnectionPlaceholder(device: device)
             }

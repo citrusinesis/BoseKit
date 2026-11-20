@@ -12,8 +12,11 @@ struct DeviceHeader: View {
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 if model.devices.count > 1 {
+                    let names = DeviceListing.displayNames(for: model.devices.map {
+                        DeviceListing(id: $0.id, name: $0.name, model: $0.profile.name)
+                    })
                     Picker(.commonDevice, selection: $model.selectedID) {
-                        ForEach(model.devices) { Text($0.name).tag(Optional($0.id)) }
+                        ForEach(model.devices) { Text(names[$0.id] ?? $0.name).tag(Optional($0.id)) }
                     }
                     .labelsHidden()
                     .pickerStyle(.menu)

@@ -63,7 +63,7 @@ xcodebuild test -workspace BoseKit.xcworkspace -scheme BoseKit -destination 'pla
 import BoseKitEngine
 
 let registry = DeviceRegistry.standard
-guard let paired = RFCOMMTransport.pairedDevices().first(where: { $0.profile(in: registry) != nil }),
+guard let paired = try RFCOMMTransport.pairedDevices().first(where: { $0.profile(in: registry) != nil }),
       let profile = paired.profile(in: registry) else { return }
 
 let transport = await RFCOMMTransport(address: paired.id, channel: profile.rfcommChannel)

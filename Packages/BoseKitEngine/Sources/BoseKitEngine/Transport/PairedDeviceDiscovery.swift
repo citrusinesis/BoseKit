@@ -1,8 +1,11 @@
 @preconcurrency import IOBluetooth
 
 extension RFCOMMTransport {
-    nonisolated public static func pairedDevices() -> [PairedBluetoothDevice] {
-        (IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice] ?? []).compactMap { device in
+    nonisolated public static func pairedDevices() throws(PairedDeviceListingError) -> [PairedBluetoothDevice] {
+        guard let devices = IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice] else {
+            throw .systemListUnavailable
+        }
+        return devices.compactMap { device in
             guard let address = device.addressString else { return nil }
             return PairedBluetoothDevice(id: address, name: device.name ?? address,
                                          identity: DeviceIDServiceRecord.identity(of: device),

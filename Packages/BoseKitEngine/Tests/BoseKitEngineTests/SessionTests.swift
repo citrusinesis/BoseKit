@@ -14,16 +14,49 @@ struct SessionTests {
         await session.close()
     }
 
-    @Test func unrelatedStatusIsPublishedAndDoesNotCompleteRequest() async throws {
+    @Test func unrelatedStatusIsPublishedAsUnsolicitedAndDoesNotCompleteRequest() async throws {
         let transport = ScriptedTransport()
         let session = try await BMAPSession.connect(transport: transport)
         let events = await session.events()
-        let event = Task { var iterator = events.makeAsyncIterator(); return await iterator.next() }
+        let received = Task {
+            var iterator = events.makeAsyncIterator()
+            return [await iterator.next(), await iterator.next()]
+        }
         let request = Task { try await session.execute(query()) }
         try await transport.waitForWrites(1)
-        await transport.inject([31, 3, 3, 1, 2, 2, 2, 3, 1, 90])
+        await transport.inject(frame(.currentMode, .status, [2]) + frame(.battery, .status, [90]))
         #expect(try await request.value == [90])
-        #expect(await event.value?.address == BMAPAddress(31, 3))
+        let published = await received.value
+        #expect(published.map { $0?.packet.address } == [.currentMode, .battery])
+        #expect(published.map { $0?.origin } == [.unsolicited, .reply])
+        await session.close()
+    }
+
+    @Test func packetsArrivingWithNoRequestInFlightAreUnsolicited() async throws {
+        let transport = ScriptedTransport()
+        let session = try await BMAPSession.connect(transport: transport)
+        let events = await session.events()
+        await transport.inject(frame(.battery, .status, [55]))
+        var iterator = events.makeAsyncIterator()
+        let event = await iterator.next()
+        #expect(event?.origin == .unsolicited)
+        #expect(event?.packet.payload == [55])
+        await session.close()
+    }
+
+    @Test func processingAndErrorPacketsForTheRequestAddressAreReplies() async throws {
+        let transport = ScriptedTransport()
+        let session = try await BMAPSession.connect(transport: transport)
+        let events = await session.events()
+        let received = Task {
+            var iterator = events.makeAsyncIterator()
+            return [await iterator.next(), await iterator.next()]
+        }
+        let request = Task { try await session.execute(query(.currentMode, operation: .start)) }
+        try await transport.waitForWrites(1)
+        await transport.inject(frame(.currentMode, .processing) + frame(.currentMode, .error, [4]))
+        await #expect(throws: BoseError.device(.currentMode, code: .functionNotSupported, detail: nil)) { try await request.value }
+        #expect(await received.value.map { $0?.origin } == [.reply, .reply])
         await session.close()
     }
 
@@ -52,7 +85,7 @@ struct SessionTests {
             bytes[0] == 1 ? [[1, 5, 4, 1, 5]] : [[2, 2, 3, 1, 75]]
         })
         let session = try await BMAPSession.connect(transport: transport)
-        await #expect(throws: BoseError.device(.init(1, 5), code: 5)) {
+        await #expect(throws: BoseError.device(.init(1, 5), code: .operatorNotSupported, detail: nil)) {
             try await session.execute(query(.init(1, 5)))
         }
         #expect(try await session.execute(query()) == [75])
@@ -62,7 +95,34 @@ struct SessionTests {
     @Test func remoteErrorWithoutPayloadHasNoCode() async throws {
         let transport = ScriptedTransport(responder: { _ in [[1, 5, 4, 0]] })
         let session = try await BMAPSession.connect(transport: transport)
-        await #expect(throws: BoseError.device(.init(1, 5), code: nil)) {
+        await #expect(throws: BoseError.device(.init(1, 5), code: nil, detail: nil)) {
+            try await session.execute(query(.init(1, 5)))
+        }
+        await session.close()
+    }
+
+    @Test func remoteErrorPreservesAnUnknownCode() async throws {
+        let transport = ScriptedTransport(responder: { _ in [frame(.init(1, 5), .error, [0x42, 9])] })
+        let session = try await BMAPSession.connect(transport: transport)
+        await #expect(throws: BoseError.device(.init(1, 5), code: BMAPErrorCode(rawValue: 0x42), detail: nil)) {
+            try await session.execute(query(.init(1, 5)))
+        }
+        await session.close()
+    }
+
+    @Test func functionBlockSpecificErrorKeepsTheFollowingByte() async throws {
+        let transport = ScriptedTransport(responder: { _ in [frame(.init(1, 5), .error, [0xFF, 0x21])] })
+        let session = try await BMAPSession.connect(transport: transport)
+        await #expect(throws: BoseError.device(.init(1, 5), code: .functionBlockSpecific, detail: 0x21)) {
+            try await session.execute(query(.init(1, 5)))
+        }
+        await session.close()
+    }
+
+    @Test func functionBlockSpecificErrorWithoutTheFollowingByteHasNoDetail() async throws {
+        let transport = ScriptedTransport(responder: { _ in [frame(.init(1, 5), .error, [0xFF])] })
+        let session = try await BMAPSession.connect(transport: transport)
+        await #expect(throws: BoseError.device(.init(1, 5), code: .functionBlockSpecific, detail: nil)) {
             try await session.execute(query(.init(1, 5)))
         }
         await session.close()

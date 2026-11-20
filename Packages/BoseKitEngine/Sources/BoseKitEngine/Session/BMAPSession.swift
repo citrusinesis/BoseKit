@@ -8,6 +8,10 @@ public actor BMAPSession {
         let timeout: Duration
         let continuation: CheckedContinuation<[BMAPPacket], any Error>
         var replies: [BMAPPacket] = []
+
+        func awaits(_ packet: BMAPPacket) -> Bool {
+            packet.address == self.packet.address || rule.addresses.contains(packet.address)
+        }
     }
 
     private let transport: any BMAPTransport
@@ -21,7 +25,7 @@ public actor BMAPSession {
     private var deadline: Task<Void, Never>?
     private var quietTimer: Task<Void, Never>?
     private var closed = false
-    private var observers: [UUID: AsyncStream<BMAPPacket>.Continuation] = [:]
+    private var observers: [UUID: AsyncStream<BMAPEvent>.Continuation] = [:]
 
     private init(transport: any BMAPTransport) {
         self.transport = transport
@@ -54,9 +58,9 @@ public actor BMAPSession {
         }
     }
 
-    public func events() -> AsyncStream<BMAPPacket> {
+    public func events() -> AsyncStream<BMAPEvent> {
         let id = UUID()
-        let (stream, continuation) = AsyncStream<BMAPPacket>.makeStream(bufferingPolicy: .bufferingNewest(256))
+        let (stream, continuation) = AsyncStream<BMAPEvent>.makeStream(bufferingPolicy: .bufferingNewest(256))
         guard !closed else {
             continuation.finish()
             return stream
@@ -141,10 +145,11 @@ public actor BMAPSession {
     private func receive(_ bytes: [UInt8]) {
         guard !closed else { return }
         for packet in decoder.append(bytes) {
-            for observer in observers.values { observer.yield(packet) }
+            let event = BMAPEvent(packet: packet, origin: active?.awaits(packet) == true ? .reply : .unsolicited)
+            for observer in observers.values { observer.yield(event) }
             guard var pending = active else { continue }
             if packet.operation == .error, packet.address == pending.packet.address {
-                finish(.failure(BoseError.device(packet.address, code: packet.payload.first)))
+                finish(.failure(BoseError(errorPacket: packet)))
                 continue
             }
             guard pending.rule.addresses.contains(packet.address) else { continue }
@@ -219,5 +224,13 @@ public actor BMAPSession {
         quietTimer?.cancel()
         let transport = transport
         Task { await transport.close() }
+    }
+}
+
+private extension BoseError {
+    init(errorPacket packet: BMAPPacket) {
+        let code = packet.payload.first.map(BMAPErrorCode.init(rawValue:))
+        let detail = code == .functionBlockSpecific ? packet.payload.dropFirst().first : nil
+        self = .device(packet.address, code: code, detail: detail)
     }
 }

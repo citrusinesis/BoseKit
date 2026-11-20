@@ -17,10 +17,22 @@ extension BoseError {
         case .timeout: .errorsTimeout
         case .transport: .errorsTransport
         case .unsupported(let reason): reason.title
-        case .device: .errorsRejected
+        case .device(_, let code, _): code?.title ?? .errorsRejected
         case .invalidState(let state): state.title
         case .verificationFailed(let failure): failure.title
         case .invalidPayload, .invalidArgument, .duplicateProduct, .duplicateProfile: .errorsInvalidValue
+        }
+    }
+}
+
+nonisolated extension BMAPErrorCode {
+    var title: LocalizedStringResource {
+        switch self {
+        case .functionBlockNotSupported, .functionNotSupported, .operatorNotSupported: .errorsUnsupported
+        case .invalidData: .errorsInvalidValue
+        case .invalidState: .errorsUnavailableInCurrentState
+        case .busy, .dataUnavailable, .runtime, .timeout: .errorsTemporarilyUnavailable
+        default: .errorsRejected
         }
     }
 }
