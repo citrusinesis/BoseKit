@@ -115,6 +115,32 @@ struct BoseDeviceSettingsTests {
         await device.close()
     }
 
+    @Test func languageThatIsNotInstalledIsRejectedBeforeWriting() async throws {
+        let transport = ScriptedTransport(script: [
+            [frame(.voicePrompts, .status, [0xe1, 0x00, 0x01, 0x81, 0x5e, 0x01, 0x00])],
+        ])
+        let device = try await connectedDevice(on: transport)
+        await #expect(throws: BoseError.unsupported(.voicePromptLanguageNotInstalled(.korean))) {
+            try await device.setVoicePromptLanguage(.korean)
+        }
+        #expect(await transport.writes == [frame(.voicePrompts, .get)])
+        await device.close()
+    }
+
+    @Test func installedLanguageIsWrittenAndConfirmed() async throws {
+        let installed: [UInt8] = [0x00, 0x01, 0x81, 0x5e, 0x01, 0x00]
+        let transport = ScriptedTransport(script: [
+            [frame(.voicePrompts, .status, [0xe1] + installed)],
+            [frame(.voicePrompts, .status, [0xf0] + installed)],
+            [frame(.voicePrompts, .status, [0xf0] + installed)],
+        ])
+        let device = try await connectedDevice(on: transport)
+        let result = try await device.setVoicePromptLanguage(.cantonese)
+        #expect(result.language == .cantonese)
+        #expect(await transport.writes[1] == frame(.voicePrompts, .setGet, [0xf0]))
+        await device.close()
+    }
+
     @Test func changingVoicePromptLanguageKeepsHighBitsAndEnabledFlag() async throws {
         let transport = ScriptedTransport(script: [
             [frame(.voicePrompts, .status, [0xa1])],

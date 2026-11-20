@@ -143,9 +143,16 @@ public enum BoseFeatures {
             }
         }, confirm: { $0 == $1 })
 
+    private static let installedVoicePromptLanguagesLength = 4
+
     public static let voicePrompts = BoseFeature<VoicePrompts, VoicePrompts>(
         id: .voicePrompts, address: .voicePrompts, decode: { bytes, _ in
-            try PayloadReader.parse(bytes, end: .trailingBytesAllowed) { VoicePrompts(flags: try $0.u8()) }
+            try PayloadReader.parse(bytes, end: .trailingBytesAllowed) { reader in
+                let flags = try reader.u8()
+                let installed = reader.remainingCount >= installedVoicePromptLanguagesLength
+                    ? VoicePromptLanguage.languages(inBitmap: try reader.u32()) : nil
+                return VoicePrompts(flags: flags, installedLanguages: installed)
+            }
         }, encode: { value, _ in [value.flags] },
         confirm: { $0.enabled == $1.enabled && $0.language == $1.language })
 

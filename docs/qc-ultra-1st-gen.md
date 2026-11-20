@@ -22,6 +22,13 @@ Verified on user hardware on 2026-11-17 with firmware `1.6.7+g6ebabd2`.
 - The shortcut button's supported-action bitmap is big-endian.
 - Voice prompt writes keep the upper flag bits. Toggling voice prompts also changes
   payload byte 6, and this change is not known to be reversible.
+- GET `1,3` returns seven bytes, for example `e1 00 01 81 5e 01 00`.
+  Byte 0 holds the flags: bit 5 is enabled and the low five bits are the language ID.
+  Bytes 1 to 4 are a big-endian bitmap of the installed languages, indexed by language ID.
+- The bitmap `00 01 81 5e` lists US English, French, Italian, German, Spanish (language ID 6), Mandarin, Japanese and Cantonese.
+  Selecting each of these eight changes the spoken language to the matching one; no other language can be selected, including Korean.
+  Verified on 2026-11-20.
+- A language change is a one-byte SETGET of the flags; BoseKit offers only the installed languages and rejects any other before writing.
 - Direct CNC writes, the default (power-on) mode and AudioSettings are not supported.
 
 ## Multipoint
@@ -64,7 +71,7 @@ Verified on 2026-11-19 with the same firmware.
 
 ## Not Yet Verified
 
-- Power off, pairing mode, renaming, voice prompt writes and turning multipoint off
+- Power off, pairing mode, renaming, switching voice prompts off and on, and turning multipoint off
 - Whether mode changes made with the headphones' button are pushed
 - What the other subscribed blocks send
 - Sleep/wake and long-lived connections

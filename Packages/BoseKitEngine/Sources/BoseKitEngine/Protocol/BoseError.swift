@@ -20,6 +20,7 @@ public enum BoseError: Error, Equatable, Sendable {
         case audioSettings
         case modeWritesInStatus44Layout
         case ancToggleInStatus47Layout
+        case voicePromptLanguageNotInstalled(VoicePromptLanguage)
     }
 
     public enum InvalidState: Equatable, Sendable {

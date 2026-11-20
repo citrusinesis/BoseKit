@@ -42,7 +42,8 @@ nonisolated extension BoseError.Unsupported {
         switch self {
         case .nonEditableModeSlot, .modeWritesInStatus44Layout: .errorsModeNotEditable
         case .automaticCNCInCustomModes: .errorsAutomaticAmbientInCustomModes
-        case .feature, .modePolicy, .continuousNoiseControl, .audioSettings, .ancToggleInStatus47Layout:
+        case .feature, .modePolicy, .continuousNoiseControl, .audioSettings, .ancToggleInStatus47Layout,
+             .voicePromptLanguageNotInstalled:
             .errorsUnsupported
         }
     }
@@ -186,8 +187,8 @@ extension VoicePromptLanguage {
         case .french: .languageFrench
         case .italian: .languageItalian
         case .german: .languageGerman
+        case .spanishSpain: .languageSpanishSpain
         case .spanish: .languageSpanish
-        case .spanishMexico: .languageSpanishMexico
         case .portuguese: .languagePortuguese
         case .mandarin: .languageMandarin
         case .korean: .languageKorean

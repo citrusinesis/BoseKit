@@ -12,13 +12,17 @@ public struct VoicePromptLanguage: RawRepresentable, Hashable, Sendable {
         rawValue = bits & Self.mask
     }
 
+    static func languages(inBitmap bitmap: UInt32) -> Set<Self> {
+        Set((0...mask).filter { bitmap & (1 << UInt32($0)) != 0 }.map(Self.init(bits:)))
+    }
+
     public static let englishUK = Self(bits: 0)
     public static let englishUS = Self(bits: 1)
     public static let french = Self(bits: 2)
     public static let italian = Self(bits: 3)
     public static let german = Self(bits: 4)
-    public static let spanish = Self(bits: 5)
-    public static let spanishMexico = Self(bits: 6)
+    public static let spanishSpain = Self(bits: 5)
+    public static let spanish = Self(bits: 6)
     public static let portuguese = Self(bits: 7)
     public static let mandarin = Self(bits: 8)
     public static let korean = Self(bits: 9)
@@ -42,8 +46,8 @@ public struct VoicePromptLanguage: RawRepresentable, Hashable, Sendable {
         .french,
         .italian,
         .german,
+        .spanishSpain,
         .spanish,
-        .spanishMexico,
         .portuguese,
         .mandarin,
         .korean,
@@ -69,17 +73,25 @@ public struct VoicePrompts: Equatable, Sendable {
 
     public var enabled: Bool
     public var language: VoicePromptLanguage
+    public let installedLanguages: Set<VoicePromptLanguage>?
     let preservedBits: UInt8
 
-    init(enabled: Bool, language: VoicePromptLanguage, preservedBits: UInt8) {
+    init(enabled: Bool, language: VoicePromptLanguage, preservedBits: UInt8,
+         installedLanguages: Set<VoicePromptLanguage>? = nil) {
         self.enabled = enabled
         self.language = language
         self.preservedBits = preservedBits & Self.preservedMask
+        self.installedLanguages = installedLanguages
     }
 
-    init(flags: UInt8) {
+    init(flags: UInt8, installedLanguages: Set<VoicePromptLanguage>? = nil) {
         self.init(enabled: flags & Self.enabledBit != 0, language: VoicePromptLanguage(bits: flags),
-                  preservedBits: flags)
+                  preservedBits: flags, installedLanguages: installedLanguages)
+    }
+
+    public var selectableLanguages: [VoicePromptLanguage] {
+        let offered = installedLanguages ?? Set(VoicePromptLanguage.known)
+        return offered.union([language]).sorted { $0.rawValue < $1.rawValue }
     }
 
     var flags: UInt8 {

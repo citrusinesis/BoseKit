@@ -123,7 +123,7 @@ struct FeatureEncodeVectorTests {
         .init("language change keeps enabled and high bits",
               prompts(flags: 0xa1, enabled: true, language: .korean), [0xa9]),
         .init("clear high bits stay clear",
-              prompts(flags: 0x3f, enabled: false, language: .spanish), [0x05]),
+              prompts(flags: 0x3f, enabled: false, language: .spanishSpain), [0x05]),
         .init("raw enabled bit is replaced by the value",
               prompts(flags: 0x20, enabled: false, language: .englishUK), [0x00]),
         .init("raw language bits are replaced by the value",

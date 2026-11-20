@@ -19,7 +19,6 @@ struct WireLeniencyTests {
               end: .trailingBytesAllowed),
         .init("source other than bluetooth", BoseFeatures.source, minimumLength: 3, valid: [0, 0x0f, 2],
               end: .trailingBytesAllowed),
-        .init("voice prompts", BoseFeatures.voicePrompts, minimumLength: 1, valid: [0xa1], end: .trailingBytesAllowed),
         .init("buttons with full bitmap", BoseFeatures.buttons, minimumLength: 7, valid: [0x80, 9, 19, 0, 9, 0x40, 0x0a],
               end: .trailingBytesAllowed),
         .init("source bluetooth", BoseFeatures.source, minimumLength: 9, valid: [0, 0x0f, 1] + phone, end: .exact),
@@ -53,9 +52,21 @@ struct WireLeniencyTests {
         expectInvalidPayload { try BoseFeatures.buttons.decode([0x80, 9, 19] + bitmap, resolved) }
     }
 
-    @Test func voicePromptsIgnoreTrailingBytes() throws {
+    @Test func voicePromptsIgnoreAPartialInstalledLanguageBitmap() throws {
         let value = try BoseFeatures.voicePrompts.decode([0xa1, 0xaa, 0xbb], wireProfile())
         #expect(value == VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0x80))
+    }
+
+    @Test func voicePromptsIgnoreBytesAfterTheInstalledLanguageBitmap() throws {
+        let bitmap: [UInt8] = [0x00, 0x01, 0x81, 0x5e]
+        let short = try BoseFeatures.voicePrompts.decode([0xa1] + bitmap, wireProfile())
+        let long = try BoseFeatures.voicePrompts.decode([0xa1] + bitmap + [0x01, 0x00, 0xaa], wireProfile())
+        #expect(short == long)
+        #expect(short.installedLanguages?.count == 8)
+    }
+
+    @Test func voicePromptsRejectAnEmptyPayload() {
+        expectInvalidPayload { try BoseFeatures.voicePrompts.decode([], wireProfile()) }
     }
 
     @Test func nameTrailingBytesBecomePartOfTheName() throws {

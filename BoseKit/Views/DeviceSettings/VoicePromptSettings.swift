@@ -10,7 +10,7 @@ struct VoicePromptSettings: View {
             SettingsToggle(title: .deviceVoicePrompts, isOn: enabled(prompts.enabled))
             Divider()
             SettingsPicker(title: .devicePromptLanguage, selection: $device.voicePromptLanguageSelection) {
-                ForEach(languages(including: prompts.language), id: \.self) { Text($0.title).tag($0) }
+                ForEach(prompts.selectableLanguages, id: \.self) { Text($0.title).tag($0) }
             }
             .confirmationDialog(.deviceVoicePromptConfirmation, isPresented: $confirmingToggle,
                                 titleVisibility: .visible) {
@@ -29,9 +29,5 @@ struct VoicePromptSettings: View {
                 device.setVoicePromptsEnabled(newValue)
             }
         })
-    }
-
-    private func languages(including current: VoicePromptLanguage) -> [VoicePromptLanguage] {
-        VoicePromptLanguage.known.contains(current) ? VoicePromptLanguage.known : VoicePromptLanguage.known + [current]
     }
 }

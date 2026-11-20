@@ -317,7 +317,16 @@ struct VoicePromptsDecodeVectorTests {
               VoicePrompts(enabled: false, language: .englishUK, preservedBits: 0xc0)),
         .init("high bits with enabled and language", [0xe1],
               VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0xc0)),
-        .init("bytes after the flags are ignored", [0xe1, 0, 0, 0, 0, 0, 1],
+        .init("QC Ultra 1st Gen reports its eight installed languages", [0xe1, 0x00, 0x01, 0x81, 0x5e, 0x01, 0x00],
+              VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0xc0, installedLanguages: [
+                  .englishUS, .french, .italian, .german, .spanish, .mandarin, .japanese, .cantonese,
+              ])),
+        .init("QC Ultra 2nd Gen capture reports three installed languages", [0x41, 0x00, 0x00, 0x81, 0x02, 0x00, 0x00],
+              VoicePrompts(enabled: false, language: .englishUS, preservedBits: 0x40,
+                           installedLanguages: [.englishUS, .mandarin, .japanese])),
+        .init("empty bitmap means no language is reported as installed", [0xe1, 0, 0, 0, 0],
+              VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0xc0, installedLanguages: [])),
+        .init("fewer than four bytes after the flags are not a bitmap", [0xe1, 0xff, 0xff, 0xff],
               VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0xc0)),
     ]
 

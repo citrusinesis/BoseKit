@@ -76,6 +76,33 @@ struct VoicePromptsTypeTests {
     }
 }
 
+struct VoicePromptSelectableLanguagesTests {
+    @Test func installedLanguagesAreOfferedInIDOrder() {
+        let prompts = VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0,
+                                   installedLanguages: [.japanese, .englishUS, .cantonese, .french])
+        #expect(prompts.selectableLanguages == [.englishUS, .french, .japanese, .cantonese])
+    }
+
+    @Test func currentLanguageIsOfferedEvenWhenTheDeviceDoesNotListIt() {
+        let prompts = VoicePrompts(enabled: true, language: .korean, preservedBits: 0,
+                                   installedLanguages: [.englishUS, .japanese])
+        #expect(prompts.selectableLanguages == [.englishUS, .korean, .japanese])
+    }
+
+    @Test func everyKnownLanguageIsOfferedWhenTheDeviceReportsNoBitmap() {
+        let prompts = VoicePrompts(enabled: true, language: .englishUS, preservedBits: 0)
+        #expect(prompts.selectableLanguages == VoicePromptLanguage.known)
+    }
+
+    @Test func bitmapBitsMapToLanguageIDs() {
+        #expect(VoicePromptLanguage.languages(inBitmap: 0x0001_815e) == [
+            .englishUS, .french, .italian, .german, .spanish, .mandarin, .japanese, .cantonese,
+        ])
+        #expect(VoicePromptLanguage.languages(inBitmap: 0).isEmpty)
+        #expect(VoicePromptLanguage.languages(inBitmap: 0x8000_0000).map(\.rawValue) == [31])
+    }
+}
+
 struct EQAdjustmentTests {
     private static let band = EQBand(id: 2, range: -6...6, value: 0)
 

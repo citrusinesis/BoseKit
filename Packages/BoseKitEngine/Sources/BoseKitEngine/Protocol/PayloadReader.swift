@@ -28,6 +28,7 @@ struct PayloadReader {
     }
 
     var isAtEnd: Bool { offset == payload.count }
+    var remainingCount: Int { payload.count - offset }
 
     func requireEnd() throws {
         guard isAtEnd else { throw BoseError.invalidPayload("Expected \(offset) bytes, received \(payload.count)") }

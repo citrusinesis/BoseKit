@@ -9,7 +9,12 @@ extension BoseDevice {
 
     @discardableResult
     public func setVoicePromptLanguage(_ language: VoicePromptLanguage) async throws -> VoicePrompts {
-        try await updateVoicePrompts { $0.language = language }
+        try await updateVoicePrompts { prompts in
+            if let installed = prompts.installedLanguages, !installed.contains(language) {
+                throw BoseError.unsupported(.voicePromptLanguageNotInstalled(language))
+            }
+            prompts.language = language
+        }
     }
 
     @discardableResult
@@ -68,10 +73,12 @@ extension BoseDevice {
         }
     }
 
-    private func updateVoicePrompts(_ change: @Sendable (inout VoicePrompts) -> Void) async throws -> VoicePrompts {
+    private func updateVoicePrompts(
+        _ change: @Sendable (inout VoicePrompts) throws -> Void
+    ) async throws -> VoicePrompts {
         try await transaction { device in
             var prompts = try await device.readValue(BoseFeatures.voicePrompts)
-            change(&prompts)
+            try change(&prompts)
             return try await device.writeValue(BoseFeatures.voicePrompts, prompts)
         }
     }

@@ -2467,20 +2467,20 @@
         }
       }
     },
-    "language.spanishMexico" : {
-      "comment" : "Language interface label or message: spanishMexico.",
+    "language.spanishSpain" : {
+      "comment" : "Language interface label or message: spanishSpain.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Spanish (Mexico)"
+            "value" : "Spanish (Spain)"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "machine_translated",
-            "value" : "스페인어(멕시코)"
+            "value" : "스페인어(스페인)"
           }
         }
       }
