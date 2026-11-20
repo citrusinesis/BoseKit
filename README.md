@@ -63,6 +63,25 @@ xattr -dr com.apple.quarantine /Applications/BoseKit.app
 Allow Bluetooth access when prompted.
 Each release is signed ad hoc, so macOS may ask for Bluetooth access again after an update.
 
+## Uninstalling
+
+1. Quit BoseKit from its menu bar icon or its window: open the **…** menu and choose Quit.
+2. To forget the Bluetooth permission, reset it while the app is still installed:
+
+```sh
+tccutil reset BluetoothAlways dev.jihosong.BoseKit
+```
+
+3. Drag BoseKit from Applications to the Trash.
+4. To remove its preferences as well, delete the app's container:
+
+```sh
+rm -rf ~/Library/Containers/dev.jihosong.BoseKit
+```
+
+BoseKit installs nothing else on the Mac.
+Settings it changed on the headphones, such as modes or the equalizer, are stored on the headphones and stay as they are.
+
 ## Building
 
 Open `BoseKit.xcworkspace` in Xcode, select the **BoseKit** scheme and run.
