@@ -1,12 +1,13 @@
 #!/bin/sh
 set -eu
 
-if [ $# -ne 1 ]; then
-    echo "usage: $0 <version>" >&2
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "usage: $0 <version> [build-number]" >&2
     exit 64
 fi
 
 version="$1"
+build_number="${2:-1}"
 root="$(cd "$(dirname "$0")/.." && pwd)"
 output="$root/build"
 derived="$output/DerivedData"
@@ -20,6 +21,7 @@ xcodebuild build \
     -destination 'generic/platform=macOS' \
     -derivedDataPath "$derived" \
     MARKETING_VERSION="$version" \
+    CURRENT_PROJECT_VERSION="$build_number" \
     CODE_SIGN_IDENTITY=- \
     CODE_SIGN_STYLE=Manual \
     DEVELOPMENT_TEAM=
